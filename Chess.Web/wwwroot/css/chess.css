@@ -1,0 +1,40 @@
+﻿.center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+i {
+    margin-left: 20px;
+    /*cursor: move;*/
+    /*background-color: green;*/
+}
+
+.figureBorder {
+    text-shadow: -2px 0 #000, 0 2px #000, 2px 0 #000, 0 -2px #000; /*Make black border to the white figures*/
+}
+
+td {
+    border: 1px solid black;
+ /*   border: 1px solid #999999;*/
+    background: #dadada 50% 50% repeat-x;
+    font-weight: normal;
+    color: #212121;
+    width: 80px;
+    height: 80px;
+}
+
+.white {
+    background-color: #F0D9B5;
+}
+
+.black {
+    background-color: #B58863;
+}
+
+.whiteFigure {
+    color: white;
+}
+
+.blackFigure {
+    color: black;
+}
