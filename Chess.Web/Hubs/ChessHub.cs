@@ -8,5 +8,10 @@ namespace Chess.Web.Hubs
 {
     public class ChessHub : Hub
     {
+        public async Task SendMessage(string startId, string targetId)
+        {
+            await Clients.Others.SendAsync("ReceiveMessage", startId, targetId);
+            Console.WriteLine(startId + "and" + targetId);
+        }
     }
 }

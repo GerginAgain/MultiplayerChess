@@ -66,7 +66,7 @@ namespace Chess.Web
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
-                endpoints.MapHub<ChessHub>("/chesshub");
+                endpoints.MapHub<ChessHub>("/chessHub");
             });
         }
     }
