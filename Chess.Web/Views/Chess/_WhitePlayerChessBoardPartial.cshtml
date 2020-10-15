@@ -1,0 +1,72 @@
+﻿<link href="~/css/chess.css" rel="stylesheet" />
+<link href="~/lib/font-awesome/css/all.css" rel="stylesheet" />
+
+
+<table id="chessBoard" class="center">
+    @for (int row = 8; row > 0; row--)
+    {
+        <tr>
+            @for (int col = 1; col <= 8; col++)
+            {
+                var boardCellColor = ((row + col) % 2 == 0) ? "white" : "black";
+                var figure = string.Empty;
+                var figureSize = "fa-3x";
+                var figureColor = string.Empty;
+                var whiteFigureBorder = string.Empty;
+                var cellId = row + "" + col;
+                var figureId = "i" + row + col;
+
+                if (row == 1 || row == 2)
+                {
+                    whiteFigureBorder = "figureBorder";
+                }
+
+                if (row == 7 || row == 8)
+                {
+                    figureColor = "blackFigure";
+                }
+                else if (row == 1 || row == 2)
+                {
+                    figureColor = "whiteFigure";
+                }
+
+                if (row == 2 || row == 7)
+                {
+                    figure = "fas fa-chess-pawn";
+                }
+
+                if ((row == 1 && (col == 1 || col == 8)) || (row == 8 && (col == 1 || col == 8)))
+                {
+                    figure = "fas fa-chess-rook";
+                }
+
+                if ((row == 1 && (col == 2 || col == 7)) || (row == 8 && (col == 2 || col == 7)))
+                {
+                    figure = "fas fa-chess-knight";
+                }
+
+                if ((row == 1 && (col == 3 || col == 6)) || (row == 8 && (col == 3 || col == 6)))
+                {
+                    figure = "fas fa-chess-bishop";
+                }
+
+                if ((row == 1 && col == 4) || (row == 8 && col == 4))
+                {
+                    figure = "fas fa-chess-queen";
+                }
+
+                if ((row == 1 && col == 5) || (row == 8 && col == 5))
+                {
+                    figure = "fas fa-chess-king";
+                }
+
+                <td id="@cellId" class="@boardCellColor" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    @if (row == 1 || row == 2 || row == 7 || row == 8)
+                    {
+                        <i id="@figureId" class="@figure @figureSize @figureColor @whiteFigureBorder" draggable="true" ondragstart="drag(event)"></i>
+                    }
+                </td>
+            }
+        </tr>
+    }
+</table>

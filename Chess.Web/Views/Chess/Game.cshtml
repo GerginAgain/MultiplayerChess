@@ -1,0 +1,85 @@
+﻿<link href="~/css/chess.css" rel="stylesheet" />
+<link href="~/lib/font-awesome/css/all.css" rel="stylesheet" />
+
+@*<script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>*@
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+
+@{ ViewData["Title"] = "Home Page"; }
+
+
+@*<partial name="_WhitePlayerChessBoardPartial" />*@
+<partial name="_BlackPlayerChessBoardPartial" />
+
+<script type="text/javascript">
+    var connection = new signalR.HubConnectionBuilder().withUrl("/chessHub").build();
+
+    connection.on("ReceiveMessage", function (startId, targetId) {
+
+
+        let element = document.getElementById(startId);
+        //console.log(element);
+
+        let cell = document.getElementById(targetId);
+        //console.log(cell)
+
+        cell.appendChild(element);
+    });
+
+    connection.start();
+
+    let targetId = "";
+    let startId = "";
+
+    function allowDrop(ev) {
+        ev.preventDefault();
+    }
+
+    function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+        startId = ev.target.id;
+        console.log(startId);
+    }
+
+    function drop(ev) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        ev.target.appendChild(document.getElementById(data));
+
+        targetId = ev.target.id;
+        connection.invoke("SendMessage", startId, targetId);
+        console.log(targetId);
+    }
+
+
+
+    //$("i").click(function () {
+
+    //});
+
+    //$("i").draggable({
+    //    containment: "#chessBoard",
+    //    scroll: false,
+    //    revert: "invalid",
+    //    stack: false,
+    //    cursor: "move",
+    //    //drag: function (event, ui) {
+    //    //    $(".droparea").removeClass("highlight");
+    //    //}
+    //});
+
+    //$("td").droppable({
+    //    accept: "i",
+    //    drop: function (event, ui) {
+    //        var $this = $(this);
+    //        ui.draggable.position({
+    //            my: "center",
+    //            at: "center",
+    //            of: $this,
+    //        });
+    //    }
+    //});</script>

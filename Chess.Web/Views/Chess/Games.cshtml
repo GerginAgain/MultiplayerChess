@@ -1,0 +1,40 @@
+﻿<script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+
+@{ ViewData["Title"] = "Create Game"; }
+
+<h1>@ViewData["Title"]</h1>
+
+<a class="btn btn-danger" onclick="CreateGame()"> Create</a>
+
+<div id="Games"></div>
+
+<script type="text/javascript">
+    function CreateGame() {
+        let element = document.getElementById("Games");
+
+        let newDiv = document.createElement("div");
+
+        //newDiv.textContent = "new game";
+        //newDiv.addEventListener(onclick, function{
+
+        //})
+
+        element.appendChild(newDiv)
+        connection.invoke("SendNewGame");
+        window.location.href = "https://localhost:5001/Home/Index";
+    }
+
+    var connection = new signalR.HubConnectionBuilder().withUrl("/chessHub").build();
+
+    connection.on("AddNewGame", function () {
+        let element = document.getElementById("Games");
+        console.log(element)
+        let newDiv = document.createElement("div");
+
+        newDiv.textContent = "new game";
+        console.log(newDiv)
+
+        element.appendChild(newDiv)
+    });
+
+    connection.start();</script>
