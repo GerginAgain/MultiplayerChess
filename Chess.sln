@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30503.244
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess.Web", "Chess.Web\Chess.Web.csproj", "{BDAFC44E-CB53-4A74-A489-5A260CF087D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chess.Web", "Chess.Web\Chess.Web.csproj", "{BDAFC44E-CB53-4A74-A489-5A260CF087D8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{D369DC26-A3A6-48D9-AE35-F54D3A14A2AD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{AA465B61-8FF7-46F7-805F-A2E0381EE395}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess.Data", "Chess.Data\Chess.Data.csproj", "{27BC1EC1-5E15-4851-9B5F-C9A1DAE2DF04}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,12 +21,17 @@ Global
 		{BDAFC44E-CB53-4A74-A489-5A260CF087D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BDAFC44E-CB53-4A74-A489-5A260CF087D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BDAFC44E-CB53-4A74-A489-5A260CF087D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27BC1EC1-5E15-4851-9B5F-C9A1DAE2DF04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27BC1EC1-5E15-4851-9B5F-C9A1DAE2DF04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27BC1EC1-5E15-4851-9B5F-C9A1DAE2DF04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27BC1EC1-5E15-4851-9B5F-C9A1DAE2DF04}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{BDAFC44E-CB53-4A74-A489-5A260CF087D8} = {D369DC26-A3A6-48D9-AE35-F54D3A14A2AD}
+		{27BC1EC1-5E15-4851-9B5F-C9A1DAE2DF04} = {AA465B61-8FF7-46F7-805F-A2E0381EE395}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B6F23AC4-1F7C-4116-BF1A-92A6243106CD}

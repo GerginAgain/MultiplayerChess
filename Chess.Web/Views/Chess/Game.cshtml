@@ -1,4 +1,7 @@
-﻿<link href="~/css/chess.css" rel="stylesheet" />
+﻿@using Chess.Web.ViewModels
+@model GameViewModel
+
+<link href="~/css/chess.css" rel="stylesheet" />
 <link href="~/lib/font-awesome/css/all.css" rel="stylesheet" />
 
 @*<script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -9,28 +12,31 @@
 
 <script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
 
-@{ ViewData["Title"] = "Home Page"; }
+@if ((ViewData["Color"] as string) == "White")
+{
+    <partial name="_WhitePlayerChessBoardPartial" />
+}
+else
+{
+    <partial name="_BlackPlayerChessBoardPartial" />
+}
 
-
-@*<partial name="_WhitePlayerChessBoardPartial" />*@
-<partial name="_BlackPlayerChessBoardPartial" />
 
 <script type="text/javascript">
+    let gameId = @Model.Id;
+    console.log("gameId is " + gameId);
+
     var connection = new signalR.HubConnectionBuilder().withUrl("/chessHub").build();
+    connection.start().then(() => {
+        connection.invoke("AddHostConnectionIdToGame", gameId);
+    });;
 
     connection.on("ReceiveMessage", function (startId, targetId) {
-
-
         let element = document.getElementById(startId);
-        //console.log(element);
-
         let cell = document.getElementById(targetId);
-        //console.log(cell)
 
         cell.appendChild(element);
     });
-
-    connection.start();
 
     let targetId = "";
     let startId = "";
@@ -51,7 +57,7 @@
         ev.target.appendChild(document.getElementById(data));
 
         targetId = ev.target.id;
-        connection.invoke("SendMessage", startId, targetId);
+        connection.invoke("SendMessage", startId, targetId, gameId);
         console.log(targetId);
     }
 
@@ -82,4 +88,5 @@
     //            of: $this,
     //        });
     //    }
-    //});</script>
+    //});
+</script>

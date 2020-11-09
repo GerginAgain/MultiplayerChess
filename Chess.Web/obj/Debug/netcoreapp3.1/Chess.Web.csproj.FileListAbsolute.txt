@@ -290,3 +290,7 @@ C:\Users\Again\Desktop\Chess\MultiplayerChess\Chess.Web\obj\Debug\netcoreapp3.1\
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Chess.Web\obj\Debug\netcoreapp3.1\Chess.Web.dll
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Chess.Web\obj\Debug\netcoreapp3.1\Chess.Web.pdb
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Chess.Web\obj\Debug\netcoreapp3.1\Chess.Web.genruntimeconfig.cache
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Chess.Web\obj\Debug\netcoreapp3.1\Razor\Views\Chess\CreateGame.cshtml.g.cs
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Chess.Web\bin\Debug\netcoreapp3.1\Chess.Data.dll
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Chess.Web\bin\Debug\netcoreapp3.1\Chess.Data.pdb
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Chess.Web\obj\Debug\netcoreapp3.1\Razor\Views\Chess\EnterGame.cshtml.g.cs

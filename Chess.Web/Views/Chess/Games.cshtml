@@ -1,40 +1,38 @@
-﻿<script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+﻿@using Chess.Web.ViewModels
+@model GamesViewModel
 
-@{ ViewData["Title"] = "Create Game"; }
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+<link href="~/css/games.css" rel="stylesheet" />
 
-<h1>@ViewData["Title"]</h1>
+@{ ViewData["Title"] = "Created Games"; }
 
-<a class="btn btn-danger" onclick="CreateGame()"> Create</a>
+<h1 class="row justify-content-center text-primary">@ViewData["Title"]</h1>
 
-<div id="Games"></div>
+<div class="row justify-content-center">
+    <div id="Games" class="col-md-6">
+        @foreach (var game in Model.Games)
+        {
+            <div class="getHover container border border-primary m-3 p-2 rounded-lg" onclick="@("window.location.href='" + @Url.Action("EnterGame", "Chess", new { id = game.Id }) + "'");">
+                <h6 class="justify-content-center">
+                    Game name: @game.Name -> Figure color: @game.Color                  
+                </h6>
+            </div>
+        }
+    </div>
+</div>
 
 <script type="text/javascript">
-    function CreateGame() {
-        let element = document.getElementById("Games");
-
-        let newDiv = document.createElement("div");
-
-        //newDiv.textContent = "new game";
-        //newDiv.addEventListener(onclick, function{
-
-        //})
-
-        element.appendChild(newDiv)
-        connection.invoke("SendNewGame");
-        window.location.href = "https://localhost:5001/Home/Index";
-    }
-
     var connection = new signalR.HubConnectionBuilder().withUrl("/chessHub").build();
+    connection.start();
 
-    connection.on("AddNewGame", function () {
+    connection.on("AddNewGame", function (name, color) {
         let element = document.getElementById("Games");
-        console.log(element)
-        let newDiv = document.createElement("div");
 
-        newDiv.textContent = "new game";
-        console.log(newDiv)
+        let newDiv = document.createElement("div");
+        var htmlAfter = '';
+
+        newDiv.innerHTML = "Game name: " + name + " -> " + "Figure color: " + color;
 
         element.appendChild(newDiv)
     });
-
-    connection.start();</script>
+</script>

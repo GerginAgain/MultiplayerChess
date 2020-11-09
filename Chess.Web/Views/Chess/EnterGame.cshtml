@@ -1,0 +1,60 @@
+﻿@using Chess.Web.ViewModels
+@model GameViewModel
+
+<link href="~/css/chess.css" rel="stylesheet" />
+<link href="~/lib/font-awesome/css/all.css" rel="stylesheet" />
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+
+@if ((ViewData["Color"] as string) == "White")
+{
+    <partial name="_WhitePlayerChessBoardPartial" />
+}
+else
+{
+    <partial name="_BlackPlayerChessBoardPartial" />
+}
+
+
+<script type="text/javascript">
+    let gameId = @Model.Id;
+    console.log("gameId is " + gameId);
+
+    var connection = new signalR.HubConnectionBuilder().withUrl("/chessHub").build();
+    connection.start().then(() => {   
+        connection.invoke("AddGuestConnectionIdToGame", gameId);        
+    });
+
+    connection.on("ReceiveMessage", function (startId, targetId) {
+        let element = document.getElementById(startId);
+        let cell = document.getElementById(targetId);
+
+        cell.appendChild(element);
+    });
+
+    let targetId = "";
+    let startId = "";
+
+    function allowDrop(ev) {
+        ev.preventDefault();
+    }
+
+    function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+        startId = ev.target.id;
+        console.log(startId);
+    }
+
+    function drop(ev) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        ev.target.appendChild(document.getElementById(data));
+
+        targetId = ev.target.id;
+        connection.invoke("SendMessage", startId, targetId, gameId);
+        console.log(targetId);
+    }
+</script>
