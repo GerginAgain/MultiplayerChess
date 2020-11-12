@@ -9,7 +9,7 @@
 
 <script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
 
-@if ((ViewData["Color"] as string) == "White")
+@if (Model.Color == "White")
 {
     <partial name="_WhitePlayerChessBoardPartial" />
 }

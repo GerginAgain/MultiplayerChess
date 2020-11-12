@@ -73,7 +73,7 @@ namespace Chess.Web.Controllers
 
         public IActionResult EnterGame(int id)
         {
-            var game = this.db.Games.FirstOrDefault(x => x.Id == id);          
+            var game = this.db.Games.FirstOrDefault(x => x.Id == id);
 
             var color = string.Empty;
             if (game.Color == "White")
@@ -89,10 +89,10 @@ namespace Chess.Web.Controllers
             {
                 Id = game.Id,
                 Name = game.Name,
-                Color = game.Color,
+                Color = color,
                 HostConnectionId = game.HostConnectionId,
             };
-  
+            
             return this.View(gameViewModel);
         }
     }

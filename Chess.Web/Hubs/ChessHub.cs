@@ -46,8 +46,9 @@ namespace Chess.Web.Hubs
 
         public async Task SendNewGame(string name, string color)
         {
+            var gameId = this.db.Games.First(x => x.Name == name).Id;
             var colorInString = Enum.GetName(typeof(Color), int.Parse(color));
-            await Clients.Others.SendAsync("AddNewGame", name, colorInString);
+            await Clients.Others.SendAsync("AddNewGame", name, colorInString, gameId);
         }
 
         public void AddHostConnectionIdToGame(int gameId)

@@ -12,27 +12,40 @@
     <div id="Games" class="col-md-6">
         @foreach (var game in Model.Games)
         {
-            <div class="getHover container border border-primary m-3 p-2 rounded-lg" onclick="@("window.location.href='" + @Url.Action("EnterGame", "Chess", new { id = game.Id }) + "'");">
-                <h6 class="justify-content-center">
-                    Game name: @game.Name -> Figure color: @game.Color                  
-                </h6>
+            <div id="@game.Id" class="getHover container border border-primary m-3 p-2 rounded-lg" @*onclick="@("window.location.href='" + @Url.Action("EnterGame", "Chess", new { id = game.Id }) + "'");"*@>
+                @*<h6 class="justify-content-center">*@
+                Game name: @game.Name -> Figure color: @game.Color
+                @*</h6>*@
             </div>
         }
     </div>
 </div>
 
 <script type="text/javascript">
+    document.getElementById("Games").addEventListener("click", addListener);
+
+    function addListener(e) {
+        if (e.target !== e.currentTarget) {
+            let currentId = e.target.id;
+            window.location.href = `EnterGame/${currentId}`;
+        }
+
+        e.stopPropagation();
+    }
+
     var connection = new signalR.HubConnectionBuilder().withUrl("/chessHub").build();
     connection.start();
 
-    connection.on("AddNewGame", function (name, color) {
-        let element = document.getElementById("Games");
+    connection.on("AddNewGame", function (gameName, color, gameId) {
+        let gamesElement = document.getElementById("Games");
 
-        let newDiv = document.createElement("div");
-        var htmlAfter = '';
+        let newGameElement = document.createElement("div");
+        newGameElement.className = "getHover container border border-primary m-3 p-2 rounded-lg";
+        newGameElement.innerHTML = "Game name: " + gameName + " -> " + "Figure color: " + color;   
 
-        newDiv.innerHTML = "Game name: " + name + " -> " + "Figure color: " + color;
-
-        element.appendChild(newDiv)
+        newGameElement.addEventListener("click", function () {
+            window.location.href = `EnterGame/${gameId}`;   
+        });
+        gamesElement.appendChild(newGameElement);
     });
 </script>
