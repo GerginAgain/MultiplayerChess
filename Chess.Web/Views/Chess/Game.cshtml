@@ -12,7 +12,7 @@
 
 <script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
 
-@if ((ViewData["Color"] as string) == "White")
+@if (Model.Color == "White")
 {
     <partial name="_WhitePlayerChessBoardPartial" />
 }
@@ -24,12 +24,12 @@ else
 
 <script type="text/javascript">
     let gameId = @Model.Id;
-    console.log("gameId is " + gameId);
+    //console.log("gameId is " + gameId);
 
     var connection = new signalR.HubConnectionBuilder().withUrl("/chessHub").build();
     connection.start().then(() => {
         connection.invoke("AddHostConnectionIdToGame", gameId);
-    });;
+    });
 
     connection.on("ReceiveMessage", function (startId, targetId) {
         let element = document.getElementById(startId);
@@ -48,7 +48,7 @@ else
     function drag(ev) {
         ev.dataTransfer.setData("text", ev.target.id);
         startId = ev.target.id;
-        console.log(startId);
+        //console.log(startId);
     }
 
     function drop(ev) {
@@ -58,7 +58,7 @@ else
 
         targetId = ev.target.id;
         connection.invoke("SendMessage", startId, targetId, gameId);
-        console.log(targetId);
+        //console.log(targetId);
     }
 
 

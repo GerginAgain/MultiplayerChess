@@ -26,8 +26,8 @@
 
     function addListener(e) {
         if (e.target !== e.currentTarget) {
-            let currentId = e.target.id;
-            window.location.href = `EnterGame/${currentId}`;
+            let id = e.target.id;
+            window.location.href = `EnterGame/${id}`;
         }
 
         e.stopPropagation();
@@ -40,12 +40,14 @@
         let gamesElement = document.getElementById("Games");
 
         let newGameElement = document.createElement("div");
+        newGameElement.id = gameId;
         newGameElement.className = "getHover container border border-primary m-3 p-2 rounded-lg";
-        newGameElement.innerHTML = "Game name: " + gameName + " -> " + "Figure color: " + color;   
-
-        newGameElement.addEventListener("click", function () {
-            window.location.href = `EnterGame/${gameId}`;   
-        });
+        newGameElement.innerHTML = "Game name: " + gameName + " -> " + "Figure color: " + color;
         gamesElement.appendChild(newGameElement);
+
+        document.getElementById(`${gameId}`).addEventListener("click", function (e) {
+            let id = e.target.id;
+            window.location.href = `EnterGame/${id}`;
+        });
     });
 </script>

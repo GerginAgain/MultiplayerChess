@@ -41,7 +41,6 @@ namespace Chess.Web.Hubs
             Console.WriteLine("currentUserConnectionId is " + currentUserConnectionId);
 
             await Clients.Client(opponentUserId).SendAsync("ReceiveMessage", startId, targetId);
-
         }
 
         public async Task SendNewGame(string name, string color)
@@ -53,7 +52,6 @@ namespace Chess.Web.Hubs
 
         public void AddHostConnectionIdToGame(int gameId)
         {
-            //Console.WriteLine("gameId = " + gameId);
             var hostConnectionId = this.Context.ConnectionId;
             var currentGame = this.db.Games.First(x => x.Id == gameId);
             currentGame.HostConnectionId = hostConnectionId;
@@ -62,7 +60,6 @@ namespace Chess.Web.Hubs
 
         public void AddGuestConnectionIdToGame(int gameId)
         {
-            //Console.WriteLine("gameId = " + gameId);
             var guestConnectionId = this.Context.ConnectionId;
             var currentGame = this.db.Games.First(x => x.Id == gameId);
             currentGame.GuestConnectionId = guestConnectionId;

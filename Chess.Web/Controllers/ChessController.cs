@@ -4,18 +4,22 @@ using System.Linq;
 using System.Threading.Tasks;
 using Chess.Data;
 using Chess.Data.Models;
+using Chess.Web.Hubs;
 using Chess.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 
 namespace Chess.Web.Controllers
 {
     public class ChessController : Controller
     {
         private ChessDbContext db;
+        private readonly IHubContext<ChessHub> hubContext;
 
-        public ChessController(ChessDbContext db)
+        public ChessController(ChessDbContext db, IHubContext<ChessHub> hubContext)
         {
             this.db = db;
+            this.hubContext = hubContext;
         }
 
         public IActionResult Game()
@@ -40,7 +44,7 @@ namespace Chess.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateGame(GameInputViewModel input)
+        public async Task<IActionResult> CreateGame(GameInputViewModel input)
         {
             if (!this.ModelState.IsValid)
             {
@@ -51,14 +55,19 @@ namespace Chess.Web.Controllers
             {
                 Name = input.Name,
                 Color = input.Color.ToString(),
-                //HostConnectionId = input.HostConnectionId
             };
 
             this.db.Games.Add(game);
-            this.db.SaveChanges();
+            await this.db.SaveChangesAsync();
 
             var currentGameWithId = this.db.Games
                 .First(x => x.Name == game.Name);
+
+            var name = currentGameWithId.Name;
+            var color = currentGameWithId.Color;
+            var gameId = currentGameWithId.Id;
+
+            await this.hubContext.Clients.All.SendAsync("AddNewGame", name, color, gameId);
 
             var gameViewModel = new GameViewModel
             {
@@ -67,12 +76,12 @@ namespace Chess.Web.Controllers
                 Color = currentGameWithId.Color,             
             };
 
-            ViewData["Color"] = game.Color;
             return this.View("Game", gameViewModel);
         }
 
         public IActionResult EnterGame(int id)
         {
+            Console.WriteLine(id);
             var game = this.db.Games.FirstOrDefault(x => x.Id == id);
 
             var color = string.Empty;

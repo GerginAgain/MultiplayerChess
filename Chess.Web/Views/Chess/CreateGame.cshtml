@@ -2,9 +2,10 @@
 @model GameInputViewModel
 
 <script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 
 <div class="row justify-content-center">
-    @*<form class="col-md-4" >*@
+    <form class="col-md-4" asp-controller="Chess" asp-action="CreateGame" method="post">
         <div asp-validation-summary="All" class="text-danger"></div>
 
         <div class="form-group">
@@ -18,10 +19,18 @@
             <input id="Name" asp-for="Name" class="form-control" />
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
+
+        <!--<div  class="form-group">-->
+            @*<label asp-for="ConnectionId"></label>*@
+            <!--<input type="hidden" id="ConnectionId" asp-for="HostConnectionId" class="form-control" />-->
+            @*<span asp-validation-for="Name" class="text-danger"></span>*@
+        <!--</div>-->
+
+        @*<input type="hidden" name="connectionId" id="connectionId" />*@
+
         <hr />
-        @*<input id="button" type="submit" class="btn btn-primary" value="Create" />*@
-        <button id="button">Create</button>
-    @*</form>*@
+        <input id="button" type="submit" class="btn btn-primary" value="Create" />
+    </form>
 </div>
 
 @section Scripts{
@@ -31,25 +40,23 @@
 <script type="text/javascript">
 
     var connection = new signalR.HubConnectionBuilder().withUrl("/chessHub").build();
-    connection.start();
+    connection.start();  //.then(() => {
+    //    connection.invoke("SendConnectionId");
+    //})
 
-    let button = document.getElementById("button");
-    button.addEventListener("click", function () {
-        let name = document.getElementById('Name').value;
-        let color = document.getElementById('Color').value;
+    //connection.on("GetConnectionId", function (connectionId) {
+    //    let connectionIdElement = document.getElementById('ConnectionId');
+    //    connectionIdElement.value = connectionId;
+    //    console.log(connectionId);
+    //}) 
 
-        var xhttp = new XMLHttpRequest();
-        xhttp.open("POST", "/Chess/CreateGame", true);
-        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    //let button = document.getElementById("button");
+    //button.addEventListener("click", function () {
+    //    let name = document.getElementById('Name').value;
+    //    let color = document.getElementById('Color').value;
 
-        xhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                connection.invoke("SendNewGame", name, color);
-            }
-        };
-        
-        xhttp.send(`name=${name}&color=${color}`);       
-    })
+    //    connection.invoke("SendNewGame", name, color);
+    //})
 
     
 </script>
