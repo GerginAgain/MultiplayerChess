@@ -19,7 +19,7 @@ namespace Chess.Web.Hubs
             this.db = db;
         }
 
-        public async Task SendMessage(string startId, string targetId, int gameId)
+        public async Task SendNewMove(string startId, string targetId, int gameId)
         {
             var currentUserConnectionId = this.Context.ConnectionId;
             var currentGame = this.db.Games.First(x => x.Id == gameId);
@@ -34,13 +34,7 @@ namespace Chess.Web.Hubs
                 opponentUserId = currentGame.HostConnectionId;
             }
 
-            Console.WriteLine("opponentConectionId is " + opponentUserId);
-            Console.WriteLine("gameId is " + currentGame.Id);
-            Console.WriteLine("gameId is " + currentGame.HostConnectionId);
-            Console.WriteLine("gameId is " + currentGame.GuestConnectionId);
-            Console.WriteLine("currentUserConnectionId is " + currentUserConnectionId);
-
-            await Clients.Client(opponentUserId).SendAsync("ReceiveMessage", startId, targetId);
+            await Clients.Client(opponentUserId).SendAsync("ReceiveNewMove", startId, targetId);
         }
 
         public async Task SendNewGame(string name, string color)

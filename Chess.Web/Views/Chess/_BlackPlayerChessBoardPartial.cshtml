@@ -62,12 +62,29 @@
 
                 <td id="@cellId" class="@boardCellColor" ondrop="drop(event)" ondragover="allowDrop(event)">
 
-                    @if (row == 1 || row == 2 || row == 7 || row == 8)
+                    @if (row == 1 || row == 2)
                     {
 
-                        <i id="@figureId" class="@figure @figureSize @figureColor @whiteFigureBorder" draggable="true" ondragstart="drag(event)"></i>}
+                        <i id="@figureId" class="@figure @figureSize @figureColor @whiteFigureBorder" @*draggable="true"*@ @*ondragstart="drag(event)"*@></i>
+                    }
+                    else if (row == 7 || row == 8)
+                    {
+                        <i id="@figureId" class="@figure @figureSize @figureColor @whiteFigureBorder" draggable="true" ondragstart="drag(event)"></i>
+                    }
                 </td>
             }
         </tr>
     }
 </table>
+
+<script type="text/javascript">
+    //let whiteFigures = document.getElementsByClassName('whiteFigure');
+    //for (var i = 0; i < whiteFigures.length; i++) {
+    //    whiteFigures[i].setAttribute('draggable', true);
+    //}
+
+    //let blackFigures = document.getElementsByClassName('blackFigure');
+    //for (var i = 0; i < blackFigures.length; i++) {
+    //    blackFigures[i].setAttribute('draggable', true);
+    //}
+</script>

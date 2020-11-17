@@ -24,15 +24,23 @@ else
     console.log("gameId is " + gameId);
 
     var connection = new signalR.HubConnectionBuilder().withUrl("/chessHub").build();
-    connection.start().then(() => {   
-        connection.invoke("AddGuestConnectionIdToGame", gameId);        
+    connection.start().then(() => {
+        connection.invoke("AddGuestConnectionIdToGame", gameId);
     });
 
-    connection.on("ReceiveMessage", function (startId, targetId) {
+    let isDragEnabled = false;
+
+    connection.on("ReceiveNewMove", function (startId, targetId) {
         let element = document.getElementById(startId);
         let cell = document.getElementById(targetId);
 
         cell.appendChild(element);
+
+        //let blackFigures = document.getElementsByClassName('blackFigure');
+        //for (var i = 0; i < blackFigures.length; i++) {
+        //    blackFigures[i].setAttribute('draggable', true);
+        //}
+        isDragEnabled = true;
     });
 
     let targetId = "";
@@ -43,9 +51,10 @@ else
     }
 
     function drag(ev) {
-        ev.dataTransfer.setData("text", ev.target.id);
-        startId = ev.target.id;
-        console.log(startId);
+        if (isDragEnabled) {
+            ev.dataTransfer.setData("text", ev.target.id);
+            startId = ev.target.id;
+        }     
     }
 
     function drop(ev) {
@@ -53,8 +62,13 @@ else
         var data = ev.dataTransfer.getData("text");
         ev.target.appendChild(document.getElementById(data));
 
+        //let blackFigures = document.getElementsByClassName('blackFigure');
+        //for (var i = 0; i < blackFigures.length; i++) {
+        //    blackFigures[i].setAttribute('draggable', false);
+        //}
+        isDragEnabled = false;
+
         targetId = ev.target.id;
-        connection.invoke("SendMessage", startId, targetId, gameId);
-        console.log(targetId);
+        connection.invoke("SendNewMove", startId, targetId, gameId);
     }
 </script>
