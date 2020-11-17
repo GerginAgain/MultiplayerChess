@@ -34,6 +34,9 @@ namespace Chess.Web.Hubs
                 opponentUserId = currentGame.HostConnectionId;
             }
 
+            Console.WriteLine("startId = " + startId);
+            Console.WriteLine("targetId = " + targetId);
+
             await Clients.Client(opponentUserId).SendAsync("ReceiveNewMove", startId, targetId);
         }
 

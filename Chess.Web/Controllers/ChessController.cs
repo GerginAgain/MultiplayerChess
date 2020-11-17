@@ -81,7 +81,6 @@ namespace Chess.Web.Controllers
 
         public IActionResult EnterGame(int id)
         {
-            Console.WriteLine(id);
             var game = this.db.Games.FirstOrDefault(x => x.Id == id);
 
             var color = string.Empty;

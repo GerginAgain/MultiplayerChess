@@ -31,15 +31,19 @@ else
     let isDragEnabled = false;
 
     connection.on("ReceiveNewMove", function (startId, targetId) {
-        let element = document.getElementById(startId);
-        let cell = document.getElementById(targetId);
+        let figuretoMove = document.getElementById(startId);
+        let targetCell = document.getElementById(targetId);
 
-        cell.appendChild(element);
+        if (targetId.startsWith("i")) {
+            let targetElementParent = targetCell.parentElement;
+            let firstChildElement = targetElementParent.firstElementChild;
+            targetElementParent.removeChild(firstChildElement);
+            targetElementParent.appendChild(figuretoMove);
+        }
+        else {
+            targetCell.appendChild(figuretoMove);
+        }
 
-        //let blackFigures = document.getElementsByClassName('blackFigure');
-        //for (var i = 0; i < blackFigures.length; i++) {
-        //    blackFigures[i].setAttribute('draggable', true);
-        //}
         isDragEnabled = true;
     });
 
@@ -59,16 +63,23 @@ else
 
     function drop(ev) {
         ev.preventDefault();
-        var data = ev.dataTransfer.getData("text");
-        ev.target.appendChild(document.getElementById(data));
+        let data = ev.dataTransfer.getData("text");
+        let currentFigure = document.getElementById(data);
+        let targetElementId = ev.target.id;
 
-        //let blackFigures = document.getElementsByClassName('blackFigure');
-        //for (var i = 0; i < blackFigures.length; i++) {
-        //    blackFigures[i].setAttribute('draggable', false);
-        //}
+        if (targetElementId.startsWith("i")) {
+            let targetElementParent = ev.target.parentElement;
+            let firstChildElement = targetElementParent.firstElementChild;
+            targetElementParent.removeChild(firstChildElement);
+            targetElementParent.appendChild(currentFigure);
+        }
+        else {
+            let targetCell = ev.target;
+            targetCell.appendChild(currentFigure);
+        }
+
+        targetId = targetElementId;
         isDragEnabled = false;
-
-        targetId = ev.target.id;
         connection.invoke("SendNewMove", startId, targetId, gameId);
     }
 </script>
