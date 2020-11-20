@@ -61,7 +61,7 @@ else
         }     
     }
 
-    function drop(ev) {
+    function drop(ev) { //da naprawq da ne move da se dropwa 
         ev.preventDefault();
         let data = ev.dataTransfer.getData("text");
         let currentFigure = document.getElementById(data);
