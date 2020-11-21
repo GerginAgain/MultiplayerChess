@@ -367,3 +367,5 @@ C:\Users\Again\Desktop\Chess\MultiplayerChess\Chess.Web\obj\Debug\netcoreapp3.1\
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Chess.Web\obj\Debug\netcoreapp3.1\Chess.Web.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Chess.Web\obj\Debug\netcoreapp3.1\Chess.Web.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Chess.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Administration\Views\Home\Index.cshtml.g.cs
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Chess.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Administration\Views\_ViewImports.cshtml.g.cs
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Chess.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Administration\Views\_ViewStart.cshtml.g.cs
