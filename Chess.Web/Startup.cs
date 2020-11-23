@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Chess.Web.Hubs;
 using Chess.Data;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Chess.Web
 {
@@ -34,7 +35,10 @@ namespace Chess.Web
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ChessDbContext>();
-            services.AddControllersWithViews();
+            services.AddControllersWithViews(options =>
+            {
+                options.Filters.Add(typeof(AutoValidateAntiforgeryTokenAttribute));
+            });
             services.AddRazorPages();
             services.AddSignalR();
         }

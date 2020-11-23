@@ -21,16 +21,19 @@
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        @*<li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Chess" asp-action="Game">Game</a>
-                        </li>*@
+                        </li>                       
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Chess" asp-action="CreateGame">Create game</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Chess" asp-action="Games">Games</a>
                         </li>
+                        @if (User.IsInRole("Administrator"))
+                        {
+                            <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Administration" asp-controller="Home" asp-action="Index">Add video</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
