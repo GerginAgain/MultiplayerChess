@@ -15,6 +15,7 @@ using Microsoft.Extensions.Hosting;
 using Chess.Web.Hubs;
 using Chess.Data;
 using Microsoft.AspNetCore.Mvc;
+using Chess.Data.Seeding;
 
 namespace Chess.Web
 {
@@ -33,14 +34,25 @@ namespace Chess.Web
             services.AddDbContext<ChessDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false) //ענÿזגא הא ו false
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ChessDbContext>();
+            services.Configure<IdentityOptions>(options =>
+            {               
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 6;
+                options.Password.RequiredUniqueChars = 1;
+            });
             services.AddControllersWithViews(options =>
             {
                 options.Filters.Add(typeof(AutoValidateAntiforgeryTokenAttribute));
             });
             services.AddRazorPages();
             services.AddSignalR();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +66,8 @@ namespace Chess.Web
                 {
                     dbContext.Database.Migrate();
                 }
+
+                new RolesSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
             }
 
             if (env.IsDevelopment())
