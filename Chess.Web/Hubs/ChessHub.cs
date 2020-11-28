@@ -1,5 +1,5 @@
 ﻿using Chess.Data;
-using Chess.Web.ViewModels;
+using Chess.Web.ViewModels.InputModels.Enums;
 using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;

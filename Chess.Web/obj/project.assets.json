@@ -2715,6 +2715,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
+          "Chess.Data.Models": "1.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "3.1.7",
           "Microsoft.EntityFrameworkCore.SqlServer": "3.1.7"
         },
@@ -2723,6 +2724,29 @@
         },
         "runtime": {
           "bin/placeholder/Chess.Data.dll": {}
+        }
+      },
+      "Chess.Data.Models/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/Chess.Data.Models.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Chess.Data.Models.dll": {}
+        }
+      },
+      "Chess.Web.ViewModels/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Chess.Data": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Chess.Web.ViewModels.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Chess.Web.ViewModels.dll": {}
         }
       }
     }
@@ -8847,11 +8871,22 @@
       "type": "project",
       "path": "../Chess.Data/Chess.Data.csproj",
       "msbuildProject": "../Chess.Data/Chess.Data.csproj"
+    },
+    "Chess.Data.Models/1.0.0": {
+      "type": "project",
+      "path": "../Chess.Data.Models/Chess.Data.Models.csproj",
+      "msbuildProject": "../Chess.Data.Models/Chess.Data.Models.csproj"
+    },
+    "Chess.Web.ViewModels/1.0.0": {
+      "type": "project",
+      "path": "../Chess.Web.ViewModels/Chess.Web.ViewModels.csproj",
+      "msbuildProject": "../Chess.Web.ViewModels/Chess.Web.ViewModels.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
       "Chess.Data >= 1.0.0",
+      "Chess.Web.ViewModels >= 1.0.0",
       "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore >= 3.1.8",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 3.1.8",
       "Microsoft.AspNetCore.Identity.UI >= 3.1.8",
@@ -8892,6 +8927,9 @@
           "projectReferences": {
             "C:\\Users\\Again\\Desktop\\Chess\\MultiplayerChess\\Chess.Data\\Chess.Data.csproj": {
               "projectPath": "C:\\Users\\Again\\Desktop\\Chess\\MultiplayerChess\\Chess.Data\\Chess.Data.csproj"
+            },
+            "C:\\Users\\Again\\Desktop\\Chess\\MultiplayerChess\\Chess.Web.ViewModels\\Chess.Web.ViewModels.csproj": {
+              "projectPath": "C:\\Users\\Again\\Desktop\\Chess\\MultiplayerChess\\Chess.Web.ViewModels\\Chess.Web.ViewModels.csproj"
             }
           }
         }

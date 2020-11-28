@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Chess.Data\Chess.Data.csproj" />
+    <ProjectReference Include="..\Chess.Web.ViewModels\Chess.Web.ViewModels.csproj" />
   </ItemGroup>
 
   <ItemGroup>

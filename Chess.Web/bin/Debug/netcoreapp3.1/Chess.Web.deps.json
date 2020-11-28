@@ -25,6 +25,7 @@
       "Chess.Web/1.0.0": {
         "dependencies": {
           "Chess.Data": "1.0.0",
+          "Chess.Web.ViewModels": "1.0.0",
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "3.1.8",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "3.1.8",
           "Microsoft.AspNetCore.Identity.UI": "3.1.8",
@@ -2341,6 +2342,7 @@
       },
       "Chess.Data/1.0.0": {
         "dependencies": {
+          "Chess.Data.Models": "1.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "3.1.8",
           "Microsoft.EntityFrameworkCore.SqlServer": "3.1.8"
         },
@@ -2349,6 +2351,25 @@
         },
         "compile": {
           "Chess.Data.dll": {}
+        }
+      },
+      "Chess.Data.Models/1.0.0": {
+        "runtime": {
+          "Chess.Data.Models.dll": {}
+        },
+        "compile": {
+          "Chess.Data.Models.dll": {}
+        }
+      },
+      "Chess.Web.ViewModels/1.0.0": {
+        "dependencies": {
+          "Chess.Data": "1.0.0"
+        },
+        "runtime": {
+          "Chess.Web.ViewModels.dll": {}
+        },
+        "compile": {
+          "Chess.Web.ViewModels.dll": {}
         }
       },
       "Microsoft.AspNetCore.Antiforgery/3.1.0.0": {
@@ -5114,6 +5135,16 @@
       "hashPath": "system.xml.xmlserializer.4.3.0.nupkg.sha512"
     },
     "Chess.Data/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Chess.Data.Models/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Chess.Web.ViewModels/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

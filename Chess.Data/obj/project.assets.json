@@ -1557,6 +1557,16 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "Chess.Data.Models/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/Chess.Data.Models.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Chess.Data.Models.dll": {}
+        }
       }
     }
   },
@@ -5860,10 +5870,16 @@
         "system.xml.xmlserializer.4.3.0.nupkg.sha512",
         "system.xml.xmlserializer.nuspec"
       ]
+    },
+    "Chess.Data.Models/1.0.0": {
+      "type": "project",
+      "path": "../Chess.Data.Models/Chess.Data.Models.csproj",
+      "msbuildProject": "../Chess.Data.Models/Chess.Data.Models.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "Chess.Data.Models >= 1.0.0",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 3.1.7",
       "Microsoft.EntityFrameworkCore.SqlServer >= 3.1.7",
       "Microsoft.EntityFrameworkCore.Tools >= 3.1.7"
@@ -5898,7 +5914,11 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Again\\Desktop\\Chess\\MultiplayerChess\\Chess.Data.Models\\Chess.Data.Models.csproj": {
+              "projectPath": "C:\\Users\\Again\\Desktop\\Chess\\MultiplayerChess\\Chess.Data.Models\\Chess.Data.Models.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

@@ -21,13 +21,13 @@ using Chess.Web;
 #nullable disable
 #nullable restore
 #line 2 "C:\Users\Again\Desktop\Chess\MultiplayerChess\Chess.Web\Areas\Administration\Views\_ViewImports.cshtml"
-using Chess.Web.Models;
+using Chess.Web.ViewModels;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"f400a24e4f1c1f8dbc87c0f761266a45e781e06b", @"/Areas/Administration/Views/_ViewStart.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"833e8d9ba6d00742f90a4dc4ca8226ec41aef66e", @"/Areas/Administration/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"a9f0311fafabc70ec7602eaca3ecbcc7dfff5e9b", @"/Areas/Administration/Views/_ViewImports.cshtml")]
     public class Areas_Administration_Views__ViewStart : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998

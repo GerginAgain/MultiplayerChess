@@ -21,13 +21,27 @@ using Chess.Web;
 #nullable disable
 #nullable restore
 #line 2 "C:\Users\Again\Desktop\Chess\MultiplayerChess\Chess.Web\Views\_ViewImports.cshtml"
-using Chess.Web.Models;
+using Chess.Web.ViewModels;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 3 "C:\Users\Again\Desktop\Chess\MultiplayerChess\Chess.Web\Views\_ViewImports.cshtml"
+using Chess.Web.ViewModels.InputModels;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 4 "C:\Users\Again\Desktop\Chess\MultiplayerChess\Chess.Web\Views\_ViewImports.cshtml"
+using Chess.Web.ViewModels.ViewModels;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"4ecc4d2bcad30a6aee551879bc7e7094ebb4184d", @"/Views/Shared/Error.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"833e8d9ba6d00742f90a4dc4ca8226ec41aef66e", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"b8184c5baf9691d2f7189f11c7d348909e771177", @"/Views/_ViewImports.cshtml")]
     public class Views_Shared_Error : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<ErrorViewModel>
     {
         #pragma warning disable 1998

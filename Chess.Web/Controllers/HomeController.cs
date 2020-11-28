@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Chess.Web.Models;
+using Chess.Web.ViewModels;
 
 namespace Chess.Web.Controllers
 {

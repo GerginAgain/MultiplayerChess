@@ -9,4 +9,7 @@ C:\Users\Again\Desktop\Chess\MultiplayerChess\Chess.Data\obj\Debug\netcoreapp3.1
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Chess.Data\obj\Debug\netcoreapp3.1\Chess.Data.dll
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Chess.Data\obj\Debug\netcoreapp3.1\Chess.Data.pdb
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Chess.Data\obj\Debug\netcoreapp3.1\Chess.Data.genruntimeconfig.cache
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Chess.Data\bin\Debug\netcoreapp3.1\Chess.Data.Models.dll
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Chess.Data\bin\Debug\netcoreapp3.1\Chess.Data.Models.pdb
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Chess.Data\obj\Debug\netcoreapp3.1\Chess.Data.csprojAssemblyReference.cache
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Chess.Data\obj\Debug\netcoreapp3.1\Chess.Data.csproj.CopyComplete

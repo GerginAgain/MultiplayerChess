@@ -17,7 +17,6 @@
             var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
 
             await SeedRoleAsync(roleManager, userManager, "Admin");
-            //await dbContext.SaveChangesAsync();
         }
 
         private static async Task SeedRoleAsync(RoleManager<IdentityRole> roleManager,
@@ -48,7 +47,7 @@
 
                 if (result.Succeeded)
                 {
-                    await userManager.AddToRoleAsync(user, "Admin");
+                    await userManager.AddToRoleAsync(user, "Admin"); //Да добавя глобална константа за админ!!!
                 }
             }
         }

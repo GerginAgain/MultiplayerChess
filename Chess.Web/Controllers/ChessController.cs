@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 using Chess.Data;
 using Chess.Data.Models;
 using Chess.Web.Hubs;
-using Chess.Web.ViewModels;
+using Chess.Web.ViewModels.ViewModels;
+using Chess.Web.ViewModels.InputModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 
