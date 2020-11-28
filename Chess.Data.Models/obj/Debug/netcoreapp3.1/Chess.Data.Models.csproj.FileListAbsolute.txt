@@ -1,8 +1,0 @@
-C:\Users\Again\Desktop\Chess\MultiplayerChess\Chess.Data.Models\bin\Debug\netcoreapp3.1\Chess.Data.Models.deps.json
-C:\Users\Again\Desktop\Chess\MultiplayerChess\Chess.Data.Models\bin\Debug\netcoreapp3.1\Chess.Data.Models.dll
-C:\Users\Again\Desktop\Chess\MultiplayerChess\Chess.Data.Models\bin\Debug\netcoreapp3.1\Chess.Data.Models.pdb
-C:\Users\Again\Desktop\Chess\MultiplayerChess\Chess.Data.Models\obj\Debug\netcoreapp3.1\Chess.Data.Models.AssemblyInfoInputs.cache
-C:\Users\Again\Desktop\Chess\MultiplayerChess\Chess.Data.Models\obj\Debug\netcoreapp3.1\Chess.Data.Models.AssemblyInfo.cs
-C:\Users\Again\Desktop\Chess\MultiplayerChess\Chess.Data.Models\obj\Debug\netcoreapp3.1\Chess.Data.Models.csproj.CoreCompileInputs.cache
-C:\Users\Again\Desktop\Chess\MultiplayerChess\Chess.Data.Models\obj\Debug\netcoreapp3.1\Chess.Data.Models.dll
-C:\Users\Again\Desktop\Chess\MultiplayerChess\Chess.Data.Models\obj\Debug\netcoreapp3.1\Chess.Data.Models.pdb
