@@ -2711,10 +2711,21 @@
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
       },
+      "Chess.Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/Chess.Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Chess.Common.dll": {}
+        }
+      },
       "Chess.Data/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
+          "Chess.Common": "1.0.0",
           "Chess.Data.Models": "1.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "3.1.7",
           "Microsoft.EntityFrameworkCore.SqlServer": "3.1.7"
@@ -8866,6 +8877,11 @@
         "system.xml.xmlserializer.4.3.0.nupkg.sha512",
         "system.xml.xmlserializer.nuspec"
       ]
+    },
+    "Chess.Common/1.0.0": {
+      "type": "project",
+      "path": "../../Chess.Common/Chess.Common.csproj",
+      "msbuildProject": "../../Chess.Common/Chess.Common.csproj"
     },
     "Chess.Data/1.0.0": {
       "type": "project",

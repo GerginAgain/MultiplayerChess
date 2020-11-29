@@ -2340,8 +2340,17 @@
           "System.Xml.XmlDocument": "4.3.0"
         }
       },
+      "Chess.Common/1.0.0": {
+        "runtime": {
+          "Chess.Common.dll": {}
+        },
+        "compile": {
+          "Chess.Common.dll": {}
+        }
+      },
       "Chess.Data/1.0.0": {
         "dependencies": {
+          "Chess.Common": "1.0.0",
           "Chess.Data.Models": "1.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "3.1.8",
           "Microsoft.EntityFrameworkCore.SqlServer": "3.1.8"
@@ -5133,6 +5142,11 @@
       "sha512": "sha512-MYoTCP7EZ98RrANESW05J5ZwskKDoN0AuZ06ZflnowE50LTpbR5yRg3tHckTVm5j/m47stuGgCrCHWePyHS70Q==",
       "path": "system.xml.xmlserializer/4.3.0",
       "hashPath": "system.xml.xmlserializer.4.3.0.nupkg.sha512"
+    },
+    "Chess.Common/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "Chess.Data/1.0.0": {
       "type": "project",

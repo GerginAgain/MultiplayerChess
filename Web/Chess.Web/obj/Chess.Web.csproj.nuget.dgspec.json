@@ -4,6 +4,61 @@
     "C:\\Users\\Again\\Desktop\\Chess\\MultiplayerChess\\Web\\Chess.Web\\Chess.Web.csproj": {}
   },
   "projects": {
+    "C:\\Users\\Again\\Desktop\\Chess\\MultiplayerChess\\Chess.Common\\Chess.Common.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Again\\Desktop\\Chess\\MultiplayerChess\\Chess.Common\\Chess.Common.csproj",
+        "projectName": "Chess.Common",
+        "projectPath": "C:\\Users\\Again\\Desktop\\Chess\\MultiplayerChess\\Chess.Common\\Chess.Common.csproj",
+        "packagesPath": "C:\\Users\\Again\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Again\\Desktop\\Chess\\MultiplayerChess\\Chess.Common\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Again\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
     "C:\\Users\\Again\\Desktop\\Chess\\MultiplayerChess\\Data\\Chess.Data.Models\\Chess.Data.Models.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -85,6 +140,9 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
+              "C:\\Users\\Again\\Desktop\\Chess\\MultiplayerChess\\Chess.Common\\Chess.Common.csproj": {
+                "projectPath": "C:\\Users\\Again\\Desktop\\Chess\\MultiplayerChess\\Chess.Common\\Chess.Common.csproj"
+              },
               "C:\\Users\\Again\\Desktop\\Chess\\MultiplayerChess\\Data\\Chess.Data.Models\\Chess.Data.Models.csproj": {
                 "projectPath": "C:\\Users\\Again\\Desktop\\Chess\\MultiplayerChess\\Data\\Chess.Data.Models\\Chess.Data.Models.csproj"
               }

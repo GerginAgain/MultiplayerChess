@@ -3,6 +3,7 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+    using Chess.Common;
     using Chess.Data;
     using Chess.Data.Seeding;
     using Microsoft.AspNetCore.Identity;
@@ -16,7 +17,7 @@
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
 
-            await SeedRoleAsync(roleManager, userManager, "Admin");
+            await SeedRoleAsync(roleManager, userManager, GlobalConstants.AdministratorRoleName);
         }
 
         private static async Task SeedRoleAsync(RoleManager<IdentityRole> roleManager,
@@ -47,7 +48,7 @@
 
                 if (result.Succeeded)
                 {
-                    await userManager.AddToRoleAsync(user, "Admin"); //Да добавя глобална константа за админ!!!
+                    await userManager.AddToRoleAsync(user, GlobalConstants.AdministratorRoleName);
                 }
             }
         }
