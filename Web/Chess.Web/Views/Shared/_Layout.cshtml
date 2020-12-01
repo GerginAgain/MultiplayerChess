@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - Chess.Web</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link href="~/lib/font-awesome/css/all.css" rel="stylesheet" />
 </head>
 <body>
     <header>
@@ -21,7 +22,7 @@
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>                       
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Chess" asp-action="CreateGame">Create game</a>
                         </li>
@@ -30,8 +31,8 @@
                         </li>
                         @if (User.IsInRole("Administrator"))
                         {
-                            <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Administration" asp-controller="Home" asp-action="Index">Add video</a>
+                            <li class="nav-item active">
+                                <a asp-controller="Home" asp-action="Index" asp-area="Administration" class="nav-link"><i class="fas fa-user-cog"></i> Admin panel</a>
                             </li>
                         }
                     </ul>

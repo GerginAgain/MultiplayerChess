@@ -16,6 +16,8 @@ using Chess.Data;
 using Microsoft.AspNetCore.Mvc;
 using Chess.Data.Seeding;
 using Chess.Data.Models;
+using Chess.Services.Interfaces;
+using Chess.Services;
 
 namespace Chess.Web
 {
@@ -53,6 +55,10 @@ namespace Chess.Web
             services.AddRazorPages();
             services.AddSignalR();
 
+            //Applications services
+            services.AddTransient<IUsersService, UsersService>();
+            services.AddTransient<IStatisticsService, StatisticsService>();
+            services.AddTransient<IGamesService, GamesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

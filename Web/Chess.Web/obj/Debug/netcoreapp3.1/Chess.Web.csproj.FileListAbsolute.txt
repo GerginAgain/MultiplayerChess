@@ -559,3 +559,5 @@ C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\bin\Debug\netcoreapp
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\bin\Debug\netcoreapp3.1\Chess.Common.pdb
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\bin\Debug\netcoreapp3.1\Chess.Data.Common.dll
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\bin\Debug\netcoreapp3.1\Chess.Data.Common.pdb
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\bin\Debug\netcoreapp3.1\Chess.Services.dll
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\bin\Debug\netcoreapp3.1\Chess.Services.pdb
