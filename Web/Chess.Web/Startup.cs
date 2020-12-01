@@ -15,6 +15,7 @@ using Chess.Web.Hubs;
 using Chess.Data;
 using Microsoft.AspNetCore.Mvc;
 using Chess.Data.Seeding;
+using Chess.Data.Models;
 
 namespace Chess.Web
 {
@@ -33,7 +34,7 @@ namespace Chess.Web
             services.AddDbContext<ChessDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false) //ענÿזגא הא ו false
+            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false) //ענÿזגא הא ו false
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ChessDbContext>();
             services.Configure<IdentityOptions>(options =>

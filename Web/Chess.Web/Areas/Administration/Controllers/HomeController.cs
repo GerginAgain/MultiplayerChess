@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Chess.Web.Areas.Administration.Controllers
 {
     [Area("Administration")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Administrator")]
     public class HomeController : Controller
     {
         public IActionResult Index()

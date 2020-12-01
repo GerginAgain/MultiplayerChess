@@ -8,13 +8,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Chess.Data
 {
-    public class ChessDbContext : IdentityDbContext
+    public class ChessDbContext : IdentityDbContext<ApplicationUser>
     {
         public ChessDbContext(DbContextOptions<ChessDbContext> options)
             :base(options)
         {
             this.Database.EnsureCreated();
         }
+
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
         public DbSet<Game> Games { get; set; }
     }

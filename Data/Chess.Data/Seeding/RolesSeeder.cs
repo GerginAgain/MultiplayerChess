@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
     using Chess.Common;
     using Chess.Data;
+    using Chess.Data.Models;
     using Chess.Data.Seeding;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
@@ -15,13 +16,13 @@
         public async Task SeedAsync(ChessDbContext dbContext, IServiceProvider serviceProvider)
         {
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-            var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
+            var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
             await SeedRoleAsync(roleManager, userManager, GlobalConstants.AdministratorRoleName);
         }
 
         private static async Task SeedRoleAsync(RoleManager<IdentityRole> roleManager,
-            UserManager<IdentityUser> userManager, string roleName)
+            UserManager<ApplicationUser> userManager, string roleName)
         {
             var role = await roleManager.FindByNameAsync(roleName);
             if (role == null)
@@ -35,7 +36,7 @@
 
             if (!await userManager.Users.AnyAsync())
             {
-                var user = new IdentityUser
+                var user = new ApplicationUser
                 {
                     UserName = "admin@gmail.com",
                     Email = "admin@gmail.com",

@@ -1097,7 +1097,16 @@
           "Chess.Common.dll": {}
         }
       },
+      "Chess.Data.Common/1.0.0": {
+        "runtime": {
+          "Chess.Data.Common.dll": {}
+        }
+      },
       "Chess.Data.Models/1.0.0": {
+        "dependencies": {
+          "Chess.Data.Common": "1.0.0",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "3.1.7"
+        },
         "runtime": {
           "Chess.Data.Models.dll": {}
         }
@@ -1846,6 +1855,11 @@
       "hashPath": "system.xml.xmlserializer.4.3.0.nupkg.sha512"
     },
     "Chess.Common/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Chess.Data.Common/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

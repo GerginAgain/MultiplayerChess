@@ -30,3 +30,5 @@ C:\Users\Again\Desktop\Chess\MultiplayerChess\Data\Chess.Data\obj\Debug\netcorea
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Data\Chess.Data\obj\Debug\netcoreapp3.1\Chess.Data.genruntimeconfig.cache
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Data\Chess.Data\bin\Debug\netcoreapp3.1\Chess.Common.dll
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Data\Chess.Data\bin\Debug\netcoreapp3.1\Chess.Common.pdb
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Data\Chess.Data\bin\Debug\netcoreapp3.1\Chess.Data.Common.dll
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Data\Chess.Data\bin\Debug\netcoreapp3.1\Chess.Data.Common.pdb

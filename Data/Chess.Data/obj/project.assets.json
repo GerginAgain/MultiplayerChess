@@ -1582,7 +1582,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
-          "Chess.Data.Common": "1.0.0"
+          "Chess.Data.Common": "1.0.0",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "3.1.0"
         },
         "compile": {
           "bin/placeholder/Chess.Data.Models.dll": {}

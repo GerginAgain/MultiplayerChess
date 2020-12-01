@@ -11,6 +11,10 @@ C:\Users\Again\Desktop\Chess\MultiplayerChess\Data\Chess.Data.Models\bin\Debug\n
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Data\Chess.Data.Models\bin\Debug\netcoreapp3.1\Chess.Data.Models.pdb
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Data\Chess.Data.Models\obj\Debug\netcoreapp3.1\Chess.Data.Models.AssemblyInfoInputs.cache
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Data\Chess.Data.Models\obj\Debug\netcoreapp3.1\Chess.Data.Models.AssemblyInfo.cs
-C:\Users\Again\Desktop\Chess\MultiplayerChess\Data\Chess.Data.Models\obj\Debug\netcoreapp3.1\Chess.Data.Models.csproj.CoreCompileInputs.cache
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Data\Chess.Data.Models\obj\Debug\netcoreapp3.1\Chess.Data.Models.dll
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Data\Chess.Data.Models\obj\Debug\netcoreapp3.1\Chess.Data.Models.pdb
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Data\Chess.Data.Models\bin\Debug\netcoreapp3.1\Chess.Data.Common.dll
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Data\Chess.Data.Models\bin\Debug\netcoreapp3.1\Chess.Data.Common.pdb
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Data\Chess.Data.Models\obj\Debug\netcoreapp3.1\Chess.Data.Models.csprojAssemblyReference.cache
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Data\Chess.Data.Models\obj\Debug\netcoreapp3.1\Chess.Data.Models.csproj.CopyComplete
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Data\Chess.Data.Models\obj\Debug\netcoreapp3.1\Chess.Data.Models.csproj.CoreCompileInputs.cache

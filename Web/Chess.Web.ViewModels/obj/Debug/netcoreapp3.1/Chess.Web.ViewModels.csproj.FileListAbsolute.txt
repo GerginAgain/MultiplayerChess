@@ -24,3 +24,5 @@ C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web.ViewModels\obj\Debug
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web.ViewModels\obj\Debug\netcoreapp3.1\Chess.Web.ViewModels.csproj.CopyComplete
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web.ViewModels\obj\Debug\netcoreapp3.1\Chess.Web.ViewModels.dll
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web.ViewModels\obj\Debug\netcoreapp3.1\Chess.Web.ViewModels.pdb
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web.ViewModels\bin\Debug\netcoreapp3.1\Chess.Data.Common.dll
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web.ViewModels\bin\Debug\netcoreapp3.1\Chess.Data.Common.pdb
