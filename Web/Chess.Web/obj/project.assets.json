@@ -2737,9 +2737,22 @@
           "bin/placeholder/Chess.Data.dll": {}
         }
       },
+      "Chess.Data.Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/Chess.Data.Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Chess.Data.Common.dll": {}
+        }
+      },
       "Chess.Data.Models/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Chess.Data.Common": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/Chess.Data.Models.dll": {}
         },
@@ -8887,6 +8900,11 @@
       "type": "project",
       "path": "../../Data/Chess.Data/Chess.Data.csproj",
       "msbuildProject": "../../Data/Chess.Data/Chess.Data.csproj"
+    },
+    "Chess.Data.Common/1.0.0": {
+      "type": "project",
+      "path": "../../Data/Chess.Data.Common/Chess.Data.Common.csproj",
+      "msbuildProject": "../../Data/Chess.Data.Common/Chess.Data.Common.csproj"
     },
     "Chess.Data.Models/1.0.0": {
       "type": "project",
