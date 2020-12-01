@@ -24,6 +24,7 @@
     ".NETCoreApp,Version=v3.1": {
       "Chess.Web/1.0.0": {
         "dependencies": {
+          "Chess.Common": "1.0.0",
           "Chess.Data": "1.0.0",
           "Chess.Services": "1.0.0",
           "Chess.Web.ViewModels": "1.0.0",
@@ -2120,6 +2121,7 @@
       },
       "Chess.Services/1.0.0": {
         "dependencies": {
+          "Chess.Common": "1.0.0",
           "Chess.Data": "1.0.0",
           "Chess.Web.ViewModels": "1.0.0",
           "Microsoft.AspNetCore.Http": "2.2.2",

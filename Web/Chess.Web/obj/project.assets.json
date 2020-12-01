@@ -2431,6 +2431,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
+          "Chess.Common": "1.0.0",
           "Chess.Data": "1.0.0",
           "Chess.Web.ViewModels": "1.0.0",
           "Microsoft.AspNetCore.Http": "2.2.2",
@@ -8182,6 +8183,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "Chess.Common >= 1.0.0",
       "Chess.Data >= 1.0.0",
       "Chess.Services >= 1.0.0",
       "Chess.Web.ViewModels >= 1.0.0",
@@ -8223,6 +8225,9 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
+            "C:\\Users\\Again\\Desktop\\Chess\\MultiplayerChess\\Chess.Common\\Chess.Common.csproj": {
+              "projectPath": "C:\\Users\\Again\\Desktop\\Chess\\MultiplayerChess\\Chess.Common\\Chess.Common.csproj"
+            },
             "C:\\Users\\Again\\Desktop\\Chess\\MultiplayerChess\\Data\\Chess.Data\\Chess.Data.csproj": {
               "projectPath": "C:\\Users\\Again\\Desktop\\Chess\\MultiplayerChess\\Data\\Chess.Data\\Chess.Data.csproj"
             },

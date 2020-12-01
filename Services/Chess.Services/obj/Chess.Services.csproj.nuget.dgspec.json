@@ -283,6 +283,9 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
+              "C:\\Users\\Again\\Desktop\\Chess\\MultiplayerChess\\Chess.Common\\Chess.Common.csproj": {
+                "projectPath": "C:\\Users\\Again\\Desktop\\Chess\\MultiplayerChess\\Chess.Common\\Chess.Common.csproj"
+              },
               "C:\\Users\\Again\\Desktop\\Chess\\MultiplayerChess\\Data\\Chess.Data\\Chess.Data.csproj": {
                 "projectPath": "C:\\Users\\Again\\Desktop\\Chess\\MultiplayerChess\\Data\\Chess.Data\\Chess.Data.csproj"
               },
