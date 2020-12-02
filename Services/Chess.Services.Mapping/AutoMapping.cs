@@ -1,10 +1,11 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Chess.Services.Mapping
 {
-    class AutoMapping
+    public class AutoMapping : Profile
     {
     }
 }

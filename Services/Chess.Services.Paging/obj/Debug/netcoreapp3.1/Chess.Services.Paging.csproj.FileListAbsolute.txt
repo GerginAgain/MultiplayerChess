@@ -1,0 +1,9 @@
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Services\Chess.Services.Paging\bin\Debug\netcoreapp3.1\Chess.Services.Paging.deps.json
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Services\Chess.Services.Paging\bin\Debug\netcoreapp3.1\Chess.Services.Paging.dll
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Services\Chess.Services.Paging\bin\Debug\netcoreapp3.1\Chess.Services.Paging.pdb
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Services\Chess.Services.Paging\obj\Debug\netcoreapp3.1\Chess.Services.Paging.csprojAssemblyReference.cache
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Services\Chess.Services.Paging\obj\Debug\netcoreapp3.1\Chess.Services.Paging.AssemblyInfoInputs.cache
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Services\Chess.Services.Paging\obj\Debug\netcoreapp3.1\Chess.Services.Paging.AssemblyInfo.cs
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Services\Chess.Services.Paging\obj\Debug\netcoreapp3.1\Chess.Services.Paging.dll
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Services\Chess.Services.Paging\obj\Debug\netcoreapp3.1\Chess.Services.Paging.pdb
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Services\Chess.Services.Paging\obj\Debug\netcoreapp3.1\Chess.Services.Paging.csproj.CoreCompileInputs.cache
