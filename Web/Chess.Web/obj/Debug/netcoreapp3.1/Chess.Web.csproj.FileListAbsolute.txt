@@ -376,9 +376,6 @@ C:\Users\Again\Desktop\Chess\MultiplayerChess\Chess.Web\bin\Debug\netcoreapp3.1\
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\obj\Debug\netcoreapp3.1\Chess.Web.csprojAssemblyReference.cache
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\obj\Debug\netcoreapp3.1\Chess.Web.AssemblyInfoInputs.cache
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\obj\Debug\netcoreapp3.1\Chess.Web.AssemblyInfo.cs
-C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\obj\Debug\netcoreapp3.1\Chess.Web.csproj.CoreCompileInputs.cache
-C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\obj\Debug\netcoreapp3.1\Chess.Web.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\obj\Debug\netcoreapp3.1\Chess.Web.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\obj\Debug\netcoreapp3.1\Chess.Web.RazorAssemblyInfo.cache
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\obj\Debug\netcoreapp3.1\Chess.Web.RazorAssemblyInfo.cs
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\bin\Debug\netcoreapp3.1\appsettings.Development.json

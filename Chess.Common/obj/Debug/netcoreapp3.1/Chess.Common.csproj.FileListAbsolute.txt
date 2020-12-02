@@ -6,7 +6,6 @@ C:\Users\Again\Desktop\Chess\MultiplayerChess\Chess.Common\obj\Debug\netcoreapp3
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Chess.Common\obj\Debug\netcoreapp3.1\Chess.Common.csproj.CoreCompileInputs.cache
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Chess.Common\obj\Debug\netcoreapp3.1\Chess.Common.dll
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Chess.Common\obj\Debug\netcoreapp3.1\Chess.Common.pdb
-C:\Users\Again\Desktop\Chess\MultiplayerChess\Chess.Common\obj\Debug\netcoreapp3.1\Chess.Common.csprojAssemblyReference.cache
 C:\Users\Again\Desktop\Нова папка (2)\MultiplayerChess-master\Chess.Common\bin\Debug\netcoreapp3.1\Chess.Common.deps.json
 C:\Users\Again\Desktop\Нова папка (2)\MultiplayerChess-master\Chess.Common\bin\Debug\netcoreapp3.1\Chess.Common.dll
 C:\Users\Again\Desktop\Нова папка (2)\MultiplayerChess-master\Chess.Common\bin\Debug\netcoreapp3.1\Chess.Common.pdb

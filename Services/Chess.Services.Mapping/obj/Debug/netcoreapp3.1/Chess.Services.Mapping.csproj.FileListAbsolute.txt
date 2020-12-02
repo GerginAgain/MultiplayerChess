@@ -1,0 +1,7 @@
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Services\Chess.Services.Mapping\bin\Debug\netcoreapp3.1\Chess.Services.Mapping.deps.json
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Services\Chess.Services.Mapping\bin\Debug\netcoreapp3.1\Chess.Services.Mapping.dll
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Services\Chess.Services.Mapping\bin\Debug\netcoreapp3.1\Chess.Services.Mapping.pdb
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Services\Chess.Services.Mapping\obj\Debug\netcoreapp3.1\Chess.Services.Mapping.AssemblyInfoInputs.cache
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Services\Chess.Services.Mapping\obj\Debug\netcoreapp3.1\Chess.Services.Mapping.AssemblyInfo.cs
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Services\Chess.Services.Mapping\obj\Debug\netcoreapp3.1\Chess.Services.Mapping.dll
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Services\Chess.Services.Mapping\obj\Debug\netcoreapp3.1\Chess.Services.Mapping.pdb
