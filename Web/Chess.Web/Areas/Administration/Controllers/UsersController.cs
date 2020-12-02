@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Chess.Common;
+using Chess.Services.Interfaces;
 
 namespace Chess.Web.Areas.Administration.Controllers
 {
@@ -12,11 +13,17 @@ namespace Chess.Web.Areas.Administration.Controllers
     [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
     public class UsersController : Controller
     {
-        //public async Task<IActionResult> Active(int? pageNumber)
-        //{
-        //    var allUserViewModels = await usersService.GetAllUserViewModelsAsync(pageNumber ?? GlobalConstants.DefaultPageNumber, GlobalConstants.DefaultPageSize);
+        private readonly IUsersService usersService;
+        public UsersController(IUsersService usersService)
+        {
+            this.usersService = usersService;
+        }
 
-        //    return View(allUserViewModels);
-        //}
+        public async Task<IActionResult> Active(int? pageNumber)
+        {
+            var allUserViewModels = await usersService.GetAllUserViewModelsAsync(pageNumber ?? GlobalConstants.DefaultPageNumber, GlobalConstants.DefaultPageSize);
+
+            return View(allUserViewModels);
+        }
     }
 }

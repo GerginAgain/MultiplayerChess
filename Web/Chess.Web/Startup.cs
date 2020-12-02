@@ -19,6 +19,7 @@ using Chess.Data.Models;
 using Chess.Services.Interfaces;
 using Chess.Services;
 using AutoMapper;
+using Chess.Services.Mapping;
 
 namespace Chess.Web
 {
@@ -49,7 +50,7 @@ namespace Chess.Web
                 options.Password.RequiredLength = 6;
                 options.Password.RequiredUniqueChars = 1;
             });
-            services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(typeof(AutoMapping));
             services.AddControllersWithViews(options =>
             {
                 options.Filters.Add(typeof(AutoValidateAntiforgeryTokenAttribute));

@@ -33,8 +33,22 @@ using Chess.Web.ViewModels.ViewModels.Statistics;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 4 "C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\Areas\Administration\Views\_ViewImports.cshtml"
+using Chess.Web.ViewModels.ViewModels.Users;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 5 "C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\Areas\Administration\Views\_ViewImports.cshtml"
+using Chess.Services.Paging;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"0d4e6a19346d95b94587eef99be08aa94053d1f2", @"/Areas/Administration/Views/Home/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"1ae98c61aa26323d997762e92a757ed164948ceb", @"/Areas/Administration/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"6e09ceb9fc6a6d5c887355a392a1dc4a885a886d", @"/Areas/Administration/Views/_ViewImports.cshtml")]
     public class Areas_Administration_Views_Home_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<AdministrationIndexStatisticViewModel>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("class", new global::Microsoft.AspNetCore.Html.HtmlString("nav-link"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -80,7 +94,7 @@ using Chess.Web.ViewModels.ViewModels.Statistics;
         <ul class=""navbar-nav"">
             <li class=""nav-item active mr-5"">
                 ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0d4e6a19346d95b94587eef99be08aa94053d1f26905", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0d4e6a19346d95b94587eef99be08aa94053d1f27355", async() => {
                 WriteLiteral("<i class=\"fas fa-user\"></i> Registered users: ");
 #nullable restore
 #line 11 "C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\Areas\Administration\Views\Home\Index.cshtml"
@@ -109,7 +123,7 @@ using Chess.Web.ViewModels.ViewModels.Statistics;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\n            </li>\n            <li class=\"nav-item active mr-5\">\n                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0d4e6a19346d95b94587eef99be08aa94053d1f29110", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0d4e6a19346d95b94587eef99be08aa94053d1f29560", async() => {
                 WriteLiteral("<i class=\"fas fa-ad\"></i> Active games: ");
 #nullable restore
 #line 14 "C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\Areas\Administration\Views\Home\Index.cshtml"
@@ -144,7 +158,7 @@ using Chess.Web.ViewModels.ViewModels.Statistics;
                 </a>
                 <div class=""dropdown-menu"" aria-labelledby=""navbarDropdownMenuLink"">
                     ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0d4e6a19346d95b94587eef99be08aa94053d1f211590", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0d4e6a19346d95b94587eef99be08aa94053d1f212040", async() => {
                 WriteLiteral("<i class=\"fas fa-clock\"></i> Waiting for approval");
             }
             );
@@ -165,7 +179,7 @@ using Chess.Web.ViewModels.ViewModels.Statistics;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\n                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0d4e6a19346d95b94587eef99be08aa94053d1f213298", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0d4e6a19346d95b94587eef99be08aa94053d1f213748", async() => {
                 WriteLiteral("<i class=\"fas fa-times-circle\"></i> Rejected ads");
             }
             );
