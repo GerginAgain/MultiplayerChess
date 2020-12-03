@@ -12,6 +12,7 @@ namespace Chess.Services.Mapping
         public AutoMapping()
         {
             CreateMap<ApplicationUser, UserAllViewModel>();
+            CreateMap<ApplicationUser, BlockedUserAllViewModel>();
         }       
     }
 }

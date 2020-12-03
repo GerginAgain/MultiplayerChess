@@ -33,5 +33,12 @@ namespace Chess.Web.Areas.Administration.Controllers
 
             return Json(isBlocked);
         }
+
+        public async Task<IActionResult> Blocked(int? pageNumber)
+        {
+            var allBlockedUserViewModels = await this.usersService.GetAllBlockedUserViewModels(pageNumber ?? GlobalConstants.DefaultPageNumber, GlobalConstants.DefaultPageSize);
+
+            return this.View(allBlockedUserViewModels);
+        }
     }
 }

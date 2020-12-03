@@ -569,3 +569,4 @@ C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\bin\Debug\netcoreapp
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\bin\Debug\netcoreapp3.1\Chess.Services.Mapping.pdb
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Administration\Views\Users\Active.cshtml.g.cs
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ModalPartial.cshtml.g.cs
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Administration\Views\Users\Blocked.cshtml.g.cs

@@ -74,5 +74,20 @@ namespace Chess.Services
 
             return true;
         }
+
+        public async Task<PaginatedList<BlockedUserAllViewModel>> GetAllBlockedUserViewModels(int pageNumber, int pageSize)
+        {
+            var blockedUsers = this.context
+                .ApplicationUsers
+                .Where(x => x.IsDeleted)
+                .OrderByDescending(x => x.CreatedOn);
+                //.To<BlockedUserAllViewModel>();
+
+            var BlockedUserAllViewModels = mapper.ProjectTo<BlockedUserAllViewModel>(blockedUsers);
+
+            var paginatedList = await PaginatedList<BlockedUserAllViewModel>.CreateAsync(BlockedUserAllViewModels, pageNumber, pageSize);
+
+            return paginatedList;
+        }
     }
 }
