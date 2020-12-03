@@ -13,6 +13,7 @@ using Chess.Services.Paging;
 using System.Linq;
 using AutoMapper;
 using Chess.Services.Mapping;
+using Chess.Common;
 
 namespace Chess.Services
 {
@@ -52,6 +53,26 @@ namespace Chess.Services
             var paginatedList = await PaginatedList<UserAllViewModel>.CreateAsync(UserAllViewModels, pageNumber, pageSize);
 
             return paginatedList;
+        }
+
+        public async Task<bool> BlockUserByIdAsync(string userId)
+        {
+            if (!await this.context.ApplicationUsers.AnyAsync(x => x.Id == userId))
+            {
+                throw new ArgumentException(GlobalConstants.InvalidUserIdErrorMessage);
+            }
+
+            var userFromDb = await context.ApplicationUsers.FirstOrDefaultAsync(x => x.Id == userId);
+
+            userFromDb.IsDeleted = true;
+            userFromDb.DeletedOn = DateTime.UtcNow;
+
+            context.ApplicationUsers.Update(userFromDb);
+            await context.SaveChangesAsync();
+
+            //await DeleteAdsByUserId(userId); trqbwa da iztriq syzdadenite igri ot user-a
+
+            return true;
         }
     }
 }
