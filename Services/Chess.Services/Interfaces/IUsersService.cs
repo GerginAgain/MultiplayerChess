@@ -17,5 +17,7 @@ namespace Chess.Services.Interfaces
         Task<bool> BlockUserByIdAsync(string userId);
 
         Task<PaginatedList<BlockedUserAllViewModel>> GetAllBlockedUserViewModels(int pageNumber, int pageSize);
+
+        Task<bool> UnblockUserByIdAsync(string userId);
     }
 }

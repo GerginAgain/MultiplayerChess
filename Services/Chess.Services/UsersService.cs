@@ -89,5 +89,22 @@ namespace Chess.Services
 
             return paginatedList;
         }
+
+        public async Task<bool> UnblockUserByIdAsync(string userId)
+        {
+            if (!await this.context.ApplicationUsers.AnyAsync(x => x.Id == userId))
+            {
+                throw new ArgumentException(GlobalConstants.InvalidUserIdErrorMessage);
+            }
+
+            var userFromDb = await context.ApplicationUsers.FirstOrDefaultAsync(x => x.Id == userId);
+
+            userFromDb.IsDeleted = false;
+
+            context.ApplicationUsers.Update(userFromDb);
+            await context.SaveChangesAsync();
+
+            return true;
+        }
     }
 }

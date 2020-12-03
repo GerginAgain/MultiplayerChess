@@ -40,5 +40,13 @@ namespace Chess.Web.Areas.Administration.Controllers
 
             return this.View(allBlockedUserViewModels);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Unblock(string userId)
+        {
+            var isUnblocked = await this.usersService.UnblockUserByIdAsync(userId);
+
+            return Json(isUnblocked);
+        }
     }
 }
