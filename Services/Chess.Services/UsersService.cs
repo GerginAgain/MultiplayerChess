@@ -34,14 +34,14 @@ namespace Chess.Services
 
         public async Task<int> GetCountOfAllUsersAsync()
         {
-            var allUsersCount = await context.Users.CountAsync(x => !x.IsDeleted);
+            var allUsersCount = await context.Users.CountAsync(x => !x.IsDeleted && x.UserName != "admin");
 
             return allUsersCount;
         }
         public async Task<PaginatedList<UserAllViewModel>> GetAllUserViewModelsAsync(int pageNumber, int pageSize)
         {
             var allUsers = context.ApplicationUsers
-                .Where(x => !x.IsDeleted)
+                .Where(x => !x.IsDeleted && x.UserName != "admin")
                 .OrderByDescending(x => x.CreatedOn);
             //.ToArray();
             //.To<UserAllViewModel>();

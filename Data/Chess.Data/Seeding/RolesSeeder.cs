@@ -38,7 +38,7 @@
             {
                 var user = new ApplicationUser
                 {
-                    UserName = "admin@gmail.com",
+                    UserName = "admin",
                     Email = "admin@gmail.com",
                     EmailConfirmed = true,                   
                 };
