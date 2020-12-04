@@ -66,9 +66,10 @@ namespace Chess.Services
 
             userFromDb.IsDeleted = true;
             userFromDb.DeletedOn = DateTime.UtcNow;
-
             context.ApplicationUsers.Update(userFromDb);
             await context.SaveChangesAsync();
+
+            await this.userManager.UpdateSecurityStampAsync(userFromDb);
 
             //await DeleteAdsByUserId(userId); trqbwa da iztriq syzdadenite igri ot user-a
 

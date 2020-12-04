@@ -55,6 +55,10 @@ namespace Chess.Web
             {
                 options.Filters.Add(typeof(AutoValidateAntiforgeryTokenAttribute));
             });
+            services.Configure<SecurityStampValidatorOptions>(options =>
+            {
+                options.ValidationInterval = TimeSpan.Zero;
+            });
             services.AddRazorPages();
             services.AddSignalR();
 
