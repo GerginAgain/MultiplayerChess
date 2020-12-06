@@ -1,0 +1,95 @@
+﻿@model PaginatedList<ActiveGameAllViewModel>
+
+<h3 class="text-center">All Active Games:</h3>
+<div class="card text-center">
+    <div class="card-header">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Created On</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Details</th>
+                            @*<th scope="col">Edit</th>
+                            <th scope="col">Promote</th>*@
+                            <th scope="col">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var game in Model)
+                        {
+            <tr class="trElm">
+                <td>
+                    @game.CreatedOn.ToString("dd/MM/yyyy")
+                </td>
+                <td>
+                    @game.Title
+                </td>
+                <td>
+                    <a asp-controller="Ads" asp-action="Details" asp-route-id="@game.Id" class="btn btn-info">Details</a>
+                </td>
+                @*<td>
+                    <a asp-controller="Ads" asp-action="Edit" asp-route-id="@ad.Id" class="btn btn-warning">Edit</a>
+                </td>
+                <td><a asp-controller="Promotions" asp-action="Index" asp-route-adId="@ad.Id" class="btn btn-primary">Promote</a></td>*@
+                <td><button type="button" value="@game.Id" class="btn btn-danger archive">Delete</button></td>
+            </tr>}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@{ 
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : ""; 
+}
+<div class="row mt-3">
+    <nav class="col d-flex justify-content-center" aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item">
+                <a asp-action="AllActiveGames"
+                   asp-route-pageNumber="@(Model.PageIndex - 1)"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   class="btn page-link btn-default @prevDisabled">
+                    &laquo;
+                </a>
+            </li>
+            @if (Model.TotalPages > 1)
+            {
+                for (int i = 1; i <= Model.TotalPages; i++)
+                {
+                    if (Model.PageIndex == i)
+                    {
+<li class="page-item active">
+    <a class="page-link" asp-action="AllActiveGames"
+       asp-route-pageNumber="@i"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]">@i</a>
+</li> }
+                    else
+                    {
+<li class="page-item">
+    <a class="page-link" asp-action="AllActiveGames"
+       asp-route-pageNumber="@i"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]">@i</a>
+</li>                    }
+                }
+            }
+            <li class="page-item">
+                <a asp-action="AllActiveGames"
+                   asp-route-pageNumber="@(Model.PageIndex + 1)"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   class="btn page-link btn-default @nextDisabled">
+                    &raquo;
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+@*@section Scripts
+{
+    <script src="~/js/archive-ad.js" asp-append-version="true"></script>
+}*@

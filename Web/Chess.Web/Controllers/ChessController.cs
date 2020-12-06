@@ -56,6 +56,7 @@ namespace Chess.Web.Controllers
             {
                 Name = input.Name,
                 Color = input.Color.ToString(),
+                CreatedOn = DateTime.UtcNow,
             };
 
             this.db.Games.Add(game);

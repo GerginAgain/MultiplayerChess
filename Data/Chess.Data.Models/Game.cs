@@ -12,6 +12,8 @@ namespace Chess.Data.Models
 
         public string Color { get; set; }
 
+        public DateTime CreatedOn { get; set; }
+
         public string HostConnectionId { get; set; }
 
         public string GuestConnectionId { get; set; }
