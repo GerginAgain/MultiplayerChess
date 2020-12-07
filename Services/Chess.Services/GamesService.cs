@@ -9,6 +9,8 @@ using Chess.Services.Paging;
 using Chess.Web.ViewModels.ViewModels.Games;
 using AutoMapper;
 using System.Linq;
+using Chess.Common;
+using Chess.Data.Models;
 
 namespace Chess.Services
 {
@@ -45,6 +47,23 @@ namespace Chess.Services
             var allGamesCount = await context.Games.Where(x => x.IsActive).CountAsync();
 
             return allGamesCount;
+        }
+
+        public async Task<Game> GetGameByIdAsync(int gameId)
+        {
+            return await this.context.Games.FirstOrDefaultAsync(x => x.Id == gameId);
+        }
+
+        public async Task<GameDetailsViewModel> GetGameDetailsViewModelAsync(int gameId)
+        {
+            if (!await context.Games.AnyAsync(x => x.Id == gameId))
+            {
+                throw new ArgumentException(GlobalConstants.InvalidGameIdErrorMessage);
+            }
+
+            var gameFromDb = await GetGameByIdAsync(gameId);
+            var gameDetailsViewModel = mapper.Map<GameDetailsViewModel>(gameFromDb);
+            return gameDetailsViewModel;
         }
     }
 }

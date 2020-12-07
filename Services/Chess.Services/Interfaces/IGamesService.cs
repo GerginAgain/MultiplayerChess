@@ -1,4 +1,5 @@
-﻿using Chess.Services.Paging;
+﻿using Chess.Data.Models;
+using Chess.Services.Paging;
 using Chess.Web.ViewModels.ViewModels.Games;
 using System;
 using System.Collections.Generic;
@@ -12,5 +13,9 @@ namespace Chess.Services.Interfaces
         Task<int> GetCountOfAllGamesAsync();
 
         Task<PaginatedList<ActiveGameAllViewModel>> GetAllActiveGamesViewModelsAsync(int pageNumber, int pageSize);
+
+        Task<GameDetailsViewModel> GetGameDetailsViewModelAsync(int gameId);
+
+        Task<Game> GetGameByIdAsync(int gameId);
     }
 }

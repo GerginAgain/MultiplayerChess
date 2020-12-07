@@ -9,6 +9,7 @@ using Chess.Web.ViewModels.ViewModels;
 using Chess.Web.ViewModels.InputModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.AspNetCore.Identity;
 
 namespace Chess.Web.Controllers
 {
@@ -16,11 +17,13 @@ namespace Chess.Web.Controllers
     {
         private ChessDbContext db;
         private readonly IHubContext<ChessHub> hubContext;
+        private readonly Microsoft.AspNetCore.Identity.UserManager<ApplicationUser> userManager;
 
-        public ChessController(ChessDbContext db, IHubContext<ChessHub> hubContext)
+        public ChessController(ChessDbContext db, IHubContext<ChessHub> hubContext, UserManager<ApplicationUser> userManager)
         {
             this.db = db;
             this.hubContext = hubContext;
+            this.userManager = userManager;
         }
 
         public IActionResult Game()
@@ -52,11 +55,13 @@ namespace Chess.Web.Controllers
                 return this.View(input);
             }
 
+            var hostId = this.userManager.GetUserId(this.User);
+
             var game = new Game
             {
                 Name = input.Name,
                 Color = input.Color.ToString(),
-                CreatedOn = DateTime.UtcNow,
+                HostId = hostId,
             };
 
             this.db.Games.Add(game);
@@ -85,6 +90,9 @@ namespace Chess.Web.Controllers
         {
             var game = this.db.Games.FirstOrDefault(x => x.Id == id);
             game.IsActive = false;
+            var guestId = this.userManager.GetUserId(this.User);
+            game.GuestId = guestId;
+            db.SaveChanges();
 
             var color = string.Empty;
             if (game.Color == "White")
