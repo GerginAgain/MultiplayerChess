@@ -50,4 +50,9 @@
             window.location.href = `EnterGame/${id}`;
         });
     });
+
+    connection.on("DeleteGame", function (gameId) {
+        let gameToDelete = document.getElementById(gameId);
+        gameToDelete.parentNode.removeChild(gameToDelete);  
+    });
 </script>

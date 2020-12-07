@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using Chess.Common;
 using Chess.Services;
 using Chess.Services.Interfaces;
+using Chess.Web.Hubs;
 using Chess.Web.ViewModels.InputModels.Games;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 
 namespace Chess.Web.Areas.Administration.Controllers
 {
@@ -16,10 +18,12 @@ namespace Chess.Web.Areas.Administration.Controllers
     public class GamesController : Controller
     {
         private readonly IGamesService gamesService;
+        private readonly IHubContext<ChessHub> hubContext;
 
-        public GamesController(IGamesService gamesService)
+        public GamesController(IGamesService gamesService, IHubContext<ChessHub> hubContext)
         {
             this.gamesService = gamesService;
+            this.hubContext = hubContext;
         }
 
         public async Task<IActionResult> AllActiveGames(int? pageNumber)
@@ -34,6 +38,15 @@ namespace Chess.Web.Areas.Administration.Controllers
             var gameDetailsViewModel = await gamesService.GetGameDetailsViewModelAsync(inputModel.Id);
 
             return View(gameDetailsViewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int gameId)
+        {
+            await gamesService.DeleteGameByIdAsync(gameId);
+            await this.hubContext.Clients.All.SendAsync("DeleteGame", gameId);
+
+            return Json(true);
         }
     }
 }

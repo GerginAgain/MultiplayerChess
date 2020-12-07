@@ -11,15 +11,13 @@
                             <th scope="col">Created On</th>
                             <th scope="col">Title</th>
                             <th scope="col">Details</th>
-                            @*<th scope="col">Edit</th>
-                            <th scope="col">Promote</th>*@
                             <th scope="col">Delete</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var game in Model)
                         {
-            <tr class="trElm">
+            <tr id="@game.Id" class="trElm">
                 <td>
                     @game.CreatedOn.ToString("dd/MM/yyyy")
                 </td>
@@ -27,13 +25,11 @@
                     @game.Title
                 </td>
                 <td>
-                    <a asp-controller="Games" asp-action="Details" asp-route-id="@game.Id" class="btn btn-info">Details</a>
+                    <a type="button" asp-controller="Games" asp-action="Details" asp-route-id="@game.Id" class="btn btn-info">Details</a>
+                </td>      
+                <td>
+                <button type="button" value="@game.Id" class="btn btn-danger DeleteButton">Delete</button>
                 </td>
-                @*<td>
-                    <a asp-controller="Ads" asp-action="Edit" asp-route-id="@ad.Id" class="btn btn-warning">Edit</a>
-                </td>
-                <td><a asp-controller="Promotions" asp-action="Index" asp-route-adId="@ad.Id" class="btn btn-primary">Promote</a></td>*@
-                <td><button type="button" value="@game.Id" class="btn btn-danger archive">Delete</button></td>
             </tr>}
                     </tbody>
                 </table>
@@ -89,7 +85,7 @@
     </nav>
 </div>
 
-@*@section Scripts
+@section Scripts
 {
-    <script src="~/js/archive-ad.js" asp-append-version="true"></script>
-}*@
+    <script src="~/js/delete-game.js" asp-append-version="true"></script>
+}

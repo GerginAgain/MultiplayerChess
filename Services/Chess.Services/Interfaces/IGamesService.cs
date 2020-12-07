@@ -17,5 +17,7 @@ namespace Chess.Services.Interfaces
         Task<GameDetailsViewModel> GetGameDetailsViewModelAsync(int gameId);
 
         Task<Game> GetGameByIdAsync(int gameId);
+
+        Task DeleteGameByIdAsync(int gameId);
     }
 }

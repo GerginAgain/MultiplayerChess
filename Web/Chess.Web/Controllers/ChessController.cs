@@ -17,7 +17,7 @@ namespace Chess.Web.Controllers
     {
         private ChessDbContext db;
         private readonly IHubContext<ChessHub> hubContext;
-        private readonly Microsoft.AspNetCore.Identity.UserManager<ApplicationUser> userManager;
+        private readonly UserManager<ApplicationUser> userManager;
 
         public ChessController(ChessDbContext db, IHubContext<ChessHub> hubContext, UserManager<ApplicationUser> userManager)
         {
@@ -33,7 +33,7 @@ namespace Chess.Web.Controllers
 
         public IActionResult Games()
         {
-            var games = this.db.Games.ToList();
+            var games = this.db.Games.Where(x => x.IsActive == true).ToList();
             var viewModel = new GamesViewModel
             {
                 Games = games,

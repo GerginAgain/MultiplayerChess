@@ -65,5 +65,17 @@ namespace Chess.Services
             var gameDetailsViewModel = mapper.Map<GameDetailsViewModel>(gameFromDb);
             return gameDetailsViewModel;
         }
+
+        public async Task DeleteGameByIdAsync(int gameId)
+        {
+            if (!await context.Games.AnyAsync(x => x.Id == gameId))
+            {
+                throw new ArgumentException(GlobalConstants.InvalidGameIdErrorMessage);
+            }
+
+            var gameFromDb = await GetGameByIdAsync(gameId);
+            gameFromDb.IsActive = false;
+            await this.context.SaveChangesAsync();          
+        }
     }
 }
