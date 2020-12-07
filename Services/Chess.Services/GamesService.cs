@@ -26,7 +26,7 @@ namespace Chess.Services
         public async Task<PaginatedList<ActiveGameAllViewModel>> GetAllActiveGamesViewModelsAsync(int pageNumber, int pageSize)
         {
             var allGames = context.Games
-               //.Where(x => !x.IsDeleted && x.UserName != "admin")
+               .Where(x => x.IsActive)
                .OrderByDescending(x => x.CreatedOn);
             //.ToArray();
             //.To<UserAllViewModel>();
@@ -42,7 +42,7 @@ namespace Chess.Services
 
         public async Task<int> GetCountOfAllGamesAsync()
         {
-            var allGamesCount = await context.Games.CountAsync();
+            var allGamesCount = await context.Games.Where(x => x.IsActive).CountAsync();
 
             return allGamesCount;
         }
