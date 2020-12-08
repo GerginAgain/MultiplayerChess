@@ -34,7 +34,7 @@ namespace Chess.Services
 
         public async Task<int> GetCountOfAllUsersAsync()
         {
-            var allUsersCount = await context.Users.CountAsync(x => !x.IsDeleted && x.UserName != "admin");
+            var allUsersCount = await context.Users.CountAsync(x => /*!x.IsDeleted &&*/ x.UserName != "admin");
 
             return allUsersCount;
         }
