@@ -1,4 +1,5 @@
-﻿using Chess.Services.Paging;
+﻿using Chess.Data.Models;
+using Chess.Services.Paging;
 using Chess.Web.ViewModels.ViewModels.Users;
 using System;
 using System.Collections.Generic;
@@ -19,5 +20,7 @@ namespace Chess.Services.Interfaces
         Task<PaginatedList<BlockedUserAllViewModel>> GetAllBlockedUserViewModels(int pageNumber, int pageSize);
 
         Task<bool> UnblockUserByIdAsync(string userId);
+
+        Task<ApplicationUser> GetUserByIdAsync(string id);
     }
 }

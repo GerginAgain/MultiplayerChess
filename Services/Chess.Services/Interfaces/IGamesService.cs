@@ -19,5 +19,7 @@ namespace Chess.Services.Interfaces
         Task<Game> GetGameByIdAsync(int gameId);
 
         Task DeleteGameByIdAsync(int gameId);
+
+        Task<int> GetActiveGameIdByUserIdAsync(string userId);
     }
 }

@@ -77,5 +77,15 @@ namespace Chess.Services
             gameFromDb.IsActive = false;
             await this.context.SaveChangesAsync();          
         }
+
+        public async Task<int> GetActiveGameIdByUserIdAsync(string userId)
+        {
+            var game = await this.context.Games
+                .FirstOrDefaultAsync(x => x.IsActive == true && x.HostId == userId);
+
+            var gameId = game.Id;
+
+            return gameId;
+        }
     }
 }

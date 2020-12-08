@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Chess.Common;
 using Chess.Services.Interfaces;
+using Microsoft.AspNetCore.SignalR;
+using Chess.Web.Hubs;
 
 namespace Chess.Web.Areas.Administration.Controllers
 {
@@ -14,9 +16,14 @@ namespace Chess.Web.Areas.Administration.Controllers
     public class UsersController : Controller
     {
         private readonly IUsersService usersService;
-        public UsersController(IUsersService usersService)
+        private readonly IGamesService gamesService;
+        private readonly IHubContext<ChessHub> hubContext;
+
+        public UsersController(IUsersService usersService, IGamesService gamesService, IHubContext<ChessHub> hubContext)
         {
             this.usersService = usersService;
+            this.gamesService = gamesService;
+            this.hubContext = hubContext;
         }
 
         public async Task<IActionResult> Active(int? pageNumber)
@@ -30,7 +37,8 @@ namespace Chess.Web.Areas.Administration.Controllers
         public async Task<IActionResult> Block(string userId)
         {
             var isBlocked = await usersService.BlockUserByIdAsync(userId);
-
+            var gameId = await gamesService.GetActiveGameIdByUserIdAsync(userId);
+            await this.hubContext.Clients.All.SendAsync("DeleteGame", gameId);
             return Json(isBlocked);
         }
 
