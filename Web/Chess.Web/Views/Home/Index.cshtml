@@ -1,162 +1,74 @@
-﻿<!--<link href="~/css/chess.css" rel="stylesheet" />
-<link href="~/lib/font-awesome/css/all.css" rel="stylesheet" />-->
+﻿<h1 class="offset-2">Wellcome to Multiplayer Chess</h1>
+<h3 class="mt-5">Latest Added Videos:</h3>
+<hr class="bolder" />
 
-@*<script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/jquery/dist/jquery.js"></script>*@
+<div class="row">
+    @*@foreach (var item in collection)
+        {*@
+    <div class="col-lg-4 col-md-12 mb-4">
+        <div class="row"><h3 class="offset-2">Title for video</h3></div>
+        <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-body mb-0 p-0">
+                        <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
+                            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/A3PDXmYoF5U" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-outline-primary btn-rounded btn-md ml-4" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a>
+            <img class="img-fluid z-depth-1" src="https://mdbootstrap.com/img/screens/yt/screen-video-1.jpg" alt="video"
+                 data-toggle="modal" data-target="#modal1">
+        </a>
+    </div>
+    @*}*@
 
-<!--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    @*<div class="col-lg-4 col-md-12 mb-4">
+        <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-body mb-0 p-0">
+                        <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
+                            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/A3PDXmYoF5U" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-outline-primary btn-rounded btn-md ml-4" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a>
+            <img class="img-fluid z-depth-1" src="https://mdbootstrap.com/img/screens/yt/screen-video-1.jpg" alt="video"
+                 data-toggle="modal" data-target="#modal1">
+        </a>
+    </div>
 
-<script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
-
-@{
-    ViewData["Title"] = "Home Page";
-}
-
-<table id="chessBoard" class="center">
-    @for (int row = 1; row <= 8; row++)
-    {
-        <tr>
-            @for (int col = 1; col <= 8; col++)
-            {
-                var boardCellColor = ((row + col) % 2 == 0) ? "white" : "black";
-                var figure = string.Empty;
-                var figureSize = "fa-3x";
-                var figureColor = string.Empty;
-                var whiteFigureBorder = string.Empty;
-                var cellId = row + "" + col;
-                var figureId = "i" + row + col;
-
-                if (row == 7 || row == 8)
-                {
-                    whiteFigureBorder = "figureBorder";
-                }
-
-                if (row == 1 || row == 2)
-                {
-                    figureColor = "blackFigure";
-                }
-                else if (row == 7 || row == 8)
-                {
-                    figureColor = "whiteFigure";
-                }
-
-                if (row == 2 || row == 7)
-                {
-                    figure = "fas fa-chess-pawn";
-                }
-
-                if ((row == 1 && (col == 1 || col == 8)) || (row == 8 && (col == 1 || col == 8)))
-                {
-                    figure = "fas fa-chess-rook";
-                }
-
-                if ((row == 1 && (col == 2 || col == 7)) || (row == 8 && (col == 2 || col == 7)))
-                {
-                    figure = "fas fa-chess-knight";
-                }
-
-                if ((row == 1 && (col == 3 || col == 6)) || (row == 8 && (col == 3 || col == 6)))
-                {
-                    figure = "fas fa-chess-bishop";
-                }
-
-                if ((row == 1 && col == 4) || (row == 8 && col == 4))
-                {
-                    figure = "fas fa-chess-queen";
-                }
-
-                if ((row == 1 && col == 5) || (row == 8 && col == 5))
-                {
-                    figure = "fas fa-chess-king";
-                }
-
-
-
-            <td id="@cellId" class="@boardCellColor" ondrop="drop(event)" ondragover="allowDrop(event)">
-                
-                @if (row == 1 || row == 2 || row == 7 || row == 8)
-                {
-                    
-                    <i id="@figureId" class="@figure @figureSize @figureColor @whiteFigureBorder" draggable="true" ondragstart="drag(event)"></i>
-                }
-            </td>
-            }
-        </tr>
-    }
-</table>
-
-<script type="text/javascript">
-
-    var connection = new signalR.HubConnectionBuilder().withUrl("/chessHub").build();
-
-    connection.on("ReceiveMessage", function (startId, targetId) {
-        
-
-        let element = document.getElementById(startId);
-        //console.log(element);
-
-        let cell = document.getElementById(targetId);
-        //console.log(cell)
-
-        cell.appendChild(element);
-    });
-
-    connection.start();
-
-    let targetId = "";
-    let startId = "";
-
-    function allowDrop(ev) {
-        ev.preventDefault();
-    }
-
-    function drag(ev) {
-        ev.dataTransfer.setData("text", ev.target.id);
-        startId = ev.target.id;
-        console.log(startId);
-    }
-
-    function drop(ev) {
-        ev.preventDefault();
-        var data = ev.dataTransfer.getData("text");
-        ev.target.appendChild(document.getElementById(data));
-
-        targetId = ev.target.id;
-        connection.invoke("SendMessage", startId, targetId);
-        console.log(targetId);
-    }
-
-    
-
-    //$("i").click(function () {
-        
-    //});
-
-    //$("i").draggable({
-    //    containment: "#chessBoard",
-    //    scroll: false,
-    //    revert: "invalid",
-    //    stack: false,
-    //    cursor: "move",
-    //    //drag: function (event, ui) {
-    //    //    $(".droparea").removeClass("highlight");
-    //    //}
-    //});
-
-    //$("td").droppable({
-    //    accept: "i",
-    //    drop: function (event, ui) {
-    //        var $this = $(this);
-    //        ui.draggable.position({
-    //            my: "center",
-    //            at: "center",
-    //            of: $this,
-    //        });
-    //    }
-    //});
-
-</script>-->
+    <div class="col-lg-4 col-md-12 mb-4">
+        <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-body mb-0 p-0">
+                        <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
+                            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/A3PDXmYoF5U" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-outline-primary btn-rounded btn-md ml-4" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a>
+            <img class="img-fluid z-depth-1" src="https://mdbootstrap.com/img/screens/yt/screen-video-1.jpg" alt="video"
+                 data-toggle="modal" data-target="#modal1">
+        </a>
+    </div>*@
+</div>
 
 
-<h1>Home Page</h1>
