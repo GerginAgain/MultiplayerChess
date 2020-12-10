@@ -2,6 +2,7 @@
 using Chess.Data.Models;
 using Chess.Web.ViewModels.ViewModels.Games;
 using Chess.Web.ViewModels.ViewModels.Users;
+using Chess.Web.ViewModels.ViewModels.Videos;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -19,6 +20,9 @@ namespace Chess.Services.Mapping
             CreateMap<Game, GameDetailsViewModel>()
                 .ForMember(x => x.HostFiguresColor, cfg => cfg.MapFrom(x => x.Color))
                 .ForMember(x => x.HostUsername, cfg => cfg.MapFrom(x => x.Host.UserName));
+            CreateMap<Video, VideoViewModel>()
+                .ForMember(x => x.PictureName, cfg => cfg.MapFrom(x => x.Picture.Name))
+                .ForMember(x => x.PictureLink, cfg => cfg.MapFrom(x => x.Picture.Link));
         }       
     }
 }

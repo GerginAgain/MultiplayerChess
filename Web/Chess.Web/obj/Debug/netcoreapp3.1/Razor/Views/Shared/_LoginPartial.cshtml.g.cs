@@ -41,6 +41,20 @@ using Chess.Web.ViewModels.ViewModels;
 #line hidden
 #nullable disable
 #nullable restore
+#line 5 "C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\Views\_ViewImports.cshtml"
+using Chess.Web.ViewModels.InputModels.Videos;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 7 "C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\Views\_ViewImports.cshtml"
+using Chess.Web.ViewModels.ViewModels.Videos;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
 #line 1 "C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\Views\Shared\_LoginPartial.cshtml"
 using Microsoft.AspNetCore.Identity;
 
@@ -55,7 +69,7 @@ using Chess.Data.Models;
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"ac2cca589a6e8aa9a2865ec43ccfb284dcdac45e", @"/Views/Shared/_LoginPartial.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"b8184c5baf9691d2f7189f11c7d348909e771177", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d76ca1dace8dcdd5260d567abce421006ca1785e", @"/Views/_ViewImports.cshtml")]
     public class Views_Shared__LoginPartial : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("class", new global::Microsoft.AspNetCore.Html.HtmlString("nav-link text-dark"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -102,7 +116,7 @@ using Chess.Data.Models;
 #line hidden
 #nullable disable
             WriteLiteral("<li class=\"nav-item\">\n    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ac2cca589a6e8aa9a2865ec43ccfb284dcdac45e7139", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ac2cca589a6e8aa9a2865ec43ccfb284dcdac45e7566", async() => {
                 WriteLiteral("Hello ");
 #nullable restore
 #line 10 "C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\Views\Shared\_LoginPartial.cshtml"
@@ -130,7 +144,7 @@ using Chess.Data.Models;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\n</li>\n                <li class=\"nav-item\">\n                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ac2cca589a6e8aa9a2865ec43ccfb284dcdac45e9066", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ac2cca589a6e8aa9a2865ec43ccfb284dcdac45e9493", async() => {
                 WriteLiteral("\n                        <button type=\"submit\" class=\"nav-link btn btn-link text-dark\">Logout</button>\n                    ");
             }
             );
@@ -176,7 +190,7 @@ using Chess.Data.Models;
 #line hidden
 #nullable disable
             WriteLiteral("                <li class=\"nav-item\">\n                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ac2cca589a6e8aa9a2865ec43ccfb284dcdac45e12405", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ac2cca589a6e8aa9a2865ec43ccfb284dcdac45e12832", async() => {
                 WriteLiteral("Register");
             }
             );
@@ -195,7 +209,7 @@ using Chess.Data.Models;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\n                </li>\n                                <li class=\"nav-item\">\n                                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ac2cca589a6e8aa9a2865ec43ccfb284dcdac45e13958", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ac2cca589a6e8aa9a2865ec43ccfb284dcdac45e14385", async() => {
                 WriteLiteral("Login");
             }
             );

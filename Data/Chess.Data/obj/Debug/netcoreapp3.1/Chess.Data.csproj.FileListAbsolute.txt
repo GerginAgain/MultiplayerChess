@@ -23,7 +23,6 @@ C:\Users\Again\Desktop\Chess\MultiplayerChess\Data\Chess.Data\bin\Debug\netcorea
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Data\Chess.Data\obj\Debug\netcoreapp3.1\Chess.Data.csprojAssemblyReference.cache
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Data\Chess.Data\obj\Debug\netcoreapp3.1\Chess.Data.AssemblyInfoInputs.cache
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Data\Chess.Data\obj\Debug\netcoreapp3.1\Chess.Data.AssemblyInfo.cs
-C:\Users\Again\Desktop\Chess\MultiplayerChess\Data\Chess.Data\obj\Debug\netcoreapp3.1\Chess.Data.csproj.CoreCompileInputs.cache
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Data\Chess.Data\obj\Debug\netcoreapp3.1\Chess.Data.csproj.CopyComplete
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Data\Chess.Data\obj\Debug\netcoreapp3.1\Chess.Data.dll
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Data\Chess.Data\obj\Debug\netcoreapp3.1\Chess.Data.pdb
@@ -32,3 +31,4 @@ C:\Users\Again\Desktop\Chess\MultiplayerChess\Data\Chess.Data\bin\Debug\netcorea
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Data\Chess.Data\bin\Debug\netcoreapp3.1\Chess.Common.pdb
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Data\Chess.Data\bin\Debug\netcoreapp3.1\Chess.Data.Common.dll
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Data\Chess.Data\bin\Debug\netcoreapp3.1\Chess.Data.Common.pdb
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Data\Chess.Data\obj\Debug\netcoreapp3.1\Chess.Data.csproj.CoreCompileInputs.cache

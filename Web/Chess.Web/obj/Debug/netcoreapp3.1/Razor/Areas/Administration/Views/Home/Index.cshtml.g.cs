@@ -54,8 +54,15 @@ using Chess.Services.Paging;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 8 "C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\Areas\Administration\Views\_ViewImports.cshtml"
+using Chess.Web.ViewModels.InputModels.Videos;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"98e5cd866aa7b2168f478075db67b303a725cb16", @"/Areas/Administration/Views/Home/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"57930b7ed4a558e13b2a835a8899dc0dbe8c2a44", @"/Areas/Administration/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"60d34b46094f240ee77b02c232f3701537a40cc4", @"/Areas/Administration/Views/_ViewImports.cshtml")]
     public class Areas_Administration_Views_Home_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<AdministrationIndexStatisticViewModel>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("class", new global::Microsoft.AspNetCore.Html.HtmlString("nav-link"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -100,7 +107,7 @@ using Chess.Services.Paging;
         <ul class=""navbar-nav"">
             <li class=""nav-item active mr-5"">
                 ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "98e5cd866aa7b2168f478075db67b303a725cb167230", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "98e5cd866aa7b2168f478075db67b303a725cb167465", async() => {
                 WriteLiteral("<i class=\"fas fa-user\"></i> Registered users: ");
 #nullable restore
 #line 11 "C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\Areas\Administration\Views\Home\Index.cshtml"
@@ -129,7 +136,7 @@ using Chess.Services.Paging;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\n            </li>\n            <li class=\"nav-item active mr-5\">\n                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "98e5cd866aa7b2168f478075db67b303a725cb169435", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "98e5cd866aa7b2168f478075db67b303a725cb169670", async() => {
                 WriteLiteral("<i class=\"fas fa-chess\"></i> Active games: ");
 #nullable restore
 #line 14 "C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\Areas\Administration\Views\Home\Index.cshtml"
@@ -157,7 +164,7 @@ using Chess.Services.Paging;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\n            </li>\n            <li class=\"nav-item active mr-5\">\n                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "98e5cd866aa7b2168f478075db67b303a725cb1611566", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "98e5cd866aa7b2168f478075db67b303a725cb1611801", async() => {
                 WriteLiteral("<i class=\"fas fa-plus-square\"></i> Add video");
             }
             );
