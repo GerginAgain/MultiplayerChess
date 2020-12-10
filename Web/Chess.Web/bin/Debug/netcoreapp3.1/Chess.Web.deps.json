@@ -2256,6 +2256,7 @@
           "Chess.Data": "1.0.0",
           "Chess.Services.Mapping": "1.0.0",
           "Chess.Services.Paging": "1.0.0",
+          "Chess.Web.Infrastructure": "1.0.0",
           "Chess.Web.ViewModels": "1.0.0",
           "Microsoft.AspNetCore.Http": "2.2.2",
           "Microsoft.AspNetCore.SignalR.Core": "1.1.0",
@@ -2290,6 +2291,14 @@
         },
         "compile": {
           "Chess.Services.Paging.dll": {}
+        }
+      },
+      "Chess.Web.Infrastructure/1.0.0": {
+        "runtime": {
+          "Chess.Web.Infrastructure.dll": {}
+        },
+        "compile": {
+          "Chess.Web.Infrastructure.dll": {}
         }
       },
       "Chess.Web.ViewModels/1.0.0": {
@@ -5040,6 +5049,11 @@
       "sha512": ""
     },
     "Chess.Services.Paging/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Chess.Web.Infrastructure/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

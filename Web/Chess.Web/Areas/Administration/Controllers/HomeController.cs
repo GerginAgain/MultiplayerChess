@@ -6,6 +6,7 @@ using Chess.Common;
 using Chess.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace Chess.Web.Areas.Administration.Controllers
 {
@@ -15,20 +16,22 @@ namespace Chess.Web.Areas.Administration.Controllers
     {
         private readonly IStatisticsService statisticsService;
 
+        private readonly JsonSerializerSettings jsonSetting;
+
         public HomeController(IStatisticsService statisticsService)
         {
             this.statisticsService = statisticsService;
-            //jsonSetting = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
+            jsonSetting = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
         }
 
         public async Task<IActionResult> Index()
         {
             var administrationIndexStatisticViewModel = await statisticsService.GetAdministrationIndexStatisticViewModel();
 
-            //var adsByDaysStatisticPoints = await this.statisticsService.GetPointsForCreatedAdsAsync();
+            var gamesByDaysStatisticPoints = await this.statisticsService.GetDataPointsForCreatedGamesAsync();
             //var promotionsByDaysStatisticPoints = await this.statisticsService.GetPointsForPromotionsAsync();
 
-            //ViewBag.DataPointsAds = JsonConvert.SerializeObject(adsByDaysStatisticPoints, jsonSetting);
+            ViewBag.DataPointsGames = JsonConvert.SerializeObject(gamesByDaysStatisticPoints, jsonSetting);
             //ViewBag.DataPointsPromotions = JsonConvert.SerializeObject(promotionsByDaysStatisticPoints, jsonSetting);
 
             return View(administrationIndexStatisticViewModel);

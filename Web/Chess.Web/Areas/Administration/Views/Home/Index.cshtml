@@ -16,15 +16,43 @@
             <li class="nav-item active mr-5">
                 <a class="nav-link" asp-area="Administration" asp-controller="Videos" asp-action="Add"><i class="fas fa-plus-square"></i> Add video</a>
             </li>
-            @*<li class="nav-item dropdown active mr-5">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-chevron-circle-down"></i> Menu
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" asp-area="Administration" asp-controller="Ads" asp-action="ForApproval"><i class="fas fa-clock"></i> Waiting for approval</a>
-                    <a class="dropdown-item" asp-area="Administration" asp-controller="Ads" asp-action="RejectedAds"><i class="fas fa-times-circle"></i> Rejected ads</a>
-                </div>
-            </li>*@
         </ul>
     </div>
 </nav>
+
+<div class="row">
+    <div class="offset-1 col-10" style="height: 450px;">
+        <div id="chartContainer1"></div>
+    </div>
+</div>
+
+
+@section Scripts
+{
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            var chart1 = new CanvasJS.Chart("chartContainer1", {
+                theme: "light2",
+                animationEnabled: true,
+                title: {
+                    text: "Created games for the last 10 days"
+                },
+                axisX: {
+                    title: "Days"
+                },
+                axisY: {
+                    title: "Games count"
+                },
+                data: [
+                    {
+                        type: "splineArea", //change type to bar, line, area, pie, etc
+                        dataPoints: @Html.Raw(ViewBag.DataPointsGames)
+                    }
+                ]
+            });
+
+            chart1.render();
+        };
+    </script>
+}

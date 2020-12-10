@@ -21,5 +21,7 @@ namespace Chess.Services.Interfaces
         Task DeleteGameByIdAsync(int gameId);
 
         Task<int> GetActiveGameIdByUserIdAsync(string userId);
+
+        Task<List<int>> GetTheCountForTheCreatedGamesForTheLastTenDaysAsync();
     }
 }

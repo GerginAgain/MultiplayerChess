@@ -87,5 +87,22 @@ namespace Chess.Services
 
             return gameId;
         }
+
+        public async Task<List<int>> GetTheCountForTheCreatedGamesForTheLastTenDaysAsync()
+        {
+            var gamesCount = new List<int>();
+
+            for (DateTime i = DateTime.UtcNow.AddDays(-GlobalConstants.CreatedGamesStatisticDaysCount + 1);
+                i <= DateTime.UtcNow;
+                i = i.AddDays(1))
+            {
+                var currentDaysGamesCount = await context.Games
+                    .CountAsync(x => x.CreatedOn.DayOfYear == i.DayOfYear);
+
+                gamesCount.Add(currentDaysGamesCount);
+            }
+
+            return gamesCount;
+        }
     }
 }

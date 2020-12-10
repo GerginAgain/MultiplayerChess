@@ -581,3 +581,5 @@ C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\obj\Debug\netcoreapp
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Administration\Views\_ValidationScriptsPartial.cshtml.g.cs
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\bin\Debug\netcoreapp3.1\Castle.Core.dll
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Proxies.dll
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\bin\Debug\netcoreapp3.1\Chess.Web.Infrastructure.dll
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\bin\Debug\netcoreapp3.1\Chess.Web.Infrastructure.pdb

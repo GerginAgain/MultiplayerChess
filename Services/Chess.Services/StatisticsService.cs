@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Chess.Data;
+using Chess.Web.Infrastructure.CanvasJSModels;
+using Chess.Common;
 
 namespace Chess.Services
 {
@@ -33,6 +35,34 @@ namespace Chess.Services
             };
 
             return administrationIndexStatisticViewModel;
+        }
+
+        public async Task<IEnumerable<DataPoint>> GetDataPointsForCreatedGamesAsync()
+        {
+            var lastTenDates = this.GetLastTenDaysAsString();
+            var countOfCreatedGames = await gamesService.GetTheCountForTheCreatedGamesForTheLastTenDaysAsync();
+
+            var dataPoints = new List<DataPoint>();
+
+            for (int i = 0; i < GlobalConstants.CreatedGamesStatisticDaysCount; i++)
+            {
+                var dataPoint = new DataPoint(countOfCreatedGames[i], lastTenDates[i]);
+                dataPoints.Add(dataPoint);
+            }
+
+            return dataPoints;
+        }
+
+        private List<string> GetLastTenDaysAsString()
+        {
+            var dates = new List<string>();
+
+            for (DateTime dt = DateTime.UtcNow.AddDays(-GlobalConstants.CreatedGamesStatisticDaysCount + 1); dt <= DateTime.UtcNow; dt = dt.AddDays(1))
+            {
+                dates.Add(dt.ToString("dd MMM"));
+            }
+
+            return dates;
         }
     }
 }

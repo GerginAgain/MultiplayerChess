@@ -2633,6 +2633,7 @@
           "Chess.Data": "1.0.0",
           "Chess.Services.Mapping": "1.0.0",
           "Chess.Services.Paging": "1.0.0",
+          "Chess.Web.Infrastructure": "1.0.0",
           "Chess.Web.ViewModels": "1.0.0",
           "Microsoft.AspNetCore.Http": "2.2.2",
           "Microsoft.AspNetCore.SignalR.Core": "1.1.0",
@@ -2671,6 +2672,16 @@
         },
         "runtime": {
           "bin/placeholder/Chess.Services.Paging.dll": {}
+        }
+      },
+      "Chess.Web.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/Chess.Web.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Chess.Web.Infrastructure.dll": {}
         }
       },
       "Chess.Web.ViewModels/1.0.0": {
@@ -8721,6 +8732,11 @@
       "type": "project",
       "path": "../../Services/Chess.Services.Paging/Chess.Services.Paging.csproj",
       "msbuildProject": "../../Services/Chess.Services.Paging/Chess.Services.Paging.csproj"
+    },
+    "Chess.Web.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../Chess.Web.Infrastructure/Chess.Web.Infrastructure.csproj",
+      "msbuildProject": "../Chess.Web.Infrastructure/Chess.Web.Infrastructure.csproj"
     },
     "Chess.Web.ViewModels/1.0.0": {
       "type": "project",

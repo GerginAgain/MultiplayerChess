@@ -6,3 +6,4 @@ C:\Users\Again\Desktop\Chess\MultiplayerChess\Data\Chess.Data.Common\obj\Debug\n
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Data\Chess.Data.Common\obj\Debug\netcoreapp3.1\Chess.Data.Common.csproj.CoreCompileInputs.cache
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Data\Chess.Data.Common\obj\Debug\netcoreapp3.1\Chess.Data.Common.dll
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Data\Chess.Data.Common\obj\Debug\netcoreapp3.1\Chess.Data.Common.pdb
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Data\Chess.Data.Common\obj\Debug\netcoreapp3.1\Chess.Data.Common.csprojAssemblyReference.cache
