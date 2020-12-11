@@ -1398,18 +1398,6 @@
           }
         }
       },
-      "Sendgrid/9.12.0": {
-        "type": "package",
-        "dependencies": {
-          "Newtonsoft.Json": "9.0.1"
-        },
-        "compile": {
-          "lib/netstandard2.0/SendGrid.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/SendGrid.dll": {}
-        }
-      },
       "System.Buffers/4.5.0": {
         "type": "package",
         "compile": {
@@ -2672,24 +2660,6 @@
         "runtime": {
           "bin/placeholder/Chess.Services.Mapping.dll": {}
         }
-      },
-      "Chess.Services.Messaging/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v3.1",
-        "dependencies": {
-          "Microsoft.AspNetCore.Identity.UI": "3.1.0",
-          "Microsoft.Extensions.Options": "3.1.0",
-          "SendGrid": "9.12.0"
-        },
-        "compile": {
-          "bin/placeholder/Chess.Services.Messaging.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Chess.Services.Messaging.dll": {}
-        },
-        "frameworkReferences": [
-          "Microsoft.AspNetCore.App"
-        ]
       },
       "Chess.Services.Paging/1.0.0": {
         "type": "project",
@@ -5065,26 +5035,6 @@
         "runtimes/win-x86/native/sni.dll",
         "useSharedDesignerContext.txt",
         "version.txt"
-      ]
-    },
-    "Sendgrid/9.12.0": {
-      "sha512": "HrH336vKylh6Yy4bqKFNPf0Rk1C7CDd4WX7D2f7D/g0Dy584Wx2Qh7vdM+NgAkHTWQ7bKwl7K9DZ9BiFKbimdA==",
-      "type": "package",
-      "path": "sendgrid/9.12.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/net452/SendGrid.dll",
-        "lib/net452/SendGrid.pdb",
-        "lib/net452/SendGrid.xml",
-        "lib/netstandard1.3/SendGrid.dll",
-        "lib/netstandard1.3/SendGrid.pdb",
-        "lib/netstandard1.3/SendGrid.xml",
-        "lib/netstandard2.0/SendGrid.dll",
-        "lib/netstandard2.0/SendGrid.pdb",
-        "lib/netstandard2.0/SendGrid.xml",
-        "sendgrid.9.12.0.nupkg.sha512",
-        "sendgrid.nuspec"
       ]
     },
     "System.Buffers/4.5.0": {
@@ -8778,11 +8728,6 @@
       "path": "../../Services/Chess.Services.Mapping/Chess.Services.Mapping.csproj",
       "msbuildProject": "../../Services/Chess.Services.Mapping/Chess.Services.Mapping.csproj"
     },
-    "Chess.Services.Messaging/1.0.0": {
-      "type": "project",
-      "path": "../../Services/Chess.Services.Messaging/Chess.Services.Messaging.csproj",
-      "msbuildProject": "../../Services/Chess.Services.Messaging/Chess.Services.Messaging.csproj"
-    },
     "Chess.Services.Paging/1.0.0": {
       "type": "project",
       "path": "../../Services/Chess.Services.Paging/Chess.Services.Paging.csproj",
@@ -8805,7 +8750,6 @@
       "Chess.Common >= 1.0.0",
       "Chess.Data >= 1.0.0",
       "Chess.Services >= 1.0.0",
-      "Chess.Services.Messaging >= 1.0.0",
       "Chess.Web.ViewModels >= 1.0.0",
       "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore >= 3.1.8",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 3.1.10",
@@ -8850,9 +8794,6 @@
             },
             "C:\\Users\\Again\\Desktop\\Chess\\MultiplayerChess\\Data\\Chess.Data\\Chess.Data.csproj": {
               "projectPath": "C:\\Users\\Again\\Desktop\\Chess\\MultiplayerChess\\Data\\Chess.Data\\Chess.Data.csproj"
-            },
-            "C:\\Users\\Again\\Desktop\\Chess\\MultiplayerChess\\Services\\Chess.Services.Messaging\\Chess.Services.Messaging.csproj": {
-              "projectPath": "C:\\Users\\Again\\Desktop\\Chess\\MultiplayerChess\\Services\\Chess.Services.Messaging\\Chess.Services.Messaging.csproj"
             },
             "C:\\Users\\Again\\Desktop\\Chess\\MultiplayerChess\\Services\\Chess.Services\\Chess.Services.csproj": {
               "projectPath": "C:\\Users\\Again\\Desktop\\Chess\\MultiplayerChess\\Services\\Chess.Services\\Chess.Services.csproj"

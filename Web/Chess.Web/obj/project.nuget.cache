@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "dMCy2Caof4Cd7CxKMmURaVAblhaCpnhf4BcJKrOvxZmoIGujTCmCxVJUvcdScr2Qyweb0t0Ber/1onmLd+FQ8Q==",
+  "dgSpecHash": "aGtVQflMU2WddKtI7XMftFYMRJrI347r0roF0YW50Cyq5ZGczryHd39IveF9wBkD2NJwJTnwLeGrWGgXTBPB8Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\Again\\Desktop\\Chess\\MultiplayerChess\\Web\\Chess.Web\\Chess.Web.csproj",
   "expectedPackageFiles": [
@@ -89,7 +89,6 @@
     "C:\\Users\\Again\\.nuget\\packages\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\Again\\.nuget\\packages\\runtime.win-x64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\Again\\.nuget\\packages\\runtime.win-x86.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
-    "C:\\Users\\Again\\.nuget\\packages\\sendgrid\\9.12.0\\sendgrid.9.12.0.nupkg.sha512",
     "C:\\Users\\Again\\.nuget\\packages\\system.buffers\\4.5.0\\system.buffers.4.5.0.nupkg.sha512",
     "C:\\Users\\Again\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",
     "C:\\Users\\Again\\.nuget\\packages\\system.collections.concurrent\\4.3.0\\system.collections.concurrent.4.3.0.nupkg.sha512",

@@ -20,8 +20,6 @@ using Chess.Services.Interfaces;
 using Chess.Services;
 using AutoMapper;
 using Chess.Services.Mapping;
-using Microsoft.AspNetCore.Identity.UI.Services;
-using Chess.Services.Messaging;
 
 namespace Chess.Web
 {
@@ -40,7 +38,7 @@ namespace Chess.Web
             services.AddDbContext<ChessDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true) //ענÿזגא הא ו false
+            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false) //ענÿזגא הא ו false
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ChessDbContext>();
             services.Configure<IdentityOptions>(options =>
@@ -62,8 +60,6 @@ namespace Chess.Web
                 options.ValidationInterval = TimeSpan.Zero;
             });
             services.AddRazorPages();
-            services.AddTransient<IEmailSender, EmailSender>();
-            services.Configure<AuthMessageSenderOptions>(Configuration);
             services.AddSignalR();
 
             //Applications services

@@ -21,7 +21,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Chess.Common\Chess.Common.csproj" />
     <ProjectReference Include="..\..\Data\Chess.Data\Chess.Data.csproj" />
-    <ProjectReference Include="..\..\Services\Chess.Services.Messaging\Chess.Services.Messaging.csproj" />
     <ProjectReference Include="..\..\Services\Chess.Services\Chess.Services.csproj" />
     <ProjectReference Include="..\Chess.Web.ViewModels\Chess.Web.ViewModels.csproj" />
   </ItemGroup>
