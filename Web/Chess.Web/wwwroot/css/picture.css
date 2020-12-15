@@ -1,4 +1,10 @@
 ﻿img {
-    width: 330px;
-    height: 330px;
+    width: 250px;
+    height: 250px;
+}
+
+.getHover:hover {
+    background-color: dodgerblue;
+    color: white;
+    cursor: pointer;
 }

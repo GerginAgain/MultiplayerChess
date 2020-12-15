@@ -1,4 +1,5 @@
 ﻿.getHover:hover{
     background-color: dodgerblue;
     color: white;
+    cursor: pointer;
 }

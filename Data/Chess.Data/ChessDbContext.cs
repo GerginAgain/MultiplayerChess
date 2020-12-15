@@ -24,6 +24,8 @@ namespace Chess.Data
 
         public DbSet<Picture> Pictures { get; set; }
 
+        public DbSet<UserFavouriteVideo> UserFavouriteVideos { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseLazyLoadingProxies();
