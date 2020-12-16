@@ -9,6 +9,11 @@ namespace Chess.Data.Models
 {
     public class Video : BaseModel<int>, IDeletableEntity
     {
+        public Video()
+        {
+            this.UserFavouriteVideos = new HashSet<UserFavouriteVideo>();
+        }
+
         [Required]
         [MaxLength(20)]
         public string Title { get; set; }
@@ -24,6 +29,7 @@ namespace Chess.Data.Models
         public int PictureId { get; set; }
         public virtual Picture Picture { get; set; }
 
+        public virtual ICollection<UserFavouriteVideo> UserFavouriteVideos { get; set; }
     }
 }
 

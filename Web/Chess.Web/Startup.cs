@@ -22,6 +22,7 @@ using AutoMapper;
 using Chess.Services.Mapping;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Chess.Services.Messaging;
+using Microsoft.AspNetCore.Http;
 
 namespace Chess.Web
 {
@@ -65,6 +66,7 @@ namespace Chess.Web
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
             services.AddSignalR();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             //Applications services
             services.AddTransient<IUsersService, UsersService>();
@@ -72,6 +74,7 @@ namespace Chess.Web
             services.AddTransient<IGamesService, GamesService>();
             services.AddTransient<IPicturesService, PicturesService>();
             services.AddTransient<IVideosService, VideosService>();
+            services.AddTransient<IFavouritesService, FavouritesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

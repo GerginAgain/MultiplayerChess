@@ -113,5 +113,12 @@ namespace Chess.Services
             var userFromDb = await this.context.ApplicationUsers.FirstOrDefaultAsync(x => x.Id == id);
             return userFromDb;
         }
+
+        public async Task<ApplicationUser> GetCurrentUserAsync()
+        {
+            var currentUser = await userManager.GetUserAsync(contextAccessor.HttpContext.User);
+            
+            return currentUser;
+        }
     }
 }

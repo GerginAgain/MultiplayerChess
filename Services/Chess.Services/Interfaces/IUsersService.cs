@@ -22,5 +22,7 @@ namespace Chess.Services.Interfaces
         Task<bool> UnblockUserByIdAsync(string userId);
 
         Task<ApplicationUser> GetUserByIdAsync(string id);
+
+        Task<ApplicationUser> GetCurrentUserAsync();
     }
 }

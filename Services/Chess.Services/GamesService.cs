@@ -83,7 +83,12 @@ namespace Chess.Services
             var game = await this.context.Games
                 .FirstOrDefaultAsync(x => x.IsActive == true && x.HostId == userId);
 
-            var gameId = game.Id;
+            var gameId = 0;
+
+            if (game != null)
+            {
+                gameId = game.Id;
+            }
 
             return gameId;
         }

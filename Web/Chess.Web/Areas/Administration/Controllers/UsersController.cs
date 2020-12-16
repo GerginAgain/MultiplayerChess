@@ -38,8 +38,13 @@ namespace Chess.Web.Areas.Administration.Controllers
         {
             var isBlocked = await usersService.BlockUserByIdAsync(userId);
             var gameId = await gamesService.GetActiveGameIdByUserIdAsync(userId);
-            await gamesService.DeleteGameByIdAsync(gameId);
-            await this.hubContext.Clients.All.SendAsync("DeleteGame", gameId);
+
+            if (gameId != 0)
+            {
+                await gamesService.DeleteGameByIdAsync(gameId);
+                await this.hubContext.Clients.All.SendAsync("DeleteGame", gameId);
+            }
+
             return Json(isBlocked);
         }
 
