@@ -43,11 +43,11 @@
                 <div class="mt-2 offset-2">
                 @if (!(Model.Videos[i].IsInFavourites))
                 {
-                    <i id="@Model.Videos[i].Id" class="far fa-star fa-3x"></i> 
+                    <i id="@Model.Videos[i].Id" class="far fa-star fa-3x text-warning"></i> 
                 }
                 else
                 {
-                    <i id="@Model.Videos[i].Id" class="fas fa-star fa-3x"></i>
+                    <i id="@Model.Videos[i].Id" class="fas fa-star fa-3x text-warning"></i>
                 }
                 </div>
             }

@@ -25,7 +25,7 @@
                             }, 2500));
                         });
                     });
-                    $("#" + videoId).replaceWith('<i id="' + videoId + '"' + 'class="fas fa-star fa-3x"></i>');
+                    $("#" + videoId).replaceWith('<i id="' + videoId + '"' + 'class="fas fa-star fa-3x text-warning"></i>');
                     RemoveFromFavourite();
                 }
             });
@@ -57,7 +57,7 @@
                             }, 2500));
                         });
                     });
-                    $("#" + videoId).replaceWith('<i id="' + videoId + '"' + 'class="far fa-star fa-3x"></i>');
+                    $("#" + videoId).replaceWith('<i id="' + videoId + '"' + 'class="far fa-star fa-3x text-warning"></i>');
                     AddToFavourite();
                 }
             });
