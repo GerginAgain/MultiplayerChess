@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {    
-    function AddToFavourite(){
+    function AddEventToEmptyFavouriteIcon(){
         $("i.far").on('click', function (event) {
             event.stopImmediatePropagation();
             var videoId = $(this).attr('id');
@@ -26,13 +26,13 @@
                         });
                     });
                     $("#" + videoId).replaceWith('<i id="' + videoId + '"' + 'class="fas fa-star fa-3x text-warning"></i>');
-                    RemoveFromFavourite();
+                    AddEventToFullFavouriteIcon();
                 }
             });
         });
     } 
 
-    function RemoveFromFavourite() {
+    function AddEventToFullFavouriteIcon() {
         $("i.fas").on('click', function (event) {
             event.stopImmediatePropagation();
             var videoId = $(this).attr('id');
@@ -58,12 +58,12 @@
                         });
                     });
                     $("#" + videoId).replaceWith('<i id="' + videoId + '"' + 'class="far fa-star fa-3x text-warning"></i>');
-                    AddToFavourite();
+                    AddEventToEmptyFavouriteIcon();
                 }
             });
         });
     }
 
-    AddToFavourite();
-    RemoveFromFavourite();
+    AddEventToEmptyFavouriteIcon();
+    AddEventToFullFavouriteIcon();
 });
