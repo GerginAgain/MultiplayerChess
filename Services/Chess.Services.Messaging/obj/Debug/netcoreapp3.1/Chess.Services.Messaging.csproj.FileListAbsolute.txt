@@ -14,4 +14,3 @@ C:\Users\Again\Desktop\Chess\MultiplayerChess\Services\Chess.Services.Messaging\
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Services\Chess.Services.Messaging\obj\Debug\netcoreapp3.1\Chess.Services.Messaging.dll
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Services\Chess.Services.Messaging\obj\Debug\netcoreapp3.1\Chess.Services.Messaging.pdb
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Services\Chess.Services.Messaging\obj\Debug\netcoreapp3.1\Chess.Services.Messaging.csproj.CoreCompileInputs.cache
-C:\Users\Again\Desktop\Chess\MultiplayerChess\Services\Chess.Services.Messaging\obj\Debug\netcoreapp3.1\Chess.Services.Messaging.csprojAssemblyReference.cache
