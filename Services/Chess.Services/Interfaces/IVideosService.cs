@@ -1,4 +1,5 @@
-﻿using Chess.Web.ViewModels.InputModels.Videos;
+﻿using Chess.Services.Paging;
+using Chess.Web.ViewModels.InputModels.Videos;
 using Chess.Web.ViewModels.ViewModels.Videos;
 using System;
 using System.Collections.Generic;
@@ -12,5 +13,7 @@ namespace Chess.Services.Interfaces
         Task CreateVideoAsync(AddVideoInputModel model);
 
         Task<LatestThreeAddedVideosViewModel> GetLatestThreeVideosAsync();
+
+        Task<PaginatedList<VideoAllViewModel>> GetAllVideosViewModelsAsync(int pageNumber, int pageSize);
     }
 }

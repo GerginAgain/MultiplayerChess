@@ -24,6 +24,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Chess.Services.Messaging;
 using Microsoft.AspNetCore.Http;
 
+
 namespace Chess.Web
 {
     public class Startup

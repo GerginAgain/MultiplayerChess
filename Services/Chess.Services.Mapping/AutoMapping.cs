@@ -5,6 +5,7 @@ using Chess.Web.ViewModels.ViewModels.Users;
 using Chess.Web.ViewModels.ViewModels.Videos;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Chess.Services.Mapping

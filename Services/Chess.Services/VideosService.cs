@@ -11,6 +11,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
+using Chess.Services.Paging;
+using AutoMapper.QueryableExtensions;
 
 namespace Chess.Services
 {
@@ -43,6 +45,25 @@ namespace Chess.Services
 
             await this.db.Videos.AddAsync(video);
             await this.db.SaveChangesAsync();
+        }
+
+        public async Task<PaginatedList<VideoAllViewModel>> GetAllVideosViewModelsAsync(int pageNumber, int pageSize)
+        {
+            var currentUser = await this.usersService.GetCurrentUserAsync();
+            var allVideos = this.db.Videos
+                .Where(x => x.IsDeleted == false)
+                .OrderByDescending(x => x.CreatedOn)
+                .Select(x => new VideoAllViewModel 
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    Link = x.Link,
+                    IsInFavourites = x.UserFavouriteVideos.Any(y => y.VideoId == x.Id && y.ApplicationUserId == currentUser.Id)
+                });
+
+            var paginatedList = await PaginatedList<VideoAllViewModel>.CreateAsync(allVideos, pageNumber, pageSize);
+
+            return paginatedList;
         }
 
         public async Task<LatestThreeAddedVideosViewModel> GetLatestThreeVideosAsync()

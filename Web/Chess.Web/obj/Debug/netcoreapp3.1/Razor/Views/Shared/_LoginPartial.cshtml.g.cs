@@ -55,6 +55,13 @@ using Chess.Web.ViewModels.ViewModels.Videos;
 #line hidden
 #nullable disable
 #nullable restore
+#line 8 "C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\Views\_ViewImports.cshtml"
+using Chess.Services.Paging;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
 #line 1 "C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\Views\Shared\_LoginPartial.cshtml"
 using Microsoft.AspNetCore.Identity;
 
@@ -69,7 +76,7 @@ using Chess.Data.Models;
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"12b515399c604ae6686fde709b2f479c40c6b5d6", @"/Views/Shared/_LoginPartial.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d76ca1dace8dcdd5260d567abce421006ca1785e", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"20f8531668fcea0551deeb825923c4b0b61bb53e", @"/Views/_ViewImports.cshtml")]
     public class Views_Shared__LoginPartial : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-area", "Identity", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -124,7 +131,7 @@ using Chess.Data.Models;
 #line hidden
 #nullable disable
             WriteLiteral("        <li class=\"nav-item active dropdown\">\n            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "12b515399c604ae6686fde709b2f479c40c6b5d610329", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "12b515399c604ae6686fde709b2f479c40c6b5d610525", async() => {
                 WriteLiteral("\n                <i class=\"fas fa-user\"></i> Hello ");
 #nullable restore
 #line 11 "C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\Views\Shared\_LoginPartial.cshtml"
@@ -156,7 +163,7 @@ using Chess.Data.Models;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\n            <div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdown\">\n                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "12b515399c604ae6686fde709b2f479c40c6b5d612618", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "12b515399c604ae6686fde709b2f479c40c6b5d612814", async() => {
                 WriteLiteral("Favorites");
             }
             );
@@ -175,7 +182,7 @@ using Chess.Data.Models;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\n                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "12b515399c604ae6686fde709b2f479c40c6b5d614082", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "12b515399c604ae6686fde709b2f479c40c6b5d614278", async() => {
                 WriteLiteral("Settings");
             }
             );
@@ -195,7 +202,7 @@ using Chess.Data.Models;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\n            </div>\n        </li>\n        <li class=\"nav-item\">\n            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "12b515399c604ae6686fde709b2f479c40c6b5d615682", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "12b515399c604ae6686fde709b2f479c40c6b5d615878", async() => {
                 WriteLiteral("\n                <button type=\"submit\" class=\"btn nav-link active\"><i class=\"fas fa-sign-out-alt\"></i> Logout</button>\n            ");
             }
             );
@@ -241,7 +248,7 @@ using Chess.Data.Models;
 #line hidden
 #nullable disable
             WriteLiteral("        <li class=\"nav-item active\">\n            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "12b515399c604ae6686fde709b2f479c40c6b5d618947", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "12b515399c604ae6686fde709b2f479c40c6b5d619143", async() => {
                 WriteLiteral("<i class=\"fas fa-user-plus\"></i> Register");
             }
             );
@@ -260,7 +267,7 @@ using Chess.Data.Models;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\n        </li>\n        <li class=\"nav-item active\">\n            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "12b515399c604ae6686fde709b2f479c40c6b5d620489", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "12b515399c604ae6686fde709b2f479c40c6b5d620685", async() => {
                 WriteLiteral("<i class=\"fas fa-user\"></i> Login");
             }
             );

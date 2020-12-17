@@ -5,7 +5,6 @@ C:\Users\Again\Desktop\Chess\MultiplayerChess\Services\Chess.Services.Mapping\ob
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Services\Chess.Services.Mapping\obj\Debug\netcoreapp3.1\Chess.Services.Mapping.AssemblyInfo.cs
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Services\Chess.Services.Mapping\obj\Debug\netcoreapp3.1\Chess.Services.Mapping.dll
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Services\Chess.Services.Mapping\obj\Debug\netcoreapp3.1\Chess.Services.Mapping.pdb
-C:\Users\Again\Desktop\Chess\MultiplayerChess\Services\Chess.Services.Mapping\obj\Debug\netcoreapp3.1\Chess.Services.Mapping.csproj.CoreCompileInputs.cache
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Services\Chess.Services.Mapping\obj\Debug\netcoreapp3.1\Chess.Services.Mapping.csprojAssemblyReference.cache
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Services\Chess.Services.Mapping\bin\Debug\netcoreapp3.1\Chess.Data.Common.dll
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Services\Chess.Services.Mapping\bin\Debug\netcoreapp3.1\Chess.Data.Models.dll
@@ -14,3 +13,4 @@ C:\Users\Again\Desktop\Chess\MultiplayerChess\Services\Chess.Services.Mapping\bi
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Services\Chess.Services.Mapping\bin\Debug\netcoreapp3.1\Chess.Web.ViewModels.pdb
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Services\Chess.Services.Mapping\bin\Debug\netcoreapp3.1\Chess.Data.Common.pdb
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Services\Chess.Services.Mapping\obj\Debug\netcoreapp3.1\Chess.Services.Mapping.csproj.CopyComplete
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Services\Chess.Services.Mapping\obj\Debug\netcoreapp3.1\Chess.Services.Mapping.csproj.CoreCompileInputs.cache
