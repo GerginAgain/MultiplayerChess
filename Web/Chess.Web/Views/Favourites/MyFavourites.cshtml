@@ -1,11 +1,10 @@
 ﻿@model PaginatedList<FavouriteVideoViewModel>
 
 <div class="row justify-content-center">
-    <h1 class="text-primary"><strong>My Favourites Videos</strong></h1>
+    <h1 class="text-primary"><strong>My Favourite Videos</strong></h1>
 </div>
 <hr class="hr-chess" />
 <div class="row">
-
     @for (int i = 0; i < Model.Count; i++)
     {
         <div class="col-lg-4 col-md-12 mb-4">
@@ -16,17 +15,9 @@
                 <iframe class="embed-responsive-item" src="@Model[i].Link" allowfullscreen></iframe>
             </div>
             <div class="mt-2">
-                @*@if (!(Model[i].IsInFavourites))
-                {
-                    <i id="@Model[i].Id" class="far fa-star fa-3x text-warning"></i>
-                }
-                else
-                {*@
-                    <i id="@Model[i].Id" class="fas fa-star fa-3x text-warning"></i>
-                @*}*@
+                <i id="@Model[i].Id" class="fas fa-star fa-3x text-warning"></i>
             </div>
         </div>
-
     }
 </div>
 
