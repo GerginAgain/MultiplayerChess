@@ -34,10 +34,10 @@ namespace Chess.Services
             //.To<UserAllViewModel>();
 
             //var ienumerableDest = mapper.Map<ApplicationUser[], IEnumerable<UserAllViewModel>>(userAllViewModels).AsQueryable();
-            var GameAllViewModels = mapper.ProjectTo<ActiveGameAllViewModel>(allGames);
+            var gameAllViewModels = mapper.ProjectTo<ActiveGameAllViewModel>(allGames);
             //return await _mapper.ProjectTo<SomeViewModel>(dbContext.SomeEntity).ToListAsync();
 
-            var paginatedList = await PaginatedList<ActiveGameAllViewModel>.CreateAsync(GameAllViewModels, pageNumber, pageSize);
+            var paginatedList = await PaginatedList<ActiveGameAllViewModel>.CreateAsync(gameAllViewModels, pageNumber, pageSize);
 
             return paginatedList;
         }
