@@ -50,10 +50,13 @@ namespace Chess.Services
         public async Task<PaginatedList<VideoAllViewModel>> GetAllVideosViewModelsAsync(int pageNumber, int pageSize)
         {
             var currentUser = await this.usersService.GetCurrentUserAsync();
-            var allVideos = this.db.Videos
+
+            if (currentUser != null)
+            {
+                var allVideos = this.db.Videos
                 .Where(x => x.IsDeleted == false)
                 .OrderByDescending(x => x.CreatedOn)
-                .Select(x => new VideoAllViewModel 
+                .Select(x => new VideoAllViewModel
                 {
                     Id = x.Id,
                     Title = x.Title,
@@ -61,9 +64,20 @@ namespace Chess.Services
                     IsInFavourites = x.UserFavouriteVideos.Any(y => y.VideoId == x.Id && y.ApplicationUserId == currentUser.Id)
                 });
 
-            var paginatedList = await PaginatedList<VideoAllViewModel>.CreateAsync(allVideos, pageNumber, pageSize);
+                var paginatedList = await PaginatedList<VideoAllViewModel>.CreateAsync(allVideos, pageNumber, pageSize);
 
-            return paginatedList;
+                return paginatedList;
+            }
+
+            var allVideosFromDb = this.db.Videos
+                .Where(x => x.IsDeleted == false)
+                .OrderByDescending(x => x.CreatedOn);
+
+            var videoAllViewModels = mapper.ProjectTo<VideoAllViewModel>(allVideosFromDb);
+
+            var paginatedListResult = await PaginatedList<VideoAllViewModel>.CreateAsync(videoAllViewModels, pageNumber, pageSize);
+
+            return paginatedListResult;
         }
 
         public async Task<LatestThreeAddedVideosViewModel> GetLatestThreeVideosAsync()
