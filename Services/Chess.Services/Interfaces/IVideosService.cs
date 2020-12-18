@@ -15,5 +15,7 @@ namespace Chess.Services.Interfaces
         Task<LatestThreeAddedVideosViewModel> GetLatestThreeVideosAsync();
 
         Task<PaginatedList<VideoAllViewModel>> GetAllVideosViewModelsAsync(int pageNumber, int pageSize);
+
+        Task<PaginatedList<FavouriteVideoViewModel>> GetFavouriteVideoViewModelsAsync(int pageNumber, int pageSize);
     }
 }

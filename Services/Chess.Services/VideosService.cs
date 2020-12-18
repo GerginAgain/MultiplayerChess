@@ -107,5 +107,18 @@ namespace Chess.Services
 
             return latestThreeAddedVideosViewModel;
         }
+
+        public async Task<PaginatedList<FavouriteVideoViewModel>> GetFavouriteVideoViewModelsAsync(int pageNumber, int pageSize)
+        {
+            var user = await usersService.GetCurrentUserAsync();
+            var favouritesVideosFromDb = this.db.Videos
+                .Where(x => x.UserFavouriteVideos.Any(y => y.ApplicationUserId == user.Id && y.VideoId == x.Id))
+                .OrderByDescending(x => x.CreatedOn);
+
+            var favoriteVideoViewModels = mapper.ProjectTo<FavouriteVideoViewModel>(favouritesVideosFromDb);
+            var paginatedFavoriteVideos = await PaginatedList<FavouriteVideoViewModel>.CreateAsync(favoriteVideoViewModels, pageNumber, pageSize);
+
+            return paginatedFavoriteVideos;
+        }
     }
 }

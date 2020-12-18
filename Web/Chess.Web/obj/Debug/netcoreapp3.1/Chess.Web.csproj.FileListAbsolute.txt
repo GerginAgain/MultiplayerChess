@@ -589,3 +589,4 @@ C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\obj\Debug\netcoreapp
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\obj\Debug\netcoreapp3.1\Chess.Web.csproj.CoreCompileInputs.cache
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\obj\Debug\netcoreapp3.1\Chess.Web.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\obj\Debug\netcoreapp3.1\Chess.Web.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\obj\Debug\netcoreapp3.1\Razor\Views\Favourites\MyFavourites.cshtml.g.cs

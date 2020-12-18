@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Chess.Common;
 using Chess.Data.Models;
 using Chess.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -15,21 +16,23 @@ namespace Chess.Web.Controllers
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IFavouritesService favouritesService;
+        private readonly IVideosService videosService;
 
-        public FavouritesController(UserManager<ApplicationUser> userManager, IFavouritesService favouritesService)
+        public FavouritesController(UserManager<ApplicationUser> userManager, IFavouritesService favouritesService, IVideosService videosService)
         {
             this.userManager = userManager;
             this.favouritesService = favouritesService;
+            this.videosService = videosService;
         }
 
-        //public async Task<IActionResult> MyFavorites(int? pageNumber)
-        //{
-        //    var loggedInUserId = userManager.GetUserId(User);
+        public async Task<IActionResult> MyFavourites(int? pageNumber)
+        {
+            var loggedInUserId = userManager.GetUserId(User);
 
-        //    var favoriteAdsViewModels = await adsService.GetFavoriteAdsViewModelsAsync(loggedInUserId, pageNumber ?? DefaultPageNumber, DefaultPageSize);
+            var favouriteVideosViewModels = await videosService.GetFavouriteVideoViewModelsAsync(pageNumber ?? GlobalConstants.DefaultPageNumber, GlobalConstants.DefaultVideoPageSize);
 
-        //    return View(favoriteAdsViewModels);
-        //}
+            return View(favouriteVideosViewModels);
+        }
 
         [HttpPost]
         public async Task<IActionResult> Add(int videoId)
