@@ -80,6 +80,19 @@ namespace Chess.Services
             return paginatedListResult;
         }
 
+        public async Task<PaginatedList<ActiveVideoViewModel>> GetAllActiveVideosViewModelsAsync(int pageNumber, int pageSize)
+        {
+            var allVideosFromDb = this.db.Videos
+               .Where(x => x.IsDeleted == false)
+               .OrderByDescending(x => x.CreatedOn);
+
+            var activeVideoViewModels = mapper.ProjectTo<ActiveVideoViewModel>(allVideosFromDb);
+
+            var paginatedList = await PaginatedList<ActiveVideoViewModel>.CreateAsync(activeVideoViewModels, pageNumber, pageSize);
+
+            return paginatedList;
+        }
+
         public async Task<LatestThreeAddedVideosViewModel> GetLatestThreeVideosAsync()
         {
             var videos = this.db.Videos
@@ -119,6 +132,50 @@ namespace Chess.Services
             var paginatedFavoriteVideos = await PaginatedList<FavouriteVideoViewModel>.CreateAsync(favoriteVideoViewModels, pageNumber, pageSize);
 
             return paginatedFavoriteVideos;
+        }
+
+        public async Task<int> GetCountOfAllGamesAsync()
+        {
+            var allVideosCount = await this.db.Videos.CountAsync();
+
+            return allVideosCount;
+        }
+
+        public async Task<bool> DeleteVideoByIdAsync(int videoId)
+        {
+            var videoFromDb = await db.Videos.FirstOrDefaultAsync(x => x.Id == videoId);
+
+            videoFromDb.IsDeleted = true;
+            videoFromDb.DeletedOn = DateTime.UtcNow;
+            db.Videos.Update(videoFromDb);
+            await db.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<PaginatedList<DeletedVideoViewModel>> GetAllDeletedVideosViewModelsAsync(int pageNumber, int pageSize)
+        {
+            var deletedVideosFromDb = this.db.Videos
+                .Where(x => x.IsDeleted)
+                .OrderByDescending(x => x.DeletedOn);
+
+            var deletedVideoViewModels = mapper.ProjectTo<DeletedVideoViewModel>(deletedVideosFromDb);
+
+            var paginatedList = await PaginatedList<DeletedVideoViewModel>.CreateAsync(deletedVideoViewModels, pageNumber, pageSize);
+
+            return paginatedList;
+        }
+
+        public async Task<bool> RestoreVideoByIdAsync(int videoId)
+        {
+            var videoFromDb = await db.Videos.FirstOrDefaultAsync(x => x.Id == videoId);
+
+            videoFromDb.IsDeleted = false;
+            videoFromDb.DeletedOn = DateTime.UtcNow;
+            db.Videos.Update(videoFromDb);
+            await db.SaveChangesAsync();
+
+            return true;
         }
     }
 }

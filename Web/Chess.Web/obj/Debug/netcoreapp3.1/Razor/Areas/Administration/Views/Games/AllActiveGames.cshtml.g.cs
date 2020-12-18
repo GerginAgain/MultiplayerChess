@@ -49,20 +49,27 @@ using Chess.Web.ViewModels.ViewModels.Games;
 #nullable disable
 #nullable restore
 #line 6 "C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\Areas\Administration\Views\_ViewImports.cshtml"
+using Chess.Web.ViewModels.ViewModels.Videos;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 7 "C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\Areas\Administration\Views\_ViewImports.cshtml"
 using Chess.Services.Paging;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 8 "C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\Areas\Administration\Views\_ViewImports.cshtml"
+#line 9 "C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\Areas\Administration\Views\_ViewImports.cshtml"
 using Chess.Web.ViewModels.InputModels.Videos;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"18a0768604df4e210bce43762c24a4e86c32f52a", @"/Areas/Administration/Views/Games/AllActiveGames.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"60d34b46094f240ee77b02c232f3701537a40cc4", @"/Areas/Administration/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"f67b24dfe3a1cce3350eabcc0fb7bc9d8767ecfd", @"/Areas/Administration/Views/_ViewImports.cshtml")]
     public class Areas_Administration_Views_Games_AllActiveGames : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<PaginatedList<ActiveGameAllViewModel>>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("type", new global::Microsoft.AspNetCore.Html.HtmlString("button"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -150,7 +157,7 @@ WriteAttributeValue("", 738, game.Id, 738, 8, false);
 #line hidden
 #nullable disable
             WriteLiteral("\n                </td>\n                <td>\n                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "18a0768604df4e210bce43762c24a4e86c32f52a9106", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "18a0768604df4e210bce43762c24a4e86c32f52a9340", async() => {
                 WriteLiteral("Details");
             }
             );
@@ -213,7 +220,7 @@ WriteAttributeValue("", 1193, game.Id, 1193, 8, false);
 #line hidden
 #nullable disable
             WriteLiteral("<div class=\"row mt-3\">\n    <nav class=\"col d-flex justify-content-center\" aria-label=\"Page navigation example\">\n        <ul class=\"pagination\">\n            <li class=\"page-item\">\n                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "18a0768604df4e210bce43762c24a4e86c32f52a13213", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "18a0768604df4e210bce43762c24a4e86c32f52a13447", async() => {
                 WriteLiteral("\n                    &laquo;\n                ");
             }
             );
@@ -280,7 +287,7 @@ AddHtmlAttributeValue(" ", 1950, prevDisabled, 1951, 13, false);
 #line hidden
 #nullable disable
             WriteLiteral("<li class=\"page-item active\">\n    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "18a0768604df4e210bce43762c24a4e86c32f52a17450", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "18a0768604df4e210bce43762c24a4e86c32f52a17684", async() => {
 #nullable restore
 #line 65 "C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\Areas\Administration\Views\Games\AllActiveGames.cshtml"
                                                        Write(i);
@@ -339,7 +346,7 @@ AddHtmlAttributeValue(" ", 1950, prevDisabled, 1951, 13, false);
 #line hidden
 #nullable disable
             WriteLiteral("<li class=\"page-item\">\n    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "18a0768604df4e210bce43762c24a4e86c32f52a21023", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "18a0768604df4e210bce43762c24a4e86c32f52a21257", async() => {
 #nullable restore
 #line 72 "C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\Areas\Administration\Views\Games\AllActiveGames.cshtml"
                                                        Write(i);
@@ -398,7 +405,7 @@ AddHtmlAttributeValue(" ", 1950, prevDisabled, 1951, 13, false);
 #line hidden
 #nullable disable
             WriteLiteral("            <li class=\"page-item\">\n                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "18a0768604df4e210bce43762c24a4e86c32f52a24643", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "18a0768604df4e210bce43762c24a4e86c32f52a24877", async() => {
                 WriteLiteral("\n                    &raquo;\n                ");
             }
             );
@@ -454,7 +461,7 @@ AddHtmlAttributeValue(" ", 2976, nextDisabled, 2977, 13, false);
             WriteLiteral("\n            </li>\n        </ul>\n    </nav>\n</div>\n\n");
             DefineSection("Scripts", async() => {
                 WriteLiteral("\n    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "18a0768604df4e210bce43762c24a4e86c32f52a28550", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "18a0768604df4e210bce43762c24a4e86c32f52a28784", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();

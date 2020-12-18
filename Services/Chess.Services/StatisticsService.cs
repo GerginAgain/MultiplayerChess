@@ -15,23 +15,27 @@ namespace Chess.Services
         private readonly ChessDbContext context;
         private readonly IUsersService usersService;
         private readonly IGamesService gamesService;
+        private readonly IVideosService videosService;
 
-        public StatisticsService(ChessDbContext context, IUsersService usersService, IGamesService gamesService)
+        public StatisticsService(ChessDbContext context, IUsersService usersService, IGamesService gamesService, IVideosService videosService)
         {
             this.context = context;
             this.usersService = usersService;
             this.gamesService = gamesService;
+            this.videosService = videosService;
         }
 
         public async Task<AdministrationIndexStatisticViewModel> GetAdministrationIndexStatisticViewModel()
         {
             var allUsersCount = await usersService.GetCountOfAllUsersAsync();
             var allGamesCount = await gamesService.GetCountOfAllGamesAsync();
+            var allVideosCount = await videosService.GetCountOfAllGamesAsync();
 
             var administrationIndexStatisticViewModel = new AdministrationIndexStatisticViewModel
             {
                 AllUsersCount = allUsersCount,
-                AllGamesCount = allGamesCount
+                AllGamesCount = allGamesCount,
+                AllVideosCount = allVideosCount,
             };
 
             return administrationIndexStatisticViewModel;

@@ -26,20 +26,21 @@
                     <tbody>
                         @foreach (var user in Model)
                         {
-            <tr class="elm">
-                <td>
-                    Registered On: @user.CreatedOn.ToString("MM/dd/yyyy hh:mm tt")
-                </td>
-                <td>
-                    @user.Username
-                </td>
-                <td>
-                    @(user.EmailConfirmed ? "Yes" : "No")
-                </td>
-                <td>
-                    <button class="btn btn-danger block-user" value="@user.Id">Block</button>
-                </td>
-            </tr>}
+                         <tr class="elm">
+                             <td>
+                                 Registered On: @user.CreatedOn.ToString("MM/dd/yyyy hh:mm tt")
+                             </td>
+                             <td>
+                                 @user.Username
+                             </td>
+                             <td>
+                                 @(user.EmailConfirmed ? "Yes" : "No")
+                             </td>
+                             <td>
+                                 <button class="btn btn-danger block-user" value="@user.Id">Block</button>
+                             </td>
+                         </tr>
+                         }
                     </tbody>
                 </table>
             </div>
@@ -48,7 +49,7 @@
 </div>
 
 @{ var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-                var nextDisabled = !Model.HasNextPage ? "disabled" : ""; }
+    var nextDisabled = !Model.HasNextPage ? "disabled" : ""; }
 <div class="row mt-3">
     <nav class="col d-flex justify-content-center" aria-label="Page navigation example">
         <ul class="pagination">
@@ -66,18 +67,19 @@
                 {
                     if (Model.PageIndex == i)
                     {
-<li class="page-item active">
-    <a class="page-link" asp-action="Active"
-       asp-route-pageNumber="@i"
-       asp-route-currentFilter="@ViewData["CurrentFilter"]">@i</a>
-</li> }
+                        <li class="page-item active">
+                            <a class="page-link" asp-action="Active"
+                               asp-route-pageNumber="@i"
+                               asp-route-currentFilter="@ViewData["CurrentFilter"]">@i</a>
+                        </li> }
                     else
                     {
-<li class="page-item">
-    <a class="page-link" asp-action="Active"
-       asp-route-pageNumber="@i"
-       asp-route-currentFilter="@ViewData["CurrentFilter"]">@i</a>
-</li>                    }
+                        <li class="page-item">
+                            <a class="page-link" asp-action="Active"
+                               asp-route-pageNumber="@i"
+                               asp-route-currentFilter="@ViewData["CurrentFilter"]">@i</a>
+                        </li>
+                    }
                 }
             }
             <li class="page-item">

@@ -27,6 +27,8 @@ namespace Chess.Services.Mapping
                 .ForMember(x => x.PictureLink, cfg => cfg.MapFrom(x => x.Picture.Link));
             CreateMap<Video, VideoAllViewModel>();
             CreateMap<Video, FavouriteVideoViewModel>();
+            CreateMap<Video, ActiveVideoViewModel>();
+            CreateMap<Video, DeletedVideoViewModel>();
             //CreateMap<VideoAllViewModel, VideoAllWithFavouritesViewModel>();
             //.ForMember(x => x.IsInFavourites, cfg => cfg.MapFrom(x => x.UserFavouriteVideos.Any(y => y.VideoId == x.Id)));
         }       

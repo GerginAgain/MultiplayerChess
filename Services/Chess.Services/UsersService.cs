@@ -82,7 +82,6 @@ namespace Chess.Services
                 .ApplicationUsers
                 .Where(x => x.IsDeleted)
                 .OrderByDescending(x => x.CreatedOn);
-                //.To<BlockedUserAllViewModel>();
 
             var BlockedUserAllViewModels = mapper.ProjectTo<BlockedUserAllViewModel>(blockedUsers);
 

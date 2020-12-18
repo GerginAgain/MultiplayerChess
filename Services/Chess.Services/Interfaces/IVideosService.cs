@@ -16,6 +16,16 @@ namespace Chess.Services.Interfaces
 
         Task<PaginatedList<VideoAllViewModel>> GetAllVideosViewModelsAsync(int pageNumber, int pageSize);
 
+        Task<PaginatedList<ActiveVideoViewModel>> GetAllActiveVideosViewModelsAsync(int pageNumber, int pageSize);
+
         Task<PaginatedList<FavouriteVideoViewModel>> GetFavouriteVideoViewModelsAsync(int pageNumber, int pageSize);
+
+        Task<int> GetCountOfAllGamesAsync();
+
+        Task<bool> DeleteVideoByIdAsync(int videoId);
+
+        Task<PaginatedList<DeletedVideoViewModel>> GetAllDeletedVideosViewModelsAsync(int pageNumber, int pageSize);
+
+        Task<bool> RestoreVideoByIdAsync(int videoId);
     }
 }

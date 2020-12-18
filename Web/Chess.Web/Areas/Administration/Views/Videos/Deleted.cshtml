@@ -1,0 +1,115 @@
+﻿@model PaginatedList<DeletedVideoViewModel>
+
+<h3 class="text-center">Deleted users:</h3>
+<hr class=""/>
+<div class="card text-center">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <a class="nav-link" asp-area="Administration" asp-controller="Videos" asp-action="AllActiveVideos">Active videos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="#">Deleted videos</a>
+            </li>
+        </ul>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Video</th>
+                            <th scope="col">Picture</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Created on</th>
+                            <th scope="col">Deleted on</th>
+                            <th scope="col">Restore</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var video in Model)
+                        {
+                            <tr class="elm">
+                                <td>
+                                    <div style="height: 120px; width: 120px" class="embed-responsive embed-responsive-16by9">
+                                        <iframe class="embed-responsive-item" src="@video.Link" allowfullscreen></iframe>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <img style="height: 120px; width: 120px" src="@video.PictureLink" />
+                                    </div>
+                                </td>
+                                <td>
+                                    @video.Title
+                                </td>
+                                <td>
+                                    @video.CreatedOn.ToString("MM/dd/yyyy hh:mm tt")
+                                </td>
+                                <td>
+                                    @video.DeletedOn.ToString("MM/dd/yyyy hh:mm tt")
+                                </td>
+                                <td>
+                                    <button class="btn btn-success restore-video" value="@video.Id">Restore</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@{ var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : ""; }
+<div class="row mt-3">
+    <nav class="col d-flex justify-content-center" aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item">
+                <a asp-action="Deleted"
+                   asp-route-pageNumber="@(Model.PageIndex - 1)"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   class="btn page-link btn-default @prevDisabled">
+                    &laquo;
+                </a>
+            </li>
+            @if (Model.TotalPages > 1)
+            {
+                for (int i = 1; i <= Model.TotalPages; i++)
+                {
+                    if (Model.PageIndex == i)
+                    {
+<li class="page-item active">
+    <a class="page-link" asp-action="Deleted"
+       asp-route-pageNumber="@i"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]">@i</a>
+</li>
+ }
+else
+{
+<li class="page-item">
+    <a class="page-link" asp-action="Deleted"
+       asp-route-pageNumber="@i"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]">@i</a>
+</li>
+               }
+}
+}
+            <li class="page-item">
+                <a asp-action="Deleted"
+                   asp-route-pageNumber="@(Model.PageIndex + 1)"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   class="btn page-link btn-default @nextDisabled">
+                    &raquo;
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<partial name="_ModalPartial" />
+
+@section Scripts
+{
+    <script src="~/js/restore-video.js" asp-append-version="true"></script>
+}
