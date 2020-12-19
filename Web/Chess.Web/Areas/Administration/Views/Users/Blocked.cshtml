@@ -20,7 +20,7 @@
                             <th scope="col">Registered On</th>
                             <th scope="col">Username</th>
                             <th scope="col">Is Confirmed</th>
-                            <th scope="col">Block</th>
+                            <th scope="col">Unblock</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -28,7 +28,7 @@
                         {
             <tr class="elm">
                 <td>
-                    Registered On: @user.CreatedOn.ToString("MM/dd/yyyy hh:mm tt")
+                    @user.CreatedOn.ToString("MM/dd/yyyy hh:mm tt")
                 </td>
                 <td>
                     @user.Username
