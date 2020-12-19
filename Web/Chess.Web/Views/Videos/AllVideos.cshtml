@@ -4,7 +4,7 @@
 @inject UserManager<ApplicationUser> UserManager
 
 <div class="row justify-content-center">
-    <h1 class="text-primary"><strong>Videos</strong></h1>
+    <h1 class="text-primary">Videos</h1>
 </div>
 <hr class="hr-chess" />
 <div class="row">
@@ -15,7 +15,7 @@
             <div class="row justify-content-center">
                 <h3 class="text-primary">@Model[i].Title</h3>
             </div>
-            <div class="embed-responsive embed-responsive-16by9">
+            <div id="video" class="embed-responsive embed-responsive-16by9">
                 <iframe class="embed-responsive-item" src="@Model[i].Link" allowfullscreen></iframe>
             </div>
             @if (SignInManager.IsSignedIn(User))

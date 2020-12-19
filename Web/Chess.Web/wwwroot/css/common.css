@@ -1,11 +1,23 @@
-﻿.hr-chess {
+﻿@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400');
+
+* {
+    font-family: Open Sans, sans-serif;
+}
+
+.hr-chess {
     width: 100%;
     color: blue;
-    height: 3px;
-    background-color: #007BFF;
+    height: 1px;
+    background-color: #FFC107;
 }
 
 .getHover:hover {
     cursor: pointer;
+}
+
+#video {
+    border-style: solid;
+    border-color: #FFC107;
+    border-width: 3px;
 }
 
