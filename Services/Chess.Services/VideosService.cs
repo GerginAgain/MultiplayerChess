@@ -125,7 +125,7 @@ namespace Chess.Services
         {
             var user = await usersService.GetCurrentUserAsync();
             var favouritesVideosFromDb = this.db.Videos
-                .Where(x => x.UserFavouriteVideos.Any(y => y.ApplicationUserId == user.Id && y.VideoId == x.Id))
+                .Where(x => x.IsDeleted == false && x.UserFavouriteVideos.Any(y => y.ApplicationUserId == user.Id && y.VideoId == x.Id))
                 .OrderByDescending(x => x.CreatedOn);
 
             var favoriteVideoViewModels = mapper.ProjectTo<FavouriteVideoViewModel>(favouritesVideosFromDb);
