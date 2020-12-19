@@ -4,7 +4,7 @@
 }
 
 .getHover:hover {
-    background-color: dodgerblue;
-    color: white;
+    color: dodgerblue;
     cursor: pointer;
 }
+
