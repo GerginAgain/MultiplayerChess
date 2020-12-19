@@ -23,11 +23,11 @@
                 <div class="mt-2">
                     @if (!(Model[i].IsInFavourites))
                     {
-                        <i id="@Model[i].Id" class="far fa-star fa-3x text-warning"></i>
+                        <i id="@Model[i].Id" class="far fa-star fa-3x text-warning getHover"></i>
                     }
                     else
                     {
-                        <i id="@Model[i].Id" class="fas fa-star fa-3x text-warning"></i>
+                        <i id="@Model[i].Id" class="fas fa-star fa-3x text-warning getHover"></i>
                     }
                 </div>
             }
