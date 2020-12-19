@@ -96,6 +96,7 @@ namespace Chess.Services
         public async Task<LatestThreeAddedVideosViewModel> GetLatestThreeVideosAsync()
         {
             var videos = this.db.Videos
+                .Where(x => x.IsDeleted == false)
                 .OrderByDescending(x => x.CreatedOn)
                 .Take(3);
 
