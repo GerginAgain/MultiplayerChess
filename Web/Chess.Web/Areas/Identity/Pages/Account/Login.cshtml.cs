@@ -81,8 +81,7 @@ namespace Chess.Web.Areas.Identity.Pages.Account
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 if (_userManager.FindByNameAsync(Input.Username).Result.IsDeleted)
                 {
-                    return Page();
-                    //return LocalRedirect("/Home/Index");
+                    return LocalRedirect("/Users/Blocked");
                 }
                 var result = await _signInManager.PasswordSignInAsync(Input.Username, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
