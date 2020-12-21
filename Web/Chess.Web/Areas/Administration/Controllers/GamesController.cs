@@ -19,11 +19,13 @@ namespace Chess.Web.Areas.Administration.Controllers
     {
         private readonly IGamesService gamesService;
         private readonly IHubContext<ChessHub> hubContext;
+        private readonly IUsersService usersService;
 
-        public GamesController(IGamesService gamesService, IHubContext<ChessHub> hubContext)
+        public GamesController(IGamesService gamesService, IHubContext<ChessHub> hubContext, IUsersService usersService)
         {
             this.gamesService = gamesService;
             this.hubContext = hubContext;
+            this.usersService = usersService;
         }
 
         public async Task<IActionResult> AllActiveGames(int? pageNumber)
@@ -45,7 +47,8 @@ namespace Chess.Web.Areas.Administration.Controllers
         {
             await gamesService.DeleteGameByIdAsync(gameId);
             await this.hubContext.Clients.All.SendAsync("DeleteGame", gameId);
-
+            var hostConnectionId = await this.usersService.GetUserHostConnectionIdByGameIdAsync(gameId);
+            await this.hubContext.Clients.Client(hostConnectionId).SendAsync("RedirectToDeletedGame");
             return Json(true);
         }
     }

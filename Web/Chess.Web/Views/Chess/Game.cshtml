@@ -30,6 +30,10 @@ else
         connection.invoke("AddHostConnectionIdToGame", gameId);
     });
 
+    connection.on("RedirectToDeletedGame", function () {
+        window.location.href = `/Chess/DeletedGame`;
+    });
+
     let isDragEnabled = true;
 
     connection.on("ReceiveNewMove", function (startId, targetId) {

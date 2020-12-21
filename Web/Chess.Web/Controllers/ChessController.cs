@@ -114,5 +114,10 @@ namespace Chess.Web.Controllers
             
             return this.View(gameViewModel);
         }
+
+        public IActionResult DeletedGame()
+        {
+            return this.View();
+        }
     }
 }

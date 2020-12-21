@@ -22,13 +22,15 @@ namespace Chess.Services
         private readonly IHttpContextAccessor contextAccessor;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IMapper mapper;
+        private readonly IGamesService gamesService;
         private readonly ChessDbContext context;
 
-        public UsersService(ChessDbContext context, IHttpContextAccessor contextAccessor, UserManager<ApplicationUser> userManager, IMapper mapper)
+        public UsersService(ChessDbContext context, IHttpContextAccessor contextAccessor, UserManager<ApplicationUser> userManager, IMapper mapper, IGamesService gamesService)
         {
             this.contextAccessor = contextAccessor;
             this.userManager = userManager;
             this.mapper = mapper;
+            this.gamesService = gamesService;
             this.context = context;
         }
 
@@ -38,6 +40,7 @@ namespace Chess.Services
 
             return allUsersCount;
         }
+
         public async Task<PaginatedList<UserAllViewModel>> GetAllUserViewModelsAsync(int pageNumber, int pageSize)
         {
             var allUsers = context.ApplicationUsers
@@ -118,6 +121,13 @@ namespace Chess.Services
             var currentUser = await userManager.GetUserAsync(contextAccessor.HttpContext.User);
             
             return currentUser;
+        }
+
+        public async Task<string> GetUserHostConnectionIdByGameIdAsync(int gameId)
+        {
+            var game = await this.gamesService.GetGameByIdAsync(gameId);
+            var hostConnectionId = game.HostConnectionId;
+            return hostConnectionId;
         }
     }
 }
