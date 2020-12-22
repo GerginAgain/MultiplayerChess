@@ -1,10 +1,10 @@
-﻿.center {
+﻿/*.center {
     margin-left: auto;
     margin-right: auto;
-}
+}*/
 
 i {
-    margin-left: 20px;
+    /*margin-left: 10px;*/
     /*cursor: move;*/
     /*background-color: green;*/
 }
@@ -19,8 +19,8 @@ td {
     background: #dadada 50% 50% repeat-x;
     font-weight: normal;
     color: #212121;
-    width: 80px;
-    height: 80px;
+    width: 66px;
+    height: 66px;
 }
 
 .white {

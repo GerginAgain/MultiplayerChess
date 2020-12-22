@@ -594,3 +594,4 @@ C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\obj\Debug\netcoreapp
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Administration\Views\Videos\Deleted.cshtml.g.cs
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\obj\Debug\netcoreapp3.1\Razor\Views\Chess\DeletedGame.cshtml.g.cs
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\obj\Debug\netcoreapp3.1\Razor\Views\Users\Blocked.cshtml.g.cs
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\obj\Debug\netcoreapp3.1\Razor\Views\Chess\_ChatPartial.cshtml.g.cs

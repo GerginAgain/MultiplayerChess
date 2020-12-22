@@ -60,15 +60,18 @@
                     figure = "fas fa-chess-king";
                 }
 
-                <td id="@cellId" class="@boardCellColor" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <td id="@cellId" style="text-align: center;" class="@boardCellColor" ondrop="drop(event)" ondragover="allowDrop(event)">
                     @if (row == 1 || row == 2)
                     {
-
+                    @*<div style="text-align: center;">*@
                         <i id="@figureId" class="@figure @figureSize @figureColor @whiteFigureBorder" draggable="true" ondragstart="drag(event)"></i>
+                    @*</div>*@
                     }
                     else if (row == 7 || row == 8)
                     {
+                        @*<div style="text-align: center;">*@
                         <i id="@figureId" class="@figure @figureSize @figureColor @whiteFigureBorder"></i>
+                        @*</div>*@
                     }
                 </td>
             }

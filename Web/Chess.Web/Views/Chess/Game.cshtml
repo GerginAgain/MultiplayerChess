@@ -12,15 +12,25 @@
 
 <script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
 
-@if (Model.Color == "White")
-{
-    <partial name="_WhitePlayerChessBoardPartial" />
-}
-else
-{
-    <partial name="_BlackPlayerChessBoardPartial" />
-}
+<script type="text/javascript">
+    var element = document.getElementById("bodyPart");
+    element.classList.remove("container");
+</script>
 
+<div class="row">
+    <div class="col-md-3 border border-primary ml-4 mr-4">
+        <partial name="_ChatPartial" />
+    </div>
+
+    <div @*class="col-md-8"*@>
+        @if (Model.Color == "White")
+        {
+        <partial name="_WhitePlayerChessBoardPartial" /> }
+        else
+        {
+        <partial name="_BlackPlayerChessBoardPartial" />}
+    </div>
+</div>
 
 <script type="text/javascript">
     let gameId = @Model.Id;
@@ -49,7 +59,7 @@ else
         else {
             targetCell.appendChild(figuretoMove);
         }
-        
+
         isDragEnabled = true;
     });
 
@@ -64,7 +74,7 @@ else
         if (isDragEnabled) {
             ev.dataTransfer.setData("text", ev.target.id);
             startId = ev.target.id;
-        }   
+        }
     }
 
     function drop(ev) {
@@ -81,11 +91,49 @@ else
         }
         else {
             let targetCell = ev.target;
-            targetCell.appendChild(currentFigure); 
-        }       
+            targetCell.appendChild(currentFigure);
+        }
 
         targetId = targetElementId;
         isDragEnabled = false;
         connection.invoke("SendNewMove", startId, targetId, gameId);
     }
 </script>
+
+@section Scripts {
+    <script>
+        connection.on("NewMessage", function (userName, message) {
+            var chatInfo = `<div>${userName}: ${escapeHtml(message)}</div>`;
+            $("#messagesList").append(chatInfo);
+            var messageListElement = $("#messagesList");
+            messageListElement.scrollTop = messageListElement.scrollHeight;
+        });
+
+        $("#sendButton").click(function () {
+            var message = $("#messageInput").val();
+            var chatInfo = `<div>Me: ${escapeHtml(message)}</div>`;
+            $("#messagesList").append(chatInfo);
+            var objDiv = document.getElementById("messagesList");
+            objDiv.scrollTop = objDiv.scrollHeight;
+            connection.invoke("Send", message, gameId);
+            //$("#messageInput").val("");
+        });
+
+        $("#messageInput").keyup(function (event) {
+            if (event.keyCode === 13 && ($("#messageInput").val() !== "")) {
+                event.preventDefault();
+                console.log(document.getElementById("messageInput").value)
+                $("#sendButton").click();
+            }
+        });
+
+        function escapeHtml(unsafe) {
+            return unsafe
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+    </script>
+}
