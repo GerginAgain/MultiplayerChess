@@ -15,7 +15,7 @@
 </script>
 
 <div class="row">
-    <div class="col-md-3 border border-primary ml-4 mr-4">
+    <div class="col-md-3 ml-5 mr-4 blueborder">
         <partial name="_ChatPartial" />
     </div>
     @if (Model.Color == "White")
@@ -24,21 +24,21 @@
     else
     {
     <partial name="_BlackPlayerChessBoardPartial" />}
-    <div class="col-md-3 ml-5 border border-primary">
+    <div class="col-md-3 ml-5 blueborder">
         <div>
-            <h3>@Model.HostName</h3>
+            <h3 class="text-danger">@Model.HostName</h3>
         </div>
         <div>
             <h3 style="visibility: hidden">host on move</h3>
         </div>
-        <div id="moveDashboard" class="border border-primary" style="font-size: 16px; overflow-y: scroll; height: 360px;">
+        <div id="moveDashboard" class="blueborder" style="font-size: 16px; overflow-y: scroll; height: 360px;">
 
         </div>
         <div>
             <h3 style="visibility: hidden">guest on move</h3>
         </div>
         <div>
-            <h3>@Model.GuestName</h3>
+            <h3 class="text-primary">@Model.GuestName</h3>
         </div>
     </div>
 </div>
@@ -129,7 +129,7 @@
 @section Scripts {
     <script>
         connection.on("NewMessage", function (userName, message) {
-            var chatInfo = `<div>${userName}: ${escapeHtml(message)}</div>`;
+            var chatInfo = `<div class="text-danger">${userName}: ${escapeHtml(message)}</div>`;
             $("#messagesList").append(chatInfo);
             var messageListElement = $("#messagesList");
             messageListElement.scrollTop = messageListElement.scrollHeight;
@@ -137,7 +137,7 @@
 
         $("#sendButton").click(function () {
             var message = $("#messageInput").val();
-            var chatInfo = `<div>Me: ${escapeHtml(message)}</div>`;
+            var chatInfo = `<div class="text-primary">Me: ${escapeHtml(message)}</div>`;
             $("#messagesList").append(chatInfo);
             var objDiv = document.getElementById("messagesList");
             objDiv.scrollTop = objDiv.scrollHeight;

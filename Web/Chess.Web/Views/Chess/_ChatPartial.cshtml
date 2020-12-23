@@ -1,14 +1,6 @@
-﻿<script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-@*<div class="container">*@
-<div id="message-holder" class="d-flex justify-content-start mt-1">
-    @*<h4>Message</h4>*@
-    <input class="w-75 ml-1 pl-1" type="text" id="messageInput" placeholder="Message..." />
-    <button id="sendButton" class="ml-4 btn btn-dark btn-lg">Send</button>
+﻿<div id="message-holder" class="d-flex justify-content-start mt-1">
+    <input class="w-75 ml-1 pl-1 text-primary border border-primary" type="text" id="messageInput" placeholder="Message..." />
+    <button id="sendButton" class="ml-4 btn btn-primary btn-lg">Send</button>
 </div>
-<hr style="height: 5px;" class="bg-dark" />
-<div id="messagesList" style="font-size: 16px; overflow-y: scroll; height: 420px;" >
-</div>
-@*</div>*@
+<hr id="hr-chat" class="bg-primary" />
+<div id="messagesList"></div>
