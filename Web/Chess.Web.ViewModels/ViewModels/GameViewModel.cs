@@ -15,7 +15,11 @@ namespace Chess.Web.ViewModels.ViewModels
 
         public string HostConnectionId { get; set; }
 
+        public string HostName { get; set; }
+
         public string GuestConnectionId { get; set; }
+
+        public string GuestName { get; set; }
 
     }
 }

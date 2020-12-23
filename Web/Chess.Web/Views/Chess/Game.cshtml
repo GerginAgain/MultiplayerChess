@@ -18,17 +18,33 @@
 </script>
 
 <div class="row">
-    <div class="col-md-3 border border-primary ml-4 mr-4">
+    <div class="col-md-3 border border-primary ml-5 mr-4">
         <partial name="_ChatPartial" />
     </div>
-
-    <div @*class="col-md-8"*@>
+    <div class="ml-4">
         @if (Model.Color == "White")
         {
-        <partial name="_WhitePlayerChessBoardPartial" /> }
-        else
-        {
-        <partial name="_BlackPlayerChessBoardPartial" />}
+<partial name="_WhitePlayerChessBoardPartial" /> }
+else
+{
+<partial name="_BlackPlayerChessBoardPartial" />}
+    </div>
+    <div class="col-md-3 ml-5 border border-primary">
+        <div>
+            <h3 id="guestName">Waiting for opponent</h3>
+        </div>
+        <div>
+            <h3 style="visibility: hidden">guest on move</h3>
+        </div>
+        <div id="moveDashboard" class="border border-primary" style="font-size: 16px; overflow-y: scroll; height: 360px;">
+
+        </div>
+        <div>
+            <h3 style="visibility: hidden">host on move</h3>
+        </div>
+        <div>
+            <h3>@Model.HostName</h3>
+        </div>
     </div>
 </div>
 
@@ -66,6 +82,11 @@
     let targetId = "";
     let startId = "";
 
+    let figureClasses = "";//
+    let newAddressFigure = "";//
+    let parentElementFigure = "";//
+    let oldAddressFigure = "";//
+
     function allowDrop(ev) {
         ev.preventDefault();
     }
@@ -74,6 +95,8 @@
         if (isDragEnabled) {
             ev.dataTransfer.setData("text", ev.target.id);
             startId = ev.target.id;
+            parentElementFigure = ev.target.parentElement; //
+            oldAddressFigure = parentElementFigure.id; //
         }
     }
 
@@ -81,6 +104,7 @@
         ev.preventDefault();
         let data = ev.dataTransfer.getData("text");
         let currentFigure = document.getElementById(data);
+        figureClasses = currentFigure.classList.item(1); //
         let targetElementId = ev.target.id;
 
         if (targetElementId.startsWith("i")) {
@@ -88,16 +112,30 @@
             let firstChildElement = targetElementParent.firstElementChild;
             targetElementParent.removeChild(firstChildElement);
             targetElementParent.appendChild(currentFigure);
+
+            newAddressFigure = targetElementParent.id;//
         }
         else {
             let targetCell = ev.target;
             targetCell.appendChild(currentFigure);
+            newAddressFigure = targetCell.id; //
         }
 
         targetId = targetElementId;
         isDragEnabled = false;
-        connection.invoke("SendNewMove", startId, targetId, gameId);
+        connection.invoke("SendNewMove", startId, targetId, gameId, figureClasses, oldAddressFigure, newAddressFigure);//
     }
+
+    connection.on("AddNewMoveToDashboard", function (currentMove) {
+        var currMove = `<div>${currentMove}</div>`;
+        $("#moveDashboard").append(currMove);
+        var moveDashboard = $("#moveDashboard");
+        moveDashboard.scrollTop = moveDashboard.scrollHeight;
+    });
+
+    connection.on("AddGuestToDashboard", function (guestName) {
+        $("#guestName").html(guestName);
+    });
 </script>
 
 @section Scripts {
@@ -114,8 +152,8 @@
             var chatInfo = `<div>Me: ${escapeHtml(message)}</div>`;
             $("#messagesList").append(chatInfo);
             var objDiv = document.getElementById("messagesList");
-            objDiv.scrollTop = objDiv.scrollHeight;
-            connection.invoke("Send", message, gameId);
+            objDiv.scrollTop = objDiv.scrollHeight;     //?
+            connection.invoke("Send", message, gameId); //?
             //$("#messageInput").val("");
         });
 
@@ -137,3 +175,4 @@
         }
     </script>
 }
+

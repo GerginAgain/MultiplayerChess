@@ -6,14 +6,14 @@
     @for (int row = 1; row <= 8; row++)
     {
         <tr>
-            @for (int col = 1; col <= 8; col++)
+            @for (int col = 'a'; col <= 'h'; col++) //
             {
-                var boardCellColor = ((row + col) % 2 == 0) ? "white" : "black";
+                var boardCellColor = ((row + col) % 2 != 0) ? "white" : "black";//
                 var figure = string.Empty;
                 var figureSize = "fa-3x";
                 var figureColor = string.Empty;
                 var whiteFigureBorder = string.Empty;
-                var cellId = row + "" + col;
+                var cellId = (char)col + "" + row; //
                 var figureId = "i" + row + col;
 
                 if (row == 1 || row == 2)
@@ -24,7 +24,7 @@
                 if (row == 7 || row == 8)
                 {
                     figureColor = "blackFigure";
-                   }
+                }
                 else if (row == 1 || row == 2)
                 {
                     figureColor = "whiteFigure";
@@ -35,27 +35,27 @@
                     figure = "fas fa-chess-pawn";
                 }
 
-                if ((row == 1 && (col == 1 || col == 8)) || (row == 8 && (col == 1 || col == 8)))
+                if ((row == 1 && (col == 'a' || col == 'h')) || (row == 8 && (col == 'a' || col == 'h')))
                 {
                     figure = "fas fa-chess-rook";
                 }
 
-                if ((row == 1 && (col == 2 || col == 7)) || (row == 8 && (col == 2 || col == 7)))
+                if ((row == 1 && (col == 'b' || col == 'g')) || (row == 8 && (col == 'b' || col == 'g')))
                 {
                     figure = "fas fa-chess-knight";
                 }
 
-                if ((row == 1 && (col == 3 || col == 6)) || (row == 8 && (col == 3 || col == 6)))
+                if ((row == 1 && (col == 'c' || col == 'f')) || (row == 8 && (col == 'c' || col == 'f')))
                 {
                     figure = "fas fa-chess-bishop";
                 }
 
-                if ((row == 1 && col == 4) || (row == 8 && col == 4))
+                if ((row == 1 && col == 'd') || (row == 8 && col == 'd'))
                 {
                     figure = "fas fa-chess-queen";
                 }
 
-                if ((row == 1 && col == 5) || (row == 8 && col == 5))
+                if ((row == 1 && col == 'e') || (row == 8 && col == 'e'))
                 {
                     figure = "fas fa-chess-king";
                 }

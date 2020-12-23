@@ -80,13 +80,14 @@ namespace Chess.Web.Controllers
             {
                 Id = currentGameWithId.Id,
                 Name = currentGameWithId.Name,
-                Color = currentGameWithId.Color,             
+                Color = currentGameWithId.Color, 
+                HostName = this.HttpContext.User.Identity.Name,
             };
 
             return this.View("Game", gameViewModel);
         }
 
-        public IActionResult EnterGame(int id)
+        public async Task<IActionResult> EnterGame(int id)
         {
             var game = this.db.Games.FirstOrDefault(x => x.Id == id);
             game.IsActive = false;
@@ -104,14 +105,21 @@ namespace Chess.Web.Controllers
                 color = "White";
             }
 
+            var hostName = this.db.ApplicationUsers.FirstOrDefault(x => x.Id == game.HostId).UserName;
+
             var gameViewModel = new GameViewModel
             {
                 Id = game.Id,
                 Name = game.Name,
                 Color = color,
                 HostConnectionId = game.HostConnectionId,
+                HostName = hostName,
+                GuestName = this.HttpContext.User.Identity.Name,
             };
-            
+
+            var guestName = this.HttpContext.User.Identity.Name;
+            await this.hubContext.Clients.Client(game.HostConnectionId).SendAsync("AddGuestToDashboard", guestName);
+
             return this.View(gameViewModel);
         }
 
