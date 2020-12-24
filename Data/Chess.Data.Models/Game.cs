@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Chess.Data.Models
 {
-    public class Game : BaseModel<int>
+    public class Game : BaseModel<string>
     {
         [Required]
         [MinLength(5)]

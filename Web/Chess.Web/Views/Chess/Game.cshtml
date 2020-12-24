@@ -49,7 +49,7 @@ else
 </div>
 
 <script type="text/javascript">
-    let gameId = @Model.Id;
+    let gameId = "@Model.Id";
 
     var connection = new signalR.HubConnectionBuilder().withUrl("/chessHub").build();
     connection.start().then(() => {

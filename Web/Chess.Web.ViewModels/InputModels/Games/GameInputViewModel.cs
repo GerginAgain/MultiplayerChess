@@ -7,7 +7,7 @@ namespace Chess.Web.ViewModels.InputModels.Games
     {
         [Required]     
         [MinLength(5, ErrorMessage = "Name must be more than 5 letters")]
-        [MaxLength(20, ErrorMessage = "Name must be less than 20 letters")]
+        [MaxLength(20)]
         public string Name { get; set; }
 
         [Required]

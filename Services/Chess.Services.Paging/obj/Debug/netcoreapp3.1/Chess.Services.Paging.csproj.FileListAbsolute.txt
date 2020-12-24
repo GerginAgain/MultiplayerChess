@@ -6,4 +6,3 @@ C:\Users\Again\Desktop\Chess\MultiplayerChess\Services\Chess.Services.Paging\obj
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Services\Chess.Services.Paging\obj\Debug\netcoreapp3.1\Chess.Services.Paging.dll
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Services\Chess.Services.Paging\obj\Debug\netcoreapp3.1\Chess.Services.Paging.pdb
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Services\Chess.Services.Paging\obj\Debug\netcoreapp3.1\Chess.Services.Paging.csproj.CoreCompileInputs.cache
-C:\Users\Again\Desktop\Chess\MultiplayerChess\Services\Chess.Services.Paging\obj\Debug\netcoreapp3.1\Chess.Services.Paging.csprojAssemblyReference.cache

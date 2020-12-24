@@ -59,6 +59,7 @@ namespace Chess.Web.Controllers
 
             var game = new Game
             {
+                Id = Guid.NewGuid().ToString(),
                 Name = input.Name,
                 Color = input.Color.ToString(),
                 HostId = hostId,
@@ -87,7 +88,7 @@ namespace Chess.Web.Controllers
             return this.View("Game", gameViewModel);
         }
 
-        public async Task<IActionResult> EnterGame(int id)
+        public async Task<IActionResult> EnterGame(string id)
         {
             var game = this.db.Games.FirstOrDefault(x => x.Id == id);
             game.IsActive = false;

@@ -123,7 +123,7 @@ namespace Chess.Services
             return currentUser;
         }
 
-        public async Task<string> GetUserHostConnectionIdByGameIdAsync(int gameId)
+        public async Task<string> GetUserHostConnectionIdByGameIdAsync(string gameId)
         {
             var game = await this.gamesService.GetGameByIdAsync(gameId);
             var hostConnectionId = game.HostConnectionId;

@@ -6,7 +6,7 @@ namespace Chess.Web.ViewModels.ViewModels.Games
 {
     public class ActiveGameAllViewModel
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         public DateTime CreatedOn { get; set; }
 

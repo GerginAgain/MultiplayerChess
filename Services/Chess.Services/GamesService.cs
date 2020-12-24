@@ -2,7 +2,6 @@
 using Chess.Services.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Chess.Services.Paging;
@@ -30,15 +29,9 @@ namespace Chess.Services
             var allGames = context.Games
                .Where(x => x.IsActive)
                .OrderByDescending(x => x.CreatedOn);
-            //.ToArray();
-            //.To<UserAllViewModel>();
 
-            //var ienumerableDest = mapper.Map<ApplicationUser[], IEnumerable<UserAllViewModel>>(userAllViewModels).AsQueryable();
             var gameAllViewModels = mapper.ProjectTo<ActiveGameAllViewModel>(allGames);
-            //return await _mapper.ProjectTo<SomeViewModel>(dbContext.SomeEntity).ToListAsync();
-
             var paginatedList = await PaginatedList<ActiveGameAllViewModel>.CreateAsync(gameAllViewModels, pageNumber, pageSize);
-
             return paginatedList;
         }
 
@@ -49,12 +42,12 @@ namespace Chess.Services
             return allGamesCount;
         }
 
-        public async Task<Game> GetGameByIdAsync(int gameId)
+        public async Task<Game> GetGameByIdAsync(string gameId)
         {
             return await this.context.Games.FirstOrDefaultAsync(x => x.Id == gameId);
         }
 
-        public async Task<GameDetailsViewModel> GetGameDetailsViewModelAsync(int gameId)
+        public async Task<GameDetailsViewModel> GetGameDetailsViewModelAsync(string gameId)
         {
             if (!await context.Games.AnyAsync(x => x.Id == gameId))
             {
@@ -66,7 +59,7 @@ namespace Chess.Services
             return gameDetailsViewModel;
         }
 
-        public async Task DeleteGameByIdAsync(int gameId)
+        public async Task DeleteGameByIdAsync(string gameId)
         {
             if (!await context.Games.AnyAsync(x => x.Id == gameId))
             {
@@ -78,12 +71,12 @@ namespace Chess.Services
             await this.context.SaveChangesAsync();          
         }
 
-        public async Task<int> GetActiveGameIdByUserIdAsync(string userId)
+        public async Task<string> GetActiveGameIdByUserIdAsync(string userId)
         {
             var game = await this.context.Games
                 .FirstOrDefaultAsync(x => x.IsActive == true && x.HostId == userId);
 
-            var gameId = 0;
+            string gameId = null;
 
             if (game != null)
             {
@@ -110,7 +103,7 @@ namespace Chess.Services
             return gamesCount;
         }
 
-        public Task<string> GetOpponentUserConnectionIdAsync(string currentUserConnectionId, int gameId)
+        public Task<string> GetOpponentUserConnectionIdAsync(string currentUserConnectionId, string gameId)
         {
             throw new NotImplementedException();
         }

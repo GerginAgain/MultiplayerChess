@@ -6,6 +6,6 @@ namespace Chess.Web.ViewModels.InputModels.Games
 {
     public class GameDetailsInputModel
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
     }
 }

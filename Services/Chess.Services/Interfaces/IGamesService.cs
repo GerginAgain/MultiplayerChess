@@ -14,16 +14,16 @@ namespace Chess.Services.Interfaces
 
         Task<PaginatedList<ActiveGameAllViewModel>> GetAllActiveGamesViewModelsAsync(int pageNumber, int pageSize);
 
-        Task<GameDetailsViewModel> GetGameDetailsViewModelAsync(int gameId);
+        Task<GameDetailsViewModel> GetGameDetailsViewModelAsync(string gameId);
 
-        Task<Game> GetGameByIdAsync(int gameId);
+        Task<Game> GetGameByIdAsync(string gameId);
 
-        Task DeleteGameByIdAsync(int gameId);
+        Task DeleteGameByIdAsync(string gameId);
 
-        Task<int> GetActiveGameIdByUserIdAsync(string userId);
+        Task<string> GetActiveGameIdByUserIdAsync(string userId);
 
         Task<List<int>> GetTheCountForTheCreatedGamesForTheLastTenDaysAsync();
 
-        Task<string> GetOpponentUserConnectionIdAsync(string currentUserConnectionId, int gameId);
+        Task<string> GetOpponentUserConnectionIdAsync(string currentUserConnectionId, string gameId);
     }
 }

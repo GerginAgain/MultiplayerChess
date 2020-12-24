@@ -43,7 +43,7 @@ namespace Chess.Web.Areas.Administration.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(int gameId)
+        public async Task<IActionResult> Delete(string gameId)
         {
             await gamesService.DeleteGameByIdAsync(gameId);
             await this.hubContext.Clients.All.SendAsync("DeleteGame", gameId);

@@ -25,6 +25,6 @@ namespace Chess.Services.Interfaces
 
         Task<ApplicationUser> GetCurrentUserAsync();
 
-        Task<string> GetUserHostConnectionIdByGameIdAsync(int gameId);
+        Task<string> GetUserHostConnectionIdByGameIdAsync(string gameId);
     }
 }
