@@ -23,5 +23,7 @@ namespace Chess.Services.Interfaces
         Task<int> GetActiveGameIdByUserIdAsync(string userId);
 
         Task<List<int>> GetTheCountForTheCreatedGamesForTheLastTenDaysAsync();
+
+        Task<string> GetOpponentUserConnectionIdAsync(string currentUserConnectionId, int gameId);
     }
 }

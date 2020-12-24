@@ -109,5 +109,10 @@ namespace Chess.Services
 
             return gamesCount;
         }
+
+        public Task<string> GetOpponentUserConnectionIdAsync(string currentUserConnectionId, int gameId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

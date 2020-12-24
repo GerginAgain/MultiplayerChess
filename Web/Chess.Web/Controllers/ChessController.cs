@@ -6,7 +6,7 @@ using Chess.Data;
 using Chess.Data.Models;
 using Chess.Web.Hubs;
 using Chess.Web.ViewModels.ViewModels;
-using Chess.Web.ViewModels.InputModels;
+using Chess.Web.ViewModels.InputModels.Games;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.AspNetCore.Identity;

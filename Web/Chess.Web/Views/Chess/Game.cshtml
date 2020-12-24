@@ -50,8 +50,6 @@ else
 
 <script type="text/javascript">
     let gameId = @Model.Id;
-    @*let curUserName = @Model.HostName;
-    console.log(curUserName);*@
 
     var connection = new signalR.HubConnectionBuilder().withUrl("/chessHub").build();
     connection.start().then(() => {
