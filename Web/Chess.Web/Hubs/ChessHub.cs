@@ -53,16 +53,22 @@ namespace Chess.Web.Hubs
                 opponentUserId = currentGame.HostConnectionId;
             }
 
-            Console.WriteLine(figureClasses.Split("-")[2]);//
+            await Clients.Client(opponentUserId).SendAsync("ReceiveNewMove", startId, targetId);
+
             var figure = figureClasses.Split("-")[2];
-            Console.WriteLine(oldAddressFigure);//
-            Console.WriteLine(newAddressFigure);//
             var currentUserName = this.Context.User.Identity.Name;
             var currentMove = $"{currentUserName}: {figure} {oldAddressFigure} to {newAddressFigure}";
-            await Clients.Client(currentGame.HostConnectionId).SendAsync("AddNewMoveToDashboard", currentMove);
-            await Clients.Client(currentGame.GuestConnectionId).SendAsync("AddNewMoveToDashboard", currentMove);
 
-            await Clients.Client(opponentUserId).SendAsync("ReceiveNewMove", startId, targetId);
+            if (currentUserName == currentGame.Host.UserName)
+            {
+                await Clients.Client(currentGame.HostConnectionId).SendAsync("AddNewMoveToDashboard", currentMove, "blue");
+                await Clients.Client(currentGame.GuestConnectionId).SendAsync("AddNewMoveToDashboard", currentMove, "red");
+            }
+            else if (currentUserName == currentGame.Guest.UserName)
+            {
+                await Clients.Client(currentGame.HostConnectionId).SendAsync("AddNewMoveToDashboard", currentMove, "red");
+                await Clients.Client(currentGame.GuestConnectionId).SendAsync("AddNewMoveToDashboard", currentMove, "blue");
+            }            
         }
 
         public async Task SendNewGame(string name, string color)

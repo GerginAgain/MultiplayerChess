@@ -118,8 +118,16 @@
         connection.invoke("SendNewMove", startId, targetId, gameId, figureClasses, oldAddressFigure, newAddressFigure);
     }
 
-    connection.on("AddNewMoveToDashboard", function (currentMove) {     
-        var currMove = `<div class="ml-1">${currentMove}</div>`;
+    connection.on("AddNewMoveToDashboard", function (currentMove, color) {
+        let moveColor = "";
+        if (color == "blue") {
+            moveColor = "text-primary"
+        }
+        else {
+            moveColor = "text-danger"
+            console.log(moveColor);
+        }
+        var currMove = `<div class="ml-1 ${moveColor}">${currentMove}</div>`;
         $("#moveDashboard").append(currMove);
         var moveDashboard = $("#moveDashboard");
         moveDashboard.scrollTop = moveDashboard.scrollHeight;

@@ -50,6 +50,8 @@ else
 
 <script type="text/javascript">
     let gameId = @Model.Id;
+    @*let curUserName = @Model.HostName;
+    console.log(curUserName);*@
 
     var connection = new signalR.HubConnectionBuilder().withUrl("/chessHub").build();
     connection.start().then(() => {
@@ -126,8 +128,17 @@ else
         connection.invoke("SendNewMove", startId, targetId, gameId, figureClasses, oldAddressFigure, newAddressFigure);//
     }
 
-    connection.on("AddNewMoveToDashboard", function (currentMove) {
-        var currMove = `<div class="ml-1">${currentMove}</div>`;
+    connection.on("AddNewMoveToDashboard", function (currentMove, color) {
+        let moveColor = "";
+        if (color == "blue") {
+            moveColor = "text-primary"
+            console.log(moveColor);
+        }
+        else {
+            moveColor = "text-danger"
+            console.log(moveColor);
+        }
+        var currMove = `<div class="ml-1 ${moveColor}">${currentMove}</div>`;
         $("#moveDashboard").append(currMove);
         var moveDashboard = $("#moveDashboard");
         moveDashboard.scrollTop = moveDashboard.scrollHeight;
