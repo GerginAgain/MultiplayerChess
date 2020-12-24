@@ -119,7 +119,7 @@
     }
 
     connection.on("AddNewMoveToDashboard", function (currentMove) {     
-        var currMove = `<div>${currentMove}</div>`;
+        var currMove = `<div class="ml-1">${currentMove}</div>`;
         $("#moveDashboard").append(currMove);
         var moveDashboard = $("#moveDashboard");
         moveDashboard.scrollTop = moveDashboard.scrollHeight;
