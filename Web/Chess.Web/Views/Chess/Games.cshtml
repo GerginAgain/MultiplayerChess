@@ -1,13 +1,11 @@
-﻿@using Chess.Web.ViewModels
+﻿@using Chess.Web.ViewModels.ViewModels.Games
 @model GamesViewModel
-
 <script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
 <link href="~/css/games.css" rel="stylesheet" />
 
 @{ ViewData["Title"] = "Created Games"; }
 
 <h1 class="row justify-content-center text-primary">@ViewData["Title"]</h1>
-
 <div class="row justify-content-center">
     <div id="Games" class="col-md-6">
         @foreach (var game in Model.Games)

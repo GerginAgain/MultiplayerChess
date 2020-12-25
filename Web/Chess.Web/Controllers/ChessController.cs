@@ -1,43 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Chess.Data;
-using Chess.Data.Models;
-using Chess.Web.Hubs;
-using Chess.Web.ViewModels.ViewModels;
-using Chess.Web.ViewModels.InputModels.Games;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
-using Microsoft.AspNetCore.Identity;
-
-namespace Chess.Web.Controllers
+﻿namespace Chess.Web.Controllers
 {
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.SignalR;
+    using Chess.Web.Hubs;
+    using Chess.Services.Interfaces;
+    using Chess.Web.ViewModels.InputModels.Games;
+
     public class ChessController : Controller
     {
-        private ChessDbContext db;
         private readonly IHubContext<ChessHub> hubContext;
-        private readonly UserManager<ApplicationUser> userManager;
+        private readonly IGamesService gamesService;
 
-        public ChessController(ChessDbContext db, IHubContext<ChessHub> hubContext, UserManager<ApplicationUser> userManager)
+        public ChessController(IHubContext<ChessHub> hubContext, IGamesService gamesService)
         {
-            this.db = db;
             this.hubContext = hubContext;
-            this.userManager = userManager;
+            this.gamesService = gamesService;
         }
 
-        public IActionResult Game()
+        public async Task<IActionResult> Games()
         {
-            return View();
-        }
-
-        public IActionResult Games()
-        {
-            var games = this.db.Games.Where(x => x.IsActive == true).ToList();
-            var viewModel = new GamesViewModel
-            {
-                Games = games,
-            };
+            var viewModel = await this.gamesService.GetGamesViewModelAsync();
 
             return View(viewModel);
         }
@@ -55,71 +38,16 @@ namespace Chess.Web.Controllers
                 return this.View(input);
             }
 
-            var hostId = this.userManager.GetUserId(this.User);
-
-            var game = new Game
-            {
-                Id = Guid.NewGuid().ToString(),
-                Name = input.Name,
-                Color = input.Color.ToString(),
-                HostId = hostId,
-            };
-
-            this.db.Games.Add(game);
-            await this.db.SaveChangesAsync();
-
-            var currentGameWithId = this.db.Games
-                .First(x => x.Name == game.Name);
-
-            var name = currentGameWithId.Name;
-            var color = currentGameWithId.Color;
-            var gameId = currentGameWithId.Id;
-
-            await this.hubContext.Clients.All.SendAsync("AddNewGame", name, color, gameId);
-
-            var gameViewModel = new GameViewModel
-            {
-                Id = currentGameWithId.Id,
-                Name = currentGameWithId.Name,
-                Color = currentGameWithId.Color, 
-                HostName = this.HttpContext.User.Identity.Name,
-            };
+            var gameViewModel = await this.gamesService.GetGameViewModelAsync(input);
+            await this.hubContext.Clients.All.SendAsync("AddNewGame", gameViewModel.Name, gameViewModel.Color, gameViewModel.Id);
 
             return this.View("Game", gameViewModel);
         }
 
         public async Task<IActionResult> EnterGame(string id)
         {
-            var game = this.db.Games.FirstOrDefault(x => x.Id == id);
-            game.IsActive = false;
-            var guestId = this.userManager.GetUserId(this.User);
-            game.GuestId = guestId;
-            db.SaveChanges();
-
-            var color = string.Empty;
-            if (game.Color == "White")
-            {
-                color = "Black";
-            }
-            else if (game.Color == "Black")
-            {
-                color = "White";
-            }
-
-            var hostName = this.db.ApplicationUsers.FirstOrDefault(x => x.Id == game.HostId).UserName;
-
-            var gameViewModel = new GameViewModel
-            {
-                Id = game.Id,
-                Name = game.Name,
-                Color = color,
-                HostConnectionId = game.HostConnectionId,
-                HostName = hostName,
-                GuestName = this.HttpContext.User.Identity.Name,
-            };
-
-            var guestName = this.HttpContext.User.Identity.Name;
-            await this.hubContext.Clients.Client(game.HostConnectionId).SendAsync("AddGuestToDashboard", guestName);
+            var gameViewModel = await this.gamesService.GetEnteringGameViewModelAsync(id);
+            await this.hubContext.Clients.Client(gameViewModel.HostConnectionId).SendAsync("AddGuestToDashboard", gameViewModel.GuestName);
 
             return this.View(gameViewModel);
         }

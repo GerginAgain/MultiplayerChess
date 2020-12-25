@@ -1,5 +1,6 @@
 ﻿using Chess.Data.Models;
 using Chess.Services.Paging;
+using Chess.Web.ViewModels.InputModels.Games;
 using Chess.Web.ViewModels.ViewModels.Games;
 using System;
 using System.Collections.Generic;
@@ -25,5 +26,13 @@ namespace Chess.Services.Interfaces
         Task<List<int>> GetTheCountForTheCreatedGamesForTheLastTenDaysAsync();
 
         Task<string> GetOpponentUserConnectionIdAsync(string currentUserConnectionId, string gameId);
-    }
+
+        Task<List<GameAllViewModel>> GetGameAllViewModelsAsync();
+
+        Task<GamesViewModel> GetGamesViewModelAsync();
+
+        Task<GameViewModel> GetGameViewModelAsync(GameInputViewModel input);
+
+        Task<GameViewModel> GetEnteringGameViewModelAsync(string id);
+    } 
 }

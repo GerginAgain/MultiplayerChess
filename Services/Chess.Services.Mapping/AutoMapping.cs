@@ -16,6 +16,9 @@ namespace Chess.Services.Mapping
         {
             CreateMap<ApplicationUser, UserAllViewModel>();
             CreateMap<ApplicationUser, BlockedUserAllViewModel>();
+            CreateMap<Game, GameAllViewModel>();
+            CreateMap<Game, GameViewModel>()
+                .ForMember(x => x.HostName, cfg => cfg.MapFrom(x => x.Host.UserName));
             CreateMap<Game, ActiveGameAllViewModel>()
                 .ForMember(x => x.Title, cfg => cfg.MapFrom(x => x.Name));
             CreateMap<Game, GameDetailsViewModel>()

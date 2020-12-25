@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Chess.Web.ViewModels.ViewModels
+﻿namespace Chess.Web.ViewModels.ViewModels.Games
 {
     public class GameViewModel
     {
@@ -20,6 +15,5 @@ namespace Chess.Web.ViewModels.ViewModels
         public string GuestConnectionId { get; set; }
 
         public string GuestName { get; set; }
-
     }
 }
