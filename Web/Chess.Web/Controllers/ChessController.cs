@@ -6,6 +6,7 @@
     using Chess.Web.Hubs;
     using Chess.Services.Interfaces;
     using Chess.Web.ViewModels.InputModels.Games;
+    using Chess.Common;
 
     public class ChessController : Controller
     {
@@ -55,6 +56,13 @@
         public IActionResult DeletedGame()
         {
             return this.View();
+        }
+
+        public async Task<IActionResult> MyGames()
+        {
+            var myGameViewModels = await this.gamesService.GetMyGameViewModelsAsync(GlobalConstants.DefaultPageNumber, GlobalConstants.DefaultPageSize);
+
+            return this.View(myGameViewModels);
         }
     }
 }

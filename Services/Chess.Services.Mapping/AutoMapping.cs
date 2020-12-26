@@ -27,6 +27,10 @@ namespace Chess.Services.Mapping
             CreateMap<Game, GameDetailsViewModel>()
                 .ForMember(x => x.HostFiguresColor, cfg => cfg.MapFrom(x => x.Color))
                 .ForMember(x => x.HostUsername, cfg => cfg.MapFrom(x => x.Host.UserName));
+            CreateMap<Game, MyGameViewModel>()
+                .ForMember(x => x.HostName, cfg => cfg.MapFrom(x => x.Host.UserName))
+                .ForMember(x => x.HostFigureColors, cfg => cfg.MapFrom(x => x.Color))
+                .ForMember(x => x.GuestName, cfg => cfg.MapFrom(x => x.Guest.UserName));
             CreateMap<Video, VideoViewModel>()
                 .ForMember(x => x.Id, cfg => cfg.MapFrom(x => x.Id))
                 .ForMember(x => x.PictureName, cfg => cfg.MapFrom(x => x.Picture.Name))

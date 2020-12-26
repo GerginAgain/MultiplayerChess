@@ -40,5 +40,7 @@ namespace Chess.Services.Interfaces
         Task AddGuestConnectionIdToGameAsync(string gameId, string guestConnectionId);
 
         Task<HubGameViewModel> GetHubGameViewModelByGameIdAsync(string gameId);
+
+        Task<PaginatedList<MyGameViewModel>> GetMyGameViewModelsAsync(int pageNumber, int pageSize);
     } 
 }

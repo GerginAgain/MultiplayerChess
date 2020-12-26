@@ -1,0 +1,101 @@
+﻿@using Chess.Services.Paging;
+@using Chess.Web.ViewModels.ViewModels.Games
+@model PaginatedList<MyGameViewModel>
+
+<h2 class="text-center text-primary mb-3">All Active Games:</h2>
+<div class="card text-center">
+    <div class="card-header">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Created On</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Host Name</th>
+                            <th scope="col">Host Figures Color</th>
+                            <th scope="col">Guest Name</th>
+                            <th scope="col">Moves</th>
+                            <th scope="col">Chat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var game in Model)
+                        {
+            <tr id="@game.Id" class="trElm">
+                <td>
+                    @game.CreatedOn.ToString("dd.MM.yyyy HH:mm:ss")
+                </td>
+                <td>
+                    @game.Name
+                </td>
+                <td>
+                    @game.HostName
+                </td>
+                <td>
+                    @game.HostFigureColors
+                </td>
+                <td>
+                    @game.GuestName
+                </td>
+                <td>
+                    <a type="button" asp-controller="Games" asp-action="Details" asp-route-id="@game.Id" class="btn btn-success">Show Moves</a>
+                </td>
+                <td>
+                    <a type="button" asp-controller="Games" asp-action="Details" asp-route-id="@game.Id" class="btn btn-success">Show Chat</a>
+                </td>
+            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@{ var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                var nextDisabled = !Model.HasNextPage ? "disabled" : ""; }
+<div class="row mt-3">
+    <nav class="col d-flex justify-content-center" aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item">
+                <a asp-action="MyGames"
+                   asp-route-pageNumber="@(Model.PageIndex - 1)"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   class="btn page-link btn-default @prevDisabled">
+                    &laquo;
+                </a>
+            </li>
+            @if (Model.TotalPages > 1)
+            {
+                for (int i = 1; i <= Model.TotalPages; i++)
+                {
+                    if (Model.PageIndex == i)
+                    {
+<li class="page-item active">
+    <a class="page-link" asp-action="MyGames"
+       asp-route-pageNumber="@i"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]">@i</a>
+</li>
+ }
+else
+{
+<li class="page-item">
+    <a class="page-link" asp-action="AllActiveGames"
+       asp-route-pageNumber="@i"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]">@i</a>
+</li>
+               }
+}
+}
+            <li class="page-item">
+                <a asp-action="MyGames"
+                   asp-route-pageNumber="@(Model.PageIndex + 1)"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   class="btn page-link btn-default @nextDisabled">
+                    &raquo;
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>

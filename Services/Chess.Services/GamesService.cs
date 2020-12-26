@@ -206,5 +206,16 @@ namespace Chess.Services
 
             return hubGameViewModel;
         }
+
+        public async Task<PaginatedList<MyGameViewModel>> GetMyGameViewModelsAsync(int pageNumber, int pageSize)
+        {
+            var allMyGames = db.Games
+               .Where(x => !x.IsActive)
+               .OrderByDescending(x => x.CreatedOn);
+
+            var myGameViewModels = mapper.ProjectTo<MyGameViewModel>(allMyGames);
+            var paginatedList = await PaginatedList<MyGameViewModel>.CreateAsync(myGameViewModels, pageNumber, pageSize);
+            return paginatedList;
+        }
     }
 }
