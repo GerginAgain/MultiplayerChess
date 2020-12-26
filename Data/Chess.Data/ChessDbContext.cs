@@ -26,6 +26,8 @@ namespace Chess.Data
 
         public DbSet<Move> Moves { get; set; }
 
+        public DbSet<Message> Messages { get; set; }
+
         public DbSet<UserFavouriteVideo> UserFavouriteVideos { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

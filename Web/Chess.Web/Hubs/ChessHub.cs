@@ -11,16 +11,20 @@
         private readonly ChessDbContext db;
         private readonly IGamesService gamesService;
         private readonly IMovesService movesService;
+        private readonly IMessagesService messagesService;
 
-        public ChessHub(ChessDbContext db, IGamesService gamesService, IMovesService movesService)
+        public ChessHub(ChessDbContext db, IGamesService gamesService, IMovesService movesService, IMessagesService messagesService)
         {
             this.db = db;
             this.gamesService = gamesService;
             this.movesService = movesService;
+            this.messagesService = messagesService;
         }
 
         public async Task SendNewMessage(string message, string gameId)
         {
+            await this.messagesService.AddMessageToDbAsync(message, gameId);
+
             var currentUserConnectionId = this.Context.ConnectionId;
             var currentGame = await this.gamesService.GetHubGameViewModelByGameIdAsync(gameId);
             var opponentUserId = string.Empty;
