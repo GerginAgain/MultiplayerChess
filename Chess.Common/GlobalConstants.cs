@@ -22,5 +22,8 @@ namespace Chess.Common
         public const int DefaultPageSize = 10;
         public const int DefaultVideoPageSize = 6;
         public const int DefaultAdminVideoPageSize = 5;
+
+        public const string HomeColor = "blue";
+        public const string AwayColor = "red";
     }
 }

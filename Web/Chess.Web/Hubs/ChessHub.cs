@@ -1,28 +1,26 @@
-﻿using Chess.Data;
-using Chess.Web.ViewModels.InputModels.Enums;
-using Microsoft.AspNetCore.SignalR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading.Tasks;
-
-namespace Chess.Web.Hubs
+﻿namespace Chess.Web.Hubs
 {
+    using Microsoft.AspNetCore.SignalR;
+    using System.Threading.Tasks;
+    using Chess.Common;
+    using Chess.Data;
+    using Chess.Services.Interfaces;
+
     public class ChessHub : Hub
     {
         private readonly ChessDbContext db;
+        private readonly IGamesService gamesService;
 
-        public ChessHub(ChessDbContext db)
+        public ChessHub(ChessDbContext db, IGamesService gamesService)
         {
             this.db = db;
+            this.gamesService = gamesService;
         }
 
-        public async Task Send(string message, string gameId)
+        public async Task SendNewMessage(string message, string gameId)
         {
             var currentUserConnectionId = this.Context.ConnectionId;
-            var currentGame = this.db.Games.First(x => x.Id == gameId);
+            var currentGame = await this.gamesService.GetHubGameViewModelByGameIdAsync(gameId);
             var opponentUserId = string.Empty;
 
             if (currentGame.HostConnectionId == currentUserConnectionId)
@@ -35,13 +33,13 @@ namespace Chess.Web.Hubs
             }
 
             string userName = this.Context.User.Identity.Name;
-            await this.Clients.Client(opponentUserId).SendAsync("NewMessage", userName, message);
+            await this.Clients.Client(opponentUserId).SendAsync("ReceiveNewMessage", userName, message);
         }
 
-        public async Task SendNewMove(string startId, string targetId, string gameId, string figureClasses, string oldAddressFigure, string newAddressFigure) //
+        public async Task SendNewMoveToBoard(string startId, string targetId, string gameId) 
         {
             var currentUserConnectionId = this.Context.ConnectionId;
-            var currentGame = this.db.Games.First(x => x.Id == gameId);
+            var currentGame = await this.gamesService.GetHubGameViewModelByGameIdAsync(gameId);
             var opponentUserId = string.Empty;
 
             if (currentGame.HostConnectionId == currentUserConnectionId)
@@ -53,45 +51,39 @@ namespace Chess.Web.Hubs
                 opponentUserId = currentGame.HostConnectionId;
             }
 
-            await Clients.Client(opponentUserId).SendAsync("ReceiveNewMove", startId, targetId);
+            await Clients.Client(opponentUserId).SendAsync("ReceiveNewMove", startId, targetId);       
+        }
 
+        public async Task SendNewMovetoDashboard(string gameId, string figureClasses, string oldAddressFigure, string newAddressFigure)
+        {
             var figure = figureClasses.Split("-")[2];
             var currentUserName = this.Context.User.Identity.Name;
             var currentMove = $"{currentUserName}: {figure} {oldAddressFigure} to {newAddressFigure}";
 
-            if (currentUserName == currentGame.Host.UserName)
+            var currentGame = await this.gamesService.GetHubGameViewModelByGameIdAsync(gameId);
+
+            if (currentUserName == currentGame.HostUsername)
             {
-                await Clients.Client(currentGame.HostConnectionId).SendAsync("AddNewMoveToDashboard", currentMove, "blue");
-                await Clients.Client(currentGame.GuestConnectionId).SendAsync("AddNewMoveToDashboard", currentMove, "red");
+                await Clients.Client(currentGame.HostConnectionId).SendAsync("AddNewMoveToDashboard", currentMove, GlobalConstants.HomeColor);
+                await Clients.Client(currentGame.GuestConnectionId).SendAsync("AddNewMoveToDashboard", currentMove, GlobalConstants.AwayColor);
             }
-            else if (currentUserName == currentGame.Guest.UserName)
+            else if (currentUserName == currentGame.GuestUsername)
             {
-                await Clients.Client(currentGame.HostConnectionId).SendAsync("AddNewMoveToDashboard", currentMove, "red");
-                await Clients.Client(currentGame.GuestConnectionId).SendAsync("AddNewMoveToDashboard", currentMove, "blue");
-            }            
+                await Clients.Client(currentGame.HostConnectionId).SendAsync("AddNewMoveToDashboard", currentMove, GlobalConstants.AwayColor);
+                await Clients.Client(currentGame.GuestConnectionId).SendAsync("AddNewMoveToDashboard", currentMove, GlobalConstants.HomeColor);
+            }
         }
 
-        public async Task SendNewGame(string name, string color)
-        {
-            var gameId = this.db.Games.First(x => x.Name == name).Id;
-            var colorInString = Enum.GetName(typeof(Color), int.Parse(color));
-            await Clients.Others.SendAsync("AddNewGame", name, colorInString, gameId);
-        }
-
-        public void AddHostConnectionIdToGame(string gameId)
+        public async Task AddHostConnectionIdToGame(string gameId)
         {
             var hostConnectionId = this.Context.ConnectionId;
-            var currentGame = this.db.Games.First(x => x.Id == gameId);
-            currentGame.HostConnectionId = hostConnectionId;
-            this.db.SaveChanges();
+            await this.gamesService.AddHostConnectionIdToGameAsync(gameId, hostConnectionId);
         }
 
-        public void AddGuestConnectionIdToGame(string gameId)
+        public async Task AddGuestConnectionIdToGame(string gameId)
         {
             var guestConnectionId = this.Context.ConnectionId;
-            var currentGame = this.db.Games.First(x => x.Id == gameId);
-            currentGame.GuestConnectionId = guestConnectionId;
-            this.db.SaveChanges();
+            await this.gamesService.AddGuestConnectionIdToGameAsync(gameId, guestConnectionId);
         }
     }
 }

@@ -1,15 +1,9 @@
 ﻿@using Chess.Web.ViewModels.ViewModels.Games
+@using Chess.Common;
 @model GameViewModel
 
 <link href="~/css/chess.css" rel="stylesheet" />
 <link href="~/lib/font-awesome/css/all.css" rel="stylesheet" />
-
-@*<script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/jquery/dist/jquery.js"></script>*@
-
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
 <script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
 
 <script type="text/javascript">
@@ -25,8 +19,8 @@
         @if (Model.Color == "White")
         {
 <partial name="_WhitePlayerChessBoardPartial" /> }
-else
-{
+            else
+            {
 <partial name="_BlackPlayerChessBoardPartial" />}
     </div>
     <div class="col-md-3 ml-5 blueborder">
@@ -58,6 +52,10 @@ else
 
     connection.on("RedirectToDeletedGame", function () {
         window.location.href = `/Chess/DeletedGame`;
+    });
+
+    connection.on("AddGuestToDashboard", function (guestName) {
+        $("#guestName").html(guestName);
     });
 
     let isDragEnabled = true;
@@ -123,64 +121,13 @@ else
 
         targetId = targetElementId;
         isDragEnabled = false;
-        connection.invoke("SendNewMove", startId, targetId, gameId, figureClasses, oldAddressFigure, newAddressFigure);//
+        connection.invoke("SendNewMoveToBoard", startId, targetId, gameId);//
+        connection.invoke("SendNewMovetoDashboard", gameId, figureClasses, oldAddressFigure, newAddressFigure);//
     }
-
-    connection.on("AddNewMoveToDashboard", function (currentMove, color) {
-        let moveColor = "";
-        if (color == "blue") {
-            moveColor = "text-primary"
-            console.log(moveColor);
-        }
-        else {
-            moveColor = "text-danger"
-            console.log(moveColor);
-        }
-        var currMove = `<div class="ml-1 ${moveColor}">${currentMove}</div>`;
-        $("#moveDashboard").append(currMove);
-        var moveDashboard = $("#moveDashboard");
-        moveDashboard.scrollTop = moveDashboard.scrollHeight;
-    });
-
-    connection.on("AddGuestToDashboard", function (guestName) {
-        $("#guestName").html(guestName);
-    });
 </script>
 
-@section Scripts {
-    <script>
-        connection.on("NewMessage", function (userName, message) {
-            var chatInfo = `<div class="text-danger">${userName}: ${escapeHtml(message)}</div>`;
-            $("#messagesList").append(chatInfo);
-            var messageListElement = $("#messagesList");
-            messageListElement.scrollTop = messageListElement.scrollHeight;
-        });
-
-        $("#sendButton").click(function () {
-            var message = $("#messageInput").val();
-            var chatInfo = `<div class="text-primary">Me: ${escapeHtml(message)}</div>`;
-            $("#messagesList").append(chatInfo);
-            var objDiv = document.getElementById("messagesList");
-            objDiv.scrollTop = objDiv.scrollHeight;     //?
-            connection.invoke("Send", message, gameId); //?
-            //$("#messageInput").val("");
-        });
-
-        $("#messageInput").keyup(function (event) {
-            if (event.keyCode === 13 && ($("#messageInput").val() !== "")) {
-                event.preventDefault();
-                $("#sendButton").click();
-            }
-        });
-
-        function escapeHtml(unsafe) {
-            return unsafe
-                .replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;")
-                .replace(/"/g, "&quot;")
-                .replace(/'/g, "&#039;");
-        }
-    </script>
-}
-
+@*@section Scripts
+{
+    <script src="~/js/add-move-to-dashboard.js" asp-append-version="true"></script>
+    <script src="~/js/chat.js" asp-append-version="true"></script>
+}*@

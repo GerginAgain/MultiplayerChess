@@ -12,9 +12,6 @@ using Chess.Common;
 using Chess.Data.Models;
 using Chess.Web.ViewModels.InputModels.Games;
 using Microsoft.AspNetCore.Http;
-
-
-using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
 
 namespace Chess.Services
@@ -175,8 +172,6 @@ namespace Chess.Services
                 color = "White";
             }
 
-            //var hostName = game.Host.UserName; //this.db.ApplicationUsers.FirstOrDefault(x => x.Id == game.HostId).UserName;
-
             var gameViewModel = new GameViewModel
             {
                 Id = game.Id,
@@ -188,6 +183,28 @@ namespace Chess.Services
             };
 
             return gameViewModel;
+        }
+
+        public async Task AddHostConnectionIdToGameAsync(string gameId, string hostConnectionId)
+        {
+            var currentGame = await this.db.Games.FirstOrDefaultAsync(x => x.Id == gameId);
+            currentGame.HostConnectionId = hostConnectionId;
+            await this.db.SaveChangesAsync();
+        }
+
+        public async Task AddGuestConnectionIdToGameAsync(string gameId, string guestConnectionId)
+        {
+            var currentGame = await this.db.Games.FirstOrDefaultAsync(x => x.Id == gameId);
+            currentGame.GuestConnectionId = guestConnectionId;
+            await this.db.SaveChangesAsync();
+        }
+
+        public async Task<HubGameViewModel> GetHubGameViewModelByGameIdAsync(string gameId)
+        {
+            var currentGame = await this.db.Games.FirstOrDefaultAsync(x => x.Id == gameId);
+            var hubGameViewModel = mapper.Map<HubGameViewModel>(currentGame);
+
+            return hubGameViewModel;
         }
     }
 }
