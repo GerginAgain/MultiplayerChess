@@ -2,7 +2,7 @@
 @using Chess.Web.ViewModels.ViewModels.Games
 @model PaginatedList<MyGameViewModel>
 
-<h2 class="text-center text-primary mb-3">All Active Games:</h2>
+<h2 class="text-center text-primary mb-3">My Games:</h2>
 <div class="card text-center">
     <div class="card-header">
         <div class="card-body">
@@ -44,8 +44,7 @@
                 <td>
                     <a type="button" asp-controller="Games" asp-action="Details" asp-route-id="@game.Id" class="btn btn-success">Show Chat</a>
                 </td>
-            </tr>
-                        }
+            </tr>}
                     </tbody>
                 </table>
             </div>
@@ -54,7 +53,7 @@
 </div>
 
 @{ var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-                var nextDisabled = !Model.HasNextPage ? "disabled" : ""; }
+   var nextDisabled = !Model.HasNextPage ? "disabled" : ""; }
 <div class="row mt-3">
     <nav class="col d-flex justify-content-center" aria-label="Page navigation example">
         <ul class="pagination">
@@ -81,7 +80,7 @@
 else
 {
 <li class="page-item">
-    <a class="page-link" asp-action="AllActiveGames"
+    <a class="page-link" asp-action="MyGames"
        asp-route-pageNumber="@i"
        asp-route-currentFilter="@ViewData["CurrentFilter"]">@i</a>
 </li>

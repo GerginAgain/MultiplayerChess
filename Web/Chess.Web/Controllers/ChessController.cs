@@ -58,9 +58,9 @@
             return this.View();
         }
 
-        public async Task<IActionResult> MyGames()
+        public async Task<IActionResult> MyGames(int? pageNumber)
         {
-            var myGameViewModels = await this.gamesService.GetMyGameViewModelsAsync(GlobalConstants.DefaultPageNumber, GlobalConstants.DefaultPageSize);
+            var myGameViewModels = await this.gamesService.GetMyGameViewModelsAsync(pageNumber ?? GlobalConstants.DefaultPageNumber, GlobalConstants.DefaultPageSize);
 
             return this.View(myGameViewModels);
         }
