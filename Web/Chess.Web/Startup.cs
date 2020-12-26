@@ -76,6 +76,7 @@ namespace Chess.Web
             services.AddTransient<IPicturesService, PicturesService>();
             services.AddTransient<IVideosService, VideosService>();
             services.AddTransient<IFavouritesService, FavouritesService>();
+            services.AddTransient<IMovesService, MovesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

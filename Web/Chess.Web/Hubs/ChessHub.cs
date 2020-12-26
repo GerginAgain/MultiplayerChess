@@ -10,11 +10,13 @@
     {
         private readonly ChessDbContext db;
         private readonly IGamesService gamesService;
+        private readonly IMovesService movesService;
 
-        public ChessHub(ChessDbContext db, IGamesService gamesService)
+        public ChessHub(ChessDbContext db, IGamesService gamesService, IMovesService movesService)
         {
             this.db = db;
             this.gamesService = gamesService;
+            this.movesService = movesService;
         }
 
         public async Task SendNewMessage(string message, string gameId)
@@ -54,12 +56,13 @@
             await Clients.Client(opponentUserId).SendAsync("ReceiveNewMove", startId, targetId);       
         }
 
-        public async Task SendNewMovetoDashboard(string gameId, string figureClasses, string oldAddressFigure, string newAddressFigure)
+        public async Task SendNewMoveToDashboard(string gameId, string figureClasses, string oldAddressFigure, string newAddressFigure)
         {
             var figure = figureClasses.Split("-")[2];
             var currentUserName = this.Context.User.Identity.Name;
             var currentMove = $"{currentUserName}: {figure} {oldAddressFigure} to {newAddressFigure}";
 
+            await this.movesService.AddMoveToDbAsync(currentMove, gameId);
             var currentGame = await this.gamesService.GetHubGameViewModelByGameIdAsync(gameId);
 
             if (currentUserName == currentGame.HostUsername)

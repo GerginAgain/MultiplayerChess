@@ -30,5 +30,7 @@ namespace Chess.Data.Models
         [ForeignKey("ApplicationUser")]
         public string GuestId { get; set; }
         public virtual ApplicationUser Guest { get; set; }
+
+        public virtual ICollection<Move> Moves { get; set; }
     }
 }
