@@ -209,9 +209,12 @@ namespace Chess.Services
 
         public async Task<PaginatedList<MyGameViewModel>> GetMyGameViewModelsAsync(int pageNumber, int pageSize)
         {
+            var currentUserId = this.userManager.GetUserId(this.httpContext.HttpContext.User);
+
             var allMyGames = db.Games
-               .Where(x => !x.IsActive)
-               .OrderByDescending(x => x.CreatedOn);
+                .Where(x => x.HostId == currentUserId || x.GuestId == currentUserId)
+                .Where(x => !x.IsActive)
+                .OrderByDescending(x => x.CreatedOn);
 
             var myGameViewModels = mapper.ProjectTo<MyGameViewModel>(allMyGames);
             var paginatedList = await PaginatedList<MyGameViewModel>.CreateAsync(myGameViewModels, pageNumber, pageSize);

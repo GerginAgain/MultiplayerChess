@@ -3,6 +3,7 @@ using Chess.Data.Models;
 using Chess.Web.ViewModels.ViewModels.Games;
 using Chess.Web.ViewModels.ViewModels.Users;
 using Chess.Web.ViewModels.ViewModels.Videos;
+using Chess.Web.ViewModels.ViewModels.Moves;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,8 +40,7 @@ namespace Chess.Services.Mapping
             CreateMap<Video, FavouriteVideoViewModel>();
             CreateMap<Video, ActiveVideoViewModel>();
             CreateMap<Video, DeletedVideoViewModel>();
-            //CreateMap<VideoAllViewModel, VideoAllWithFavouritesViewModel>();
-            //.ForMember(x => x.IsInFavourites, cfg => cfg.MapFrom(x => x.UserFavouriteVideos.Any(y => y.VideoId == x.Id)));
+            CreateMap<Move, MoveViewModel>();
         }       
     }
 }
