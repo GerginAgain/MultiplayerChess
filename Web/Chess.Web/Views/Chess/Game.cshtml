@@ -58,8 +58,6 @@
         $("#guestName").html(guestName);
     });
 
-    let isDragEnabled = true;
-
     connection.on("ReceiveNewMove", function (startId, targetId) {
         let figuretoMove = document.getElementById(startId);
         let targetCell = document.getElementById(targetId);
@@ -73,56 +71,67 @@
         else {
             targetCell.appendChild(figuretoMove);
         }
-
-        isDragEnabled = true;
     });
 
     let targetId = "";
     let startId = "";
 
-    let figureClasses = "";//
-    let newAddressFigure = "";//
-    let parentElementFigure = "";//
-    let oldAddressFigure = "";//
+    let figureClasses = "";
+    let newAddressFigure = "";
+    let parentElementFigure = "";
+    let oldAddressFigure = "";
 
     function allowDrop(ev) {
         ev.preventDefault();
     }
 
     function drag(ev) {
-        if (isDragEnabled) {
-            ev.dataTransfer.setData("text", ev.target.id);
-            startId = ev.target.id;
-            parentElementFigure = ev.target.parentElement; //
-            oldAddressFigure = parentElementFigure.id; //
-        }
+        ev.dataTransfer.setData("text", ev.target.id);
+        startId = ev.target.id;
+        parentElementFigure = ev.target.parentElement;
+        oldAddressFigure = parentElementFigure.id;
     }
 
     function drop(ev) {
         ev.preventDefault();
         let data = ev.dataTransfer.getData("text");
         let currentFigure = document.getElementById(data);
-        figureClasses = currentFigure.classList.item(1); //
+        figureClasses = currentFigure.classList.item(1);
         let targetElementId = ev.target.id;
 
         if (targetElementId.startsWith("i")) {
-            let targetElementParent = ev.target.parentElement;
-            let firstChildElement = targetElementParent.firstElementChild;
-            targetElementParent.removeChild(firstChildElement);
-            targetElementParent.appendChild(currentFigure);
+            let targetFigure = ev.target;
+            let targetFigureColor = targetFigure.classList.item(3);
+            let figureColor = targetFigureColor.substring(0, 5);
 
-            newAddressFigure = targetElementParent.id;//
+            if (figureColor !== "@Model.Color.ToLower()") {
+                let targetElementParent = ev.target.parentElement;
+                let firstChildElement = targetElementParent.firstElementChild;
+                targetElementParent.removeChild(firstChildElement);
+                targetElementParent.appendChild(currentFigure);
+
+                newAddressFigure = targetElementParent.id;
+            }
+
+            return;
         }
         else {
             let targetCell = ev.target;
+            if (targetCell.childElementCount > 0) {
+                let figrueChildElement = targetCell.firstElementChild;
+                let figrueChildElementColor = figrueChildElement.classList.item(3);
+                let figureColor = figrueChildElementColor.substring(0, 5);
+                if (figureColor === "@Model.Color.ToLower()") {
+                    return;
+                }
+            }
             targetCell.appendChild(currentFigure);
-            newAddressFigure = targetCell.id; //
+            newAddressFigure = targetCell.id;
         }
 
         targetId = targetElementId;
-        isDragEnabled = false;
-        connection.invoke("SendNewMoveToBoard", startId, targetId, gameId);//
-        connection.invoke("SendNewMovetoDashboard", gameId, figureClasses, oldAddressFigure, newAddressFigure);//
+        connection.invoke("SendNewMoveToBoard", startId, targetId, gameId);
+        connection.invoke("SendNewMovetoDashboard", gameId, figureClasses, oldAddressFigure, newAddressFigure);
     }
 </script>
 
