@@ -69,6 +69,10 @@
             targetElementParent.appendChild(figuretoMove);
         }
         else {
+            if (targetCell.childElementCount > 0) {
+                let childElement = targetCell.firstElementChild;
+                targetCell.removeChild(childElement);
+            }
             targetCell.appendChild(figuretoMove);
         }
     });
@@ -125,6 +129,7 @@
                 if (figureColor === "@Model.Color.ToLower()") {
                     return;
                 }
+                targetCell.removeChild(figrueChildElement);
             }
             targetCell.appendChild(currentFigure);
             newAddressFigure = targetCell.id;

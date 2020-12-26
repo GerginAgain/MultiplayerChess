@@ -61,6 +61,10 @@ else
             targetElementParent.appendChild(figuretoMove);
         }
         else {
+            if (targetCell.childElementCount > 0) {
+                let childElement = targetCell.firstElementChild;
+                targetCell.removeChild(childElement);
+            }
             targetCell.appendChild(figuretoMove);
         }
     });
@@ -104,8 +108,9 @@ else
 
                 newAddressFigure = targetElementParent.id;
             }
-
-            return;
+            else {
+                return;
+            }
         }
         else {
             let targetCell = ev.target;
@@ -116,6 +121,7 @@ else
                 if (figureColor === "@Model.Color.ToLower()") {
                     return;
                 }
+                targetCell.removeChild(figrueChildElement);
             }
             targetCell.appendChild(currentFigure);
             newAddressFigure = targetCell.id;

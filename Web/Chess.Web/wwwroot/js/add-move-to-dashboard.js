@@ -10,7 +10,7 @@
 
         var currMove = `<div class="ml-1 ${moveColor}">${currentMove}</div>`;
         $("#moveDashboard").append(currMove);
-        var moveDashboard = $("#moveDashboard");
+        var moveDashboard = document.getElementById("moveDashboard");
         moveDashboard.scrollTop = moveDashboard.scrollHeight;
     });
 });
