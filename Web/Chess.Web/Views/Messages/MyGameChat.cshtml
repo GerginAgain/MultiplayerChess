@@ -1,0 +1,21 @@
+﻿@using Chess.Web.ViewModels.ViewModels.Messages;
+@model List<MessageViewModel>
+
+<h2 class="text-center text-primary mb-3">Game chat:</h2>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <hr class="hr-chess" />
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <ul class="list-group">
+            @foreach (var message in Model)
+            {
+                <li class="list-group-item m-1 p-1 border border-warning">
+                    <i class="fas fa-clock"></i> <span>@message.CreatedOn.ToString("HH:mm:ss")</span>  <i class="fas fa-user text-primary"></i> <strong class="text-primary">@message.UserName:</strong> @message.Content
+                </li>
+            }
+        </ul>
+    </div>
+</div>

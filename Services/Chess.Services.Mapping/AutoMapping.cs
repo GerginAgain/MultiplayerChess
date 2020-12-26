@@ -4,6 +4,7 @@ using Chess.Web.ViewModels.ViewModels.Games;
 using Chess.Web.ViewModels.ViewModels.Users;
 using Chess.Web.ViewModels.ViewModels.Videos;
 using Chess.Web.ViewModels.ViewModels.Moves;
+using Chess.Web.ViewModels.ViewModels.Messages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,6 +42,8 @@ namespace Chess.Services.Mapping
             CreateMap<Video, ActiveVideoViewModel>();
             CreateMap<Video, DeletedVideoViewModel>();
             CreateMap<Move, MoveViewModel>();
+            CreateMap<Message, MessageViewModel>()
+                .ForMember(x => x.UserName, cfg => cfg.MapFrom(x => x.Player.UserName));
         }       
     }
 }
