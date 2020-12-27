@@ -118,6 +118,7 @@
                 }
 
                 await this.Clients.Client(opponentConnectionId).SendAsync("ActivateGameEndModal");
+                await this.Clients.Client(opponentConnectionId).SendAsync("MakeChessboardInactive");
             }
         }
     }

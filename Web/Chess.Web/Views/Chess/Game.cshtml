@@ -19,8 +19,8 @@
         @if (Model.Color == "White")
         {
 <partial name="_WhitePlayerChessBoardPartial" /> }
-            else
-            {
+else
+{
 <partial name="_BlackPlayerChessBoardPartial" />}
     </div>
     <div class="col-md-3 ml-5 blueborder">
@@ -41,7 +41,7 @@
         </div>
     </div>
 </div>
-<partial name="_ModalPartial"/>
+<partial name="_ModalPartial" />
 
 <script type="text/javascript">
     let gameId = "@Model.Id";
@@ -149,6 +149,7 @@
 
 @section Scripts
 {
+    <script src="~/js/make-board-inactive.js" asp-append-version="true"></script>
     <script src="~/js/add-move-to-dashboard.js" asp-append-version="true"></script>
     <script src="~/js/chat.js" asp-append-version="true"></script>
 }
