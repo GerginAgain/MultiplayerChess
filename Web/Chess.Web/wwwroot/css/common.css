@@ -1,7 +1,8 @@
 ﻿@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400');
 
 * {
-    font-family: Open Sans, sans-serif;
+    /*font-family: Open Sans, sans-serif;*/
+    font-family: "montserrat",sans-serif;
 }
 
 .hr-chess {

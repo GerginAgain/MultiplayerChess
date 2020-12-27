@@ -12,9 +12,10 @@
     <div id="Games" class="col-md-6">
         @foreach (var game in Model.Games)
         {
-<div id="@game.Id" class="getHover container blueborder m-3 p-2 rounded-lg">
-    Game name: @game.Name Figure color: @game.Color
-</div>}
+        <div id="@game.Id" class="getHover container blueborder m-3 p-2 rounded-lg">
+            Game name: @game.Name Figure color: @game.Color
+        </div>
+        }
     </div>
 </div>
 
