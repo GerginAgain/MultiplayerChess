@@ -2,29 +2,21 @@
 {
     using Microsoft.AspNetCore.SignalR;
     using System.Threading.Tasks;
-    using Chess.Common;
-    using Chess.Data;
-    using Chess.Services.Interfaces;
     using System;
-    using Chess.Data.Models;
-    using Microsoft.AspNetCore.Identity;
-    using System.Linq;
+    using Chess.Common;
+    using Chess.Services.Interfaces;
 
     public class ChessHub : Hub
     {
-        private readonly ChessDbContext db;
         private readonly IGamesService gamesService;
         private readonly IMovesService movesService;
         private readonly IMessagesService messagesService;
-        private readonly UserManager<ApplicationUser> userManager;
 
-        public ChessHub(ChessDbContext db, IGamesService gamesService, IMovesService movesService, IMessagesService messagesService, UserManager<ApplicationUser> userManager)
+        public ChessHub(IGamesService gamesService, IMovesService movesService, IMessagesService messagesService)
         {
-            this.db = db;
             this.gamesService = gamesService;
             this.movesService = movesService;
             this.messagesService = messagesService;
-            this.userManager = userManager;
         }
 
         public async Task SendNewMessage(string message, string gameId)
@@ -101,7 +93,6 @@
 
         public async override Task OnDisconnectedAsync(Exception exception)
         {
-            //var userId = this.userManager.GetUserId(this.Context.User);
             var connectionId = this.Context.ConnectionId;
             var abandonedGame = await this.gamesService.GetGameByConnectionIdAndIsActiveStatusAsync(connectionId);
 
@@ -112,26 +103,22 @@
                 await this.gamesService.MakeGameInActiveAsync(abandonedGameId);
             }
 
-            //var finishedGame = this.db.Games
-            //    .FirstOrDefault(x => (x.HostConnectionId == connectionId || x.GuestConnectionId == connectionId) && x.IsActive == false);
+            var finishedGame = await this.gamesService.GetFinishedGameByConnectionIdAsync(connectionId);
 
-            //if (finishedGame != null)
-            //{
-            //    var opponentConnectionId = string.Empty;
-            //    if (connectionId == finishedGame.HostConnectionId)
-            //    {
-            //        opponentConnectionId = finishedGame.GuestConnectionId;
-            //    }
-            //    else if (connectionId == finishedGame.GuestConnectionId)
-            //    {
-            //        opponentConnectionId = finishedGame.HostConnectionId;
-            //    }
+            if (finishedGame != null)
+            {
+                var opponentConnectionId = string.Empty;
+                if (connectionId == finishedGame.HostConnectionId)
+                {
+                    opponentConnectionId = finishedGame.GuestConnectionId;
+                }
+                else if (connectionId == finishedGame.GuestConnectionId)
+                {
+                    opponentConnectionId = finishedGame.HostConnectionId;
+                }
 
-            //    await this.Clients.Client(opponentConnectionId).SendAsync("ActivategameEndModal");
-            //}
-            ////da sloja igrata inactive
-            //Console.WriteLine($"{this.Context.ConnectionId}");
-            //Console.WriteLine("here");           
+                await this.Clients.Client(opponentConnectionId).SendAsync("ActivateGameEndModal");
+            }
         }
     }
 }

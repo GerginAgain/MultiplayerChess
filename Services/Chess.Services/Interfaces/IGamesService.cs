@@ -1,14 +1,12 @@
-﻿using Chess.Data.Models;
-using Chess.Services.Paging;
-using Chess.Web.ViewModels.InputModels.Games;
-using Chess.Web.ViewModels.ViewModels.Games;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Chess.Services.Interfaces
+﻿namespace Chess.Services.Interfaces
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using Chess.Data.Models;
+    using Chess.Services.Paging;
+    using Chess.Web.ViewModels.InputModels.Games;
+    using Chess.Web.ViewModels.ViewModels.Games;
+
     public interface IGamesService
     {
         Task<int> GetCountOfAllGamesAsync();
@@ -24,8 +22,6 @@ namespace Chess.Services.Interfaces
         Task<string> GetActiveGameIdByUserIdAsync(string userId);
 
         Task<List<int>> GetTheCountForTheCreatedGamesForTheLastTenDaysAsync();
-
-        Task<string> GetOpponentUserConnectionIdAsync(string currentUserConnectionId, string gameId);
 
         Task<List<GameAllViewModel>> GetGameAllViewModelsAsync();
 
@@ -46,5 +42,8 @@ namespace Chess.Services.Interfaces
         Task<Game> GetGameByConnectionIdAndIsActiveStatusAsync(string connectionId);
 
         Task MakeGameInActiveAsync(string gameId);
-    } 
+
+        Task<Game> GetFinishedGameByConnectionIdAsync(string connectionId);
+    }
 }
+

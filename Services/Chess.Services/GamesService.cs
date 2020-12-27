@@ -1,21 +1,21 @@
-﻿using Chess.Data;
-using Chess.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Chess.Services.Paging;
-using Chess.Web.ViewModels.ViewModels.Games;
-using AutoMapper;
-using System.Linq;
-using Chess.Common;
-using Chess.Data.Models;
-using Chess.Web.ViewModels.InputModels.Games;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
+﻿namespace Chess.Services
+{      
+    using System;
+    using System.Linq;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using AutoMapper;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.EntityFrameworkCore;
+    using Chess.Data;
+    using Chess.Data.Models;
+    using Chess.Common;
+    using Chess.Services.Paging;
+    using Chess.Services.Interfaces;
+    using Chess.Web.ViewModels.InputModels.Games;
+    using Chess.Web.ViewModels.ViewModels.Games;
 
-namespace Chess.Services
-{
     public class GamesService : IGamesService
     {
         private readonly ChessDbContext db;
@@ -108,11 +108,6 @@ namespace Chess.Services
             }
 
             return gamesCount;
-        }
-
-        public Task<string> GetOpponentUserConnectionIdAsync(string currentUserConnectionId, string gameId)
-        {
-            throw new NotImplementedException();
         }
 
         public async Task<List<GameAllViewModel>> GetGameAllViewModelsAsync()
@@ -234,6 +229,15 @@ namespace Chess.Services
             var game = await this.GetGameByIdAsync(gameId);
             game.IsActive = false;
             await this.db.SaveChangesAsync();
+        }
+
+        public async Task<Game> GetFinishedGameByConnectionIdAsync(string connectionId)
+        {
+            var finishedGame = await this.db.Games
+                .FirstOrDefaultAsync(x => (x.HostConnectionId == connectionId || x.GuestConnectionId == connectionId)
+                                            && x.IsActive == false);
+
+            return finishedGame;
         }
     }
 }

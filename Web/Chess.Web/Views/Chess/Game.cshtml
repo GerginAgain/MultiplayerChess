@@ -41,7 +41,6 @@
         </div>
     </div>
 </div>
-
 <partial name="_ModalPartial"/>
 
 <script type="text/javascript">
@@ -60,7 +59,7 @@
         $("#guestName").html(guestName);
     });
 
-    connection.on("ActivategameEndModal", function () {
+    connection.on("ActivateGameEndModal", function () {
         $('#modal').modal('show');
         $('.modal-message').html('Your opponent left the game!');
     });

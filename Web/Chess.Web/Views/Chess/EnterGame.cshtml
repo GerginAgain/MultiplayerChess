@@ -41,7 +41,6 @@ else
         </div>
     </div>
 </div>
-
 <partial name="_ModalPartial" />
 
 <script type="text/javascript">
@@ -52,7 +51,7 @@ else
         connection.invoke("AddGuestConnectionIdToGame", gameId);
     });
 
-    connection.on("ActivategameEndModal", function () {
+    connection.on("ActivateGameEndModal", function () {
         $('#modal').modal('show');
         $('.modal-message').html('Your opponent left the game!');
     });
