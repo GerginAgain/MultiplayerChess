@@ -10,9 +10,9 @@ namespace Chess.Common
         public const string InvalidGameIdErrorMessage = "Game with the given id doesn't exist!";
 
         public const string CurrentUserIsNullErrorMessage = "Current user can't be null";
-        public const string InvalidVideoIdErrorMessage = "Ad with the given id doesn't exist!";
-        public const string VideoIsAlreadyInFavoritesErrorMessage = "The given ad is already added to favorites!";
-        public const string VideoIsNotInFavoritesListErrorMessage = "The given ad isn't in the favorites list!";
+        public const string InvalidVideoIdErrorMessage = "Video with the given id doesn't exist!";
+        public const string VideoIsAlreadyInFavoritesErrorMessage = "The given video is already added to favorites!";
+        public const string VideoIsNotInFavoritesListErrorMessage = "The given video isn't in the favorites list!";
 
         public const string AdministratorRoleName = "Administrator";
 
