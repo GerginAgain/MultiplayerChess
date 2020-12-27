@@ -42,12 +42,19 @@ else
     </div>
 </div>
 
+<partial name="_ModalPartial" />
+
 <script type="text/javascript">
     let gameId = "@Model.Id";
 
     var connection = new signalR.HubConnectionBuilder().withUrl("/chessHub").build();
     connection.start().then(() => {
         connection.invoke("AddGuestConnectionIdToGame", gameId);
+    });
+
+    connection.on("ActivategameEndModal", function () {
+        $('#modal').modal('show');
+        $('.modal-message').html('Your opponent left the game!');
     });
 
     connection.on("ReceiveNewMove", function (startId, targetId) {

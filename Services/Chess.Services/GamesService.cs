@@ -220,5 +220,20 @@ namespace Chess.Services
             var paginatedList = await PaginatedList<MyGameViewModel>.CreateAsync(myGameViewModels, pageNumber, pageSize);
             return paginatedList;
         }
+
+        public async Task<Game> GetGameByConnectionIdAndIsActiveStatusAsync(string connectionId)
+        {
+            var abandonedGame = await this.db.Games
+                .FirstOrDefaultAsync(x => x.HostConnectionId == connectionId && x.IsActive == true);
+
+            return abandonedGame;
+        }
+
+        public async Task MakeGameInActiveAsync(string gameId)
+        {
+            var game = await this.GetGameByIdAsync(gameId);
+            game.IsActive = false;
+            await this.db.SaveChangesAsync();
+        }
     }
 }

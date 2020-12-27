@@ -42,5 +42,9 @@ namespace Chess.Services.Interfaces
         Task<HubGameViewModel> GetHubGameViewModelByGameIdAsync(string gameId);
 
         Task<PaginatedList<MyGameViewModel>> GetMyGameViewModelsAsync(int pageNumber, int pageSize);
+
+        Task<Game> GetGameByConnectionIdAndIsActiveStatusAsync(string connectionId);
+
+        Task MakeGameInActiveAsync(string gameId);
     } 
 }
