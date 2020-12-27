@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Chess.Web.ViewModels.ViewModels.Videos
+﻿namespace Chess.Web.ViewModels.ViewModels.Videos
 {
+    using System.Collections.Generic;
+
     public class LatestThreeAddedVideosViewModel
     {
         public IList<VideoViewModel> Videos { get; set; } = new List<VideoViewModel>();

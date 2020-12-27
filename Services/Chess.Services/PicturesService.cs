@@ -1,15 +1,11 @@
-﻿using Chess.Data;
-using Chess.Data.Models;
-using Chess.Services.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Chess.Services
+﻿namespace Chess.Services
 {
+    using Microsoft.EntityFrameworkCore;
+    using System.Threading.Tasks;
+    using Chess.Data;
+    using Chess.Data.Models;
+    using Chess.Services.Interfaces;
+
     public class PicturesService : IPicturesService
     {
         private readonly ChessDbContext db;

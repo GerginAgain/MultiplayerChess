@@ -1,16 +1,14 @@
-﻿using Chess.Common;
-using Chess.Data;
-using Chess.Data.Models;
-using Chess.Services.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Chess.Services
+﻿namespace Chess.Services
 {
+    using Chess.Common;
+    using Chess.Data;
+    using Chess.Data.Models;
+    using Chess.Services.Interfaces;
+    using Microsoft.EntityFrameworkCore;
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+
     public class FavouritesService : IFavouritesService
     {
         private readonly ChessDbContext db;

@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
-using Chess.Common;
-using Chess.Services.Interfaces;
-using Microsoft.AspNetCore.SignalR;
-using Chess.Web.Hubs;
-
-namespace Chess.Web.Areas.Administration.Controllers
+﻿namespace Chess.Web.Areas.Administration.Controllers
 {
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.SignalR;
+    using Chess.Web.Hubs;
+    using Chess.Common;
+    using Chess.Services.Interfaces;
+
     [Area("Administration")]
     [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
     public class UsersController : Controller

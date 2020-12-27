@@ -1,31 +1,27 @@
-﻿using Chess.Services.Interfaces;
-using Chess.Web.ViewModels.ViewModels.Statistics;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using Chess.Data;
-using Chess.Web.Infrastructure.CanvasJSModels;
-using Chess.Common;
-
-namespace Chess.Services
+﻿namespace Chess.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using Chess.Web.Infrastructure.CanvasJSModels;
+    using Chess.Services.Interfaces;
+    using Chess.Web.ViewModels.ViewModels.Statistics;
+    using Chess.Common;
+
     public class StatisticsService : IStatisticsService
     {
-        private readonly ChessDbContext context;
         private readonly IUsersService usersService;
         private readonly IGamesService gamesService;
         private readonly IVideosService videosService;
 
-        public StatisticsService(ChessDbContext context, IUsersService usersService, IGamesService gamesService, IVideosService videosService)
+        public StatisticsService(IUsersService usersService, IGamesService gamesService, IVideosService videosService)
         {
-            this.context = context;
             this.usersService = usersService;
             this.gamesService = gamesService;
             this.videosService = videosService;
         }
 
-        public async Task<AdministrationIndexStatisticViewModel> GetAdministrationIndexStatisticViewModel()
+        public async Task<AdministrationIndexStatisticViewModel> GetAdministrationIndexStatisticViewModelAsync()
         {
             var allUsersCount = await usersService.GetCountOfAllUsersAsync();
             var allGamesCount = await gamesService.GetCountOfAllGamesAsync();

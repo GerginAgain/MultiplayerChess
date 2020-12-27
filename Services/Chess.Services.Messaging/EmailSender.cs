@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using SendGrid;
-using SendGrid.Helpers.Mail;
-using Microsoft.Extensions.Options;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity.UI.Services;
-
-namespace Chess.Services.Messaging
+﻿namespace Chess.Services.Messaging
 {
+    using SendGrid;
+    using SendGrid.Helpers.Mail;
+    using Microsoft.Extensions.Options;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Identity.UI.Services;
+
     public class EmailSender : IEmailSender
     {
         public EmailSender(IOptions<AuthMessageSenderOptions> optionsAccessor)

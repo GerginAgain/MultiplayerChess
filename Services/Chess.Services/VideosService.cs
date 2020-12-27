@@ -1,21 +1,17 @@
-﻿using AutoMapper;
-using Chess.Data;
-using Chess.Data.Models;
-using Chess.Services.Interfaces;
-using Chess.Web.ViewModels.InputModels.Videos;
-using Chess.Web.ViewModels.ViewModels.Videos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Http;
-using Chess.Services.Paging;
-using AutoMapper.QueryableExtensions;
-
-namespace Chess.Services
+﻿namespace Chess.Services
 {
+    using AutoMapper;
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Microsoft.EntityFrameworkCore;
+    using Chess.Services.Paging;
+    using Chess.Data;
+    using Chess.Data.Models;
+    using Chess.Services.Interfaces;
+    using Chess.Web.ViewModels.InputModels.Videos;
+    using Chess.Web.ViewModels.ViewModels.Videos;
+
     public class VideosService : IVideosService
     {
         private readonly ChessDbContext db;

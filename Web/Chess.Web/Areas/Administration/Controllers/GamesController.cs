@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Chess.Common;
-using Chess.Services;
-using Chess.Services.Interfaces;
-using Chess.Web.Hubs;
-using Chess.Web.ViewModels.InputModels.Games;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
-
-namespace Chess.Web.Areas.Administration.Controllers
+﻿namespace Chess.Web.Areas.Administration.Controllers
 {
+    using System.Threading.Tasks;   
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.SignalR;
+    using Chess.Common;
+    using Chess.Services.Interfaces;
+    using Chess.Web.Hubs;
+    using Chess.Web.ViewModels.InputModels.Games;
+
     [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
     [Area("Administration")]
     public class GamesController : Controller
@@ -49,6 +45,7 @@ namespace Chess.Web.Areas.Administration.Controllers
             await this.hubContext.Clients.All.SendAsync("DeleteGame", gameId);
             var hostConnectionId = await this.usersService.GetUserHostConnectionIdByGameIdAsync(gameId);
             await this.hubContext.Clients.Client(hostConnectionId).SendAsync("RedirectToDeletedGame");
+
             return Json(true);
         }
     }

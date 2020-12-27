@@ -1,8 +1,8 @@
 ﻿namespace Chess.Services.Interfaces
 {
-    using Chess.Web.ViewModels.ViewModels.Messages;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using Chess.Web.ViewModels.ViewModels.Messages;
 
     public interface IMessagesService
     {

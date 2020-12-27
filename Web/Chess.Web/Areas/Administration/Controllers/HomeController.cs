@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Chess.Common;
-using Chess.Services.Interfaces;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-
-namespace Chess.Web.Areas.Administration.Controllers
+﻿namespace Chess.Web.Areas.Administration.Controllers
 {
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using Newtonsoft.Json;
+    using Chess.Common;
+    using Chess.Services.Interfaces;
+
     [Area("Administration")]
     [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
     public class HomeController : Controller
@@ -26,13 +23,10 @@ namespace Chess.Web.Areas.Administration.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var administrationIndexStatisticViewModel = await statisticsService.GetAdministrationIndexStatisticViewModel();
-
+            var administrationIndexStatisticViewModel = await statisticsService.GetAdministrationIndexStatisticViewModelAsync();
             var gamesByDaysStatisticPoints = await this.statisticsService.GetDataPointsForCreatedGamesAsync();
-            //var promotionsByDaysStatisticPoints = await this.statisticsService.GetPointsForPromotionsAsync();
 
             ViewBag.DataPointsGames = JsonConvert.SerializeObject(gamesByDaysStatisticPoints, jsonSetting);
-            //ViewBag.DataPointsPromotions = JsonConvert.SerializeObject(promotionsByDaysStatisticPoints, jsonSetting);
 
             return View(administrationIndexStatisticViewModel);
         }

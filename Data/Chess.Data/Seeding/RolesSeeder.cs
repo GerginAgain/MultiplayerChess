@@ -3,13 +3,12 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
-    using Chess.Common;
-    using Chess.Data;
-    using Chess.Data.Models;
-    using Chess.Data.Seeding;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;
+    using Chess.Common;
+    using Chess.Data;
+    using Chess.Data.Models;
 
     public class RolesSeeder : ISeeder
     {

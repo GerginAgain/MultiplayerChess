@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Chess.Web.ViewModels.ViewModels.Statistics
+﻿namespace Chess.Web.ViewModels.ViewModels.Statistics
 {
     public class AdministrationIndexStatisticViewModel
     {

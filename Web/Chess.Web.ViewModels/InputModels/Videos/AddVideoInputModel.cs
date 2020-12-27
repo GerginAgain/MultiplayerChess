@@ -1,15 +1,11 @@
-﻿using Chess.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-
-namespace Chess.Web.ViewModels.InputModels.Videos
+﻿namespace Chess.Web.ViewModels.InputModels.Videos
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class AddVideoInputModel
     {
         [Required]
-        [MinLength(6)]
+        [MinLength(5, ErrorMessage = "Video name must be more than 5 letters")]
         [MaxLength(20)]
         [Display(Name = "Video Title")]
         public string VideoTitle { get; set; }
@@ -19,7 +15,7 @@ namespace Chess.Web.ViewModels.InputModels.Videos
         public string VideoLink { get; set; }
 
         [Required]
-        [MinLength(6)]
+        [MinLength(5, ErrorMessage = "Picture name must be more than 5 letters")]
         [MaxLength(20)]
         [Display(Name = "Picture Name")]
         public string PictureName { get; set; }

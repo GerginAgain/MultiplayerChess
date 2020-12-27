@@ -1,13 +1,8 @@
 ﻿namespace Chess.Services.Interfaces
-{
-    using System;
-    using Chess.Data.Models;
-    using Chess.Services.Paging;
-    using Chess.Web.ViewModels.InputModels.Games;
-    using Chess.Web.ViewModels.ViewModels.Moves;
+{   
     using System.Collections.Generic;
-    using System.Text;
     using System.Threading.Tasks;
+    using Chess.Web.ViewModels.ViewModels.Moves;
 
     public interface IMovesService
     {

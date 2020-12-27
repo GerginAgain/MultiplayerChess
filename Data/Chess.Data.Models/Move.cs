@@ -1,7 +1,7 @@
 ﻿namespace Chess.Data.Models
 {
-    using Chess.Data.Common;
     using System.ComponentModel.DataAnnotations.Schema;
+    using Chess.Data.Common;
 
     public class Move : BaseModel<string>
     {

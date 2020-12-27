@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Chess.Data.Common
+﻿namespace Chess.Data.Common
 {
+    using System;
     public interface IDeletableEntity
     {
         bool IsDeleted { get; set; }

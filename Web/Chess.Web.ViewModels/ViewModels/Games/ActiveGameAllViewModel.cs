@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Chess.Web.ViewModels.ViewModels.Games
+﻿namespace Chess.Web.ViewModels.ViewModels.Games
 {
+    using System;
+
     public class ActiveGameAllViewModel
     {
         public string Id { get; set; }

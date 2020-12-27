@@ -1,11 +1,8 @@
-﻿using Chess.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Chess.Services.Interfaces
+﻿namespace Chess.Services.Interfaces
 {
+    using System.Threading.Tasks;
+    using Chess.Data.Models;
+
     public interface IPicturesService
     {
         Task CreatePictureAsync(string name, string link);

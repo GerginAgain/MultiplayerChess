@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Chess.Web.ViewModels.ViewModels.Videos
+﻿namespace Chess.Web.ViewModels.ViewModels.Videos
 {
+    using System;
+
     public class DeletedVideoViewModel
     {
         public int Id { get; set; }

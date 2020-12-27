@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Chess.Web.ViewModels.ViewModels.Users
+﻿namespace Chess.Web.ViewModels.ViewModels.Users
 {
+    using System;
+
     public class BlockedUserAllViewModel
     {
         public string Id { get; set; }

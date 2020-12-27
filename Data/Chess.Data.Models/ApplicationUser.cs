@@ -1,12 +1,10 @@
-﻿using Chess.Data.Common;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Chess.Data.Models
+﻿namespace Chess.Data.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using Microsoft.AspNetCore.Identity;
+    using Chess.Data.Common;
+
     public class ApplicationUser : IdentityUser, IDeletableEntity
     {
         public ApplicationUser()

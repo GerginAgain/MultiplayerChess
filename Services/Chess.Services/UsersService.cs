@@ -1,22 +1,19 @@
-﻿using Chess.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Chess.Data.Models;
-using Chess.Data;
-using Chess.Web.ViewModels.ViewModels.Users;
-using Chess.Services.Paging;
-using System.Linq;
-using AutoMapper;
-using Chess.Services.Mapping;
-using Chess.Common;
-
-namespace Chess.Services
+﻿namespace Chess.Services
 {
+    using System;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.EntityFrameworkCore;
+    using Chess.Services.Paging;
+    using System.Linq;
+    using AutoMapper;
+    using Chess.Common;
+    using Chess.Data.Models;
+    using Chess.Data;
+    using Chess.Services.Interfaces;
+    using Chess.Web.ViewModels.ViewModels.Users;
+
     public class UsersService : IUsersService
     {
         private readonly IHttpContextAccessor contextAccessor;
@@ -46,13 +43,8 @@ namespace Chess.Services
             var allUsers = context.ApplicationUsers
                 .Where(x => !x.IsDeleted && x.UserName != "admin")
                 .OrderByDescending(x => x.CreatedOn);
-            //.ToArray();
-            //.To<UserAllViewModel>();
 
-            //var ienumerableDest = mapper.Map<ApplicationUser[], IEnumerable<UserAllViewModel>>(userAllViewModels).AsQueryable();
             var UserAllViewModels = mapper.ProjectTo<UserAllViewModel>(allUsers);
-            //return await _mapper.ProjectTo<SomeViewModel>(dbContext.SomeEntity).ToListAsync();
-
             var paginatedList = await PaginatedList<UserAllViewModel>.CreateAsync(UserAllViewModels, pageNumber, pageSize);
 
             return paginatedList;
@@ -87,7 +79,6 @@ namespace Chess.Services
                 .OrderByDescending(x => x.CreatedOn);
 
             var BlockedUserAllViewModels = mapper.ProjectTo<BlockedUserAllViewModel>(blockedUsers);
-
             var paginatedList = await PaginatedList<BlockedUserAllViewModel>.CreateAsync(BlockedUserAllViewModels, pageNumber, pageSize);
 
             return paginatedList;

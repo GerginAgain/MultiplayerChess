@@ -1,8 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Chess.Web.ViewModels.InputModels.Enums;
-
-namespace Chess.Web.ViewModels.InputModels.Games
+﻿namespace Chess.Web.ViewModels.InputModels.Games
 {
+    using System.ComponentModel.DataAnnotations;
+    using Chess.Web.ViewModels.InputModels.Enums;
+
     public class GameInputViewModel
     {
         [Required]     

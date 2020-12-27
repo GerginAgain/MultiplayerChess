@@ -5,14 +5,14 @@
     @for (int row = 8; row > 0; row--)
     {
         <tr>
-            @for (int col = 'a'; col <= 'h'; col++) //
+            @for (int col = 'a'; col <= 'h'; col++) 
             {
-                var boardCellColor = ((row + col) % 2 != 0) ? "white" : "black";//
+                var boardCellColor = ((row + col) % 2 != 0) ? "white" : "black";
                 var figure = string.Empty;
                 var figureSize = "fa-3x";
                 var figureColor = string.Empty;
                 var whiteFigureBorder = string.Empty;
-                var cellId = (char)col + "" + row; //
+                var cellId = (char)col + "" + row; 
                 var figureId = "i" + row + col;
 
                 if (row == 1 || row == 2)
@@ -62,15 +62,11 @@
                 <td id="@cellId" style="text-align: center;" class="@boardCellColor" ondrop="drop(event)" ondragover="allowDrop(event)">
                     @if (row == 1 || row == 2)
                     {
-                    @*<div style="text-align: center;">*@
                         <i id="@figureId" class="@figure @figureSize @figureColor @whiteFigureBorder" draggable="true" ondragstart="drag(event)"></i>
-                    @*</div>*@
                     }
                     else if (row == 7 || row == 8)
                     {
-                        @*<div style="text-align: center;">*@
                         <i id="@figureId" class="@figure @figureSize @figureColor @whiteFigureBorder"></i>
-                        @*</div>*@
                     }
                 </td>
             }
@@ -78,14 +74,3 @@
     }
 </table>
 
-<script type="text/javascript">
-    //let whiteFigures = document.getElementsByClassName('whiteFigure');
-    //for (var i = 0; i < whiteFigures.length; i++) {
-    //    whiteFigures[i].setAttribute('draggable', true);
-    //}
-
-    //let blackFigures = document.getElementsByClassName('blackFigure');
-    //for (var i = 0; i < blackFigures.length; i++) {
-    //    blackFigures[i].setAttribute('draggable', false);
-    //}
-</script>

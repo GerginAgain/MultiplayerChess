@@ -1,10 +1,7 @@
-﻿using Chess.Data.Common;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Chess.Data.Models
+﻿namespace Chess.Data.Models
 {
+    using Chess.Data.Common;
+
     public class UserFavouriteVideo : BaseModel<int>
     {
         public int VideoId { get; set; }

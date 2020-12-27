@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Chess.Data.Models;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-
-namespace Chess.Data
+﻿namespace Chess.Data
 {
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore;
+    using Chess.Data.Models;
+
     public class ChessDbContext : IdentityDbContext<ApplicationUser>
     {
         public ChessDbContext(DbContextOptions<ChessDbContext> options)

@@ -1,14 +1,10 @@
-﻿using Chess.Data.Models;
-using Chess.Services.Paging;
-using Chess.Web.ViewModels.ViewModels.Users;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-
-
-namespace Chess.Services.Interfaces
+﻿namespace Chess.Services.Interfaces
 {
+    using System.Threading.Tasks;
+    using Chess.Services.Paging;
+    using Chess.Web.ViewModels.ViewModels.Users;
+    using Chess.Data.Models;
+
     public interface IUsersService
     {
         Task<int> GetCountOfAllUsersAsync();

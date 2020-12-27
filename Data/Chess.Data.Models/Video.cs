@@ -1,12 +1,11 @@
-﻿using Chess.Data.Common;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
-
-namespace Chess.Data.Models
+﻿namespace Chess.Data.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using Chess.Data.Common;
+
     public class Video : BaseModel<int>, IDeletableEntity
     {
         public Video()
@@ -15,6 +14,7 @@ namespace Chess.Data.Models
         }
 
         [Required]
+        [MinLength(5, ErrorMessage = "Video name must be more than 5 letters")]
         [MaxLength(20)]
         public string Title { get; set; }
 

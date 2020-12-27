@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Chess.Common
+﻿namespace Chess.Common
 {
     public static class GlobalConstants
     {

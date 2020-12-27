@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Chess.Common;
-using Chess.Services.Interfaces;
-
-namespace Chess.Web.Controllers
+﻿namespace Chess.Web.Controllers
 {
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Mvc;
+    using Chess.Common;
+    using Chess.Services.Interfaces;
+
     public class VideosController : Controller
     {
         private readonly IVideosService videosService;

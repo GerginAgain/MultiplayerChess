@@ -1,8 +1,8 @@
 ﻿namespace Chess.Web.Controllers
 {
-    using Chess.Services.Interfaces;
     using Microsoft.AspNetCore.Mvc;
     using System.Threading.Tasks;
+    using Chess.Services.Interfaces;
 
     public class MessagesController : Controller
     {

@@ -1,15 +1,13 @@
-﻿using Chess.Web.Infrastructure.CanvasJSModels;
-using Chess.Web.ViewModels.ViewModels.Statistics;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Chess.Services.Interfaces
+﻿namespace Chess.Services.Interfaces
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using Chess.Web.Infrastructure.CanvasJSModels;
+    using Chess.Web.ViewModels.ViewModels.Statistics;
+
     public interface IStatisticsService
     {
-        Task<AdministrationIndexStatisticViewModel> GetAdministrationIndexStatisticViewModel();
+        Task<AdministrationIndexStatisticViewModel> GetAdministrationIndexStatisticViewModelAsync();
 
         Task<IEnumerable<DataPoint>> GetDataPointsForCreatedGamesAsync();
     }

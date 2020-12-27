@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Chess.Web.ViewModels;
-using Chess.Data;
-using Chess.Services.Interfaces;
-
-namespace Chess.Web.Controllers
+﻿namespace Chess.Web.Controllers
 {
+    using System.Diagnostics;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Logging;
+    using Chess.Web.ViewModels;
+    using Chess.Data;
+    using Chess.Services.Interfaces;
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
