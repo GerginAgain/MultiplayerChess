@@ -7,7 +7,9 @@
     using Chess.Services.Interfaces;
     using Chess.Web.ViewModels.InputModels.Games;
     using Chess.Common;
+    using Microsoft.AspNetCore.Authorization;
 
+    [Authorize]
     public class ChessController : Controller
     {
         private readonly IHubContext<ChessHub> hubContext;

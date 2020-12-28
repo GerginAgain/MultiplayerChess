@@ -3,7 +3,9 @@
     using Microsoft.AspNetCore.Mvc;
     using System.Threading.Tasks;
     using Chess.Services.Interfaces;
+    using Microsoft.AspNetCore.Authorization;
 
+    [Authorize]
     public class MovesController : Controller
     {
         private readonly IMovesService movesService;
