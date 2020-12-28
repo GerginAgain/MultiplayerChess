@@ -597,3 +597,5 @@ C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\obj\Debug\netcoreapp
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\obj\Debug\netcoreapp3.1\Razor\Views\Chess\MyGames.cshtml.g.cs
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\obj\Debug\netcoreapp3.1\Razor\Views\Moves\MyGameAllMoves.cshtml.g.cs
 C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\obj\Debug\netcoreapp3.1\Razor\Views\Messages\MyGameChat.cshtml.g.cs
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\bin\Debug\netcoreapp3.1\Properties\ServiceDependencies\MultiplayerChess - Web Deploy\profile.arm.json
+C:\Users\Again\Desktop\Chess\MultiplayerChess\Web\Chess.Web\obj\Debug\netcoreapp3.1\Razor\Views\Home\Error.cshtml.g.cs

@@ -7,6 +7,7 @@
     using Chess.Web.ViewModels;
     using Chess.Data;
     using Chess.Services.Interfaces;
+    using Microsoft.AspNetCore.Diagnostics;
 
     public class HomeController : Controller
     {

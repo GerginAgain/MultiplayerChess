@@ -66,8 +66,6 @@
 
             await this.userManager.UpdateSecurityStampAsync(userFromDb);
 
-            //await DeleteAdsByUserId(userId); trqbwa da iztriq syzdadenite igri ot user-a
-
             return true;
         }
 
