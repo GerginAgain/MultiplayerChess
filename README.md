@@ -20,8 +20,10 @@ Tha app is built with:
 + SignalR
 + AutoMapper
 + SendGrid
++ Ajax
 + jQuery
 + Bootstrap
++ Font Awesome
 + CanvasJS
 + Moq
 + xUnit
