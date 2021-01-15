@@ -25,7 +25,7 @@
         {
             var allUsersCount = await usersService.GetCountOfAllUsersAsync();
             var allGamesCount = await gamesService.GetCountOfAllGamesAsync();
-            var allVideosCount = await videosService.GetCountOfAllGamesAsync();
+            var allVideosCount = await videosService.GetCountOfAllVideosAsync();
 
             var administrationIndexStatisticViewModel = new AdministrationIndexStatisticViewModel
             {

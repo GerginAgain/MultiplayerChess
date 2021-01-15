@@ -17,7 +17,7 @@
 
         Task<PaginatedList<FavouriteVideoViewModel>> GetFavouriteVideoViewModelsAsync(int pageNumber, int pageSize);
 
-        Task<int> GetCountOfAllGamesAsync();
+        Task<int> GetCountOfAllVideosAsync();
 
         Task<bool> DeleteVideoByIdAsync(int videoId);
 

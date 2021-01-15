@@ -131,7 +131,7 @@
             return paginatedFavoriteVideos;
         }
 
-        public async Task<int> GetCountOfAllGamesAsync()
+        public async Task<int> GetCountOfAllVideosAsync()
         {
             var allVideosCount = await this.db.Videos.CountAsync();
 
