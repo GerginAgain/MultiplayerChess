@@ -37,6 +37,66 @@ namespace Chess.Tests
         }
 
         [Fact]
+        public async Task GetCountOfAllUsersAsync_WithoutAnyUsers_ShouldReturnZero()
+        {
+            //Arrange
+            var expectedResult = 0;
+
+            var moqHttpContext = new Mock<IHttpContextAccessor>();
+            var userStore = new Mock<IUserStore<ApplicationUser>>();
+            var userManager = new Mock<UserManager<ApplicationUser>>(userStore.Object, null, null, null, null, null, null, null, null);
+            var moqGameService = new Mock<IGamesService>();
+
+            var option = new DbContextOptionsBuilder<ChessDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var db = new ChessDbContext(option);
+
+            this.usersService = new UsersService(db, moqHttpContext.Object, userManager.Object, mapper, moqGameService.Object);
+
+            //Act
+            var actual = await this.usersService.GetCountOfAllUsersAsync();
+
+            //Assert
+            Assert.Equal(expectedResult, actual);
+        }
+
+        [Fact]
+        public async Task GetCountOfAllUsersAsync_WithValidData_ShouldReturnCorrectCount()
+        {
+            //Arrange
+            var expectedResult = 4;
+
+            var moqHttpContext = new Mock<IHttpContextAccessor>();
+            var userStore = new Mock<IUserStore<ApplicationUser>>();
+            var userManager = new Mock<UserManager<ApplicationUser>>(userStore.Object, null, null, null, null, null, null, null, null);
+            var moqGameService = new Mock<IGamesService>();
+
+            var option = new DbContextOptionsBuilder<ChessDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var db = new ChessDbContext(option);
+
+            this.usersService = new UsersService(db, moqHttpContext.Object, userManager.Object, mapper, moqGameService.Object);
+
+            var testingUsers = new List<ApplicationUser>
+            {
+                new ApplicationUser{Id = "Id1", UserName = "Player1", IsDeleted = false,EmailConfirmed = true, CreatedOn = DateTime.UtcNow.AddDays(-25)},
+                new ApplicationUser{Id = "Id2", UserName = "Player2", IsDeleted = false, EmailConfirmed = true, CreatedOn = DateTime.UtcNow.AddDays(-20)},
+                new ApplicationUser{Id = "Id3", UserName = "Player3", IsDeleted = false, EmailConfirmed = true, CreatedOn = DateTime.UtcNow.AddDays(-5)},
+                new ApplicationUser{Id = "Id4", UserName = "Player4", IsDeleted = true, EmailConfirmed = true, CreatedOn = DateTime.UtcNow.AddDays(-5)},
+                new ApplicationUser{Id = "Id5", UserName = "admin", IsDeleted = false, EmailConfirmed = true, CreatedOn = DateTime.UtcNow.AddDays(-18)},
+            };
+
+            await db.ApplicationUsers.AddRangeAsync(testingUsers);
+            await db.SaveChangesAsync();
+
+            //Act
+            var actual = await this.usersService.GetCountOfAllUsersAsync();
+
+            //Assert
+            Assert.Equal(expectedResult, actual);
+        }
+
+        [Fact]
         public async Task GetAllUserViewModelsAsync_WithValidDAta_ShouldReturnCorrectCount()
         {
             //Arrange
