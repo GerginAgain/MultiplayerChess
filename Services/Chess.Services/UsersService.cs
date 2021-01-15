@@ -46,7 +46,7 @@
 
             var UserAllViewModels = mapper.ProjectTo<UserAllViewModel>(allUsers);
             var paginatedList = await PaginatedList<UserAllViewModel>.CreateAsync(UserAllViewModels, pageNumber, pageSize);
-            ;
+            
             return paginatedList;
         }
 

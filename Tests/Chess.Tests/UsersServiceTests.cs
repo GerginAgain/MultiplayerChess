@@ -21,25 +21,19 @@ namespace Chess.Tests
     public class UsersServiceTests
     {
         private IUsersService usersService;
-        private static IMapper _mapper;
+        private static IMapper mapper;
 
         public UsersServiceTests()
         {
-            if (_mapper == null)
+            if (mapper == null)
             {
                 var mappingConfig = new MapperConfiguration(mc =>
                 {
                     mc.AddProfile(new AutoMapping());
                 });
                 IMapper mapper = mappingConfig.CreateMapper();
-                _mapper = mapper;
+                UsersServiceTests.mapper = mapper;
             }
-        }
-
-        [Fact]
-        public void Test1()
-        {
-
         }
 
         [Fact]
@@ -51,34 +45,67 @@ namespace Chess.Tests
             var moqHttpContext = new Mock<IHttpContextAccessor>();
             var userStore = new Mock<IUserStore<ApplicationUser>>();
             var userManager = new Mock<UserManager<ApplicationUser>>(userStore.Object, null, null, null, null, null, null, null, null);
-            //var moqMapper = new Mock<IMapper>();
-
             var moqGameService = new Mock<IGamesService>();
 
             var option = new DbContextOptionsBuilder<ChessDbContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var db = new ChessDbContext(option);
 
-            var context = new ChessDbContext(option);
-
-            //var context = InitializeContext.CreateContextForInMemory();
-            this.usersService = new UsersService(context, moqHttpContext.Object, userManager.Object, _mapper, moqGameService.Object);
+            this.usersService = new UsersService(db, moqHttpContext.Object, userManager.Object, mapper, moqGameService.Object);
 
             var testingUsers = new List<ApplicationUser>
             {
-                new ApplicationUser{Id = "Id1", UserName = "Seller1", IsDeleted = false,EmailConfirmed = true, CreatedOn = DateTime.UtcNow.AddDays(-25)},
-                new ApplicationUser{Id = "Id2", UserName = "Seller2", IsDeleted = false, EmailConfirmed = true, CreatedOn = DateTime.UtcNow.AddDays(-20)},
-                new ApplicationUser{Id = "Id3", UserName = "Seller3", IsDeleted = false, EmailConfirmed = true, CreatedOn = DateTime.UtcNow.AddDays(-5)},
-                new ApplicationUser{Id = "Id4", UserName = "Seller4", IsDeleted = true, EmailConfirmed = true, CreatedOn = DateTime.UtcNow.AddDays(-18)},
+                new ApplicationUser{Id = "Id1", UserName = "Player1", IsDeleted = false,EmailConfirmed = true, CreatedOn = DateTime.UtcNow.AddDays(-25)},
+                new ApplicationUser{Id = "Id2", UserName = "Player2", IsDeleted = false, EmailConfirmed = true, CreatedOn = DateTime.UtcNow.AddDays(-20)},
+                new ApplicationUser{Id = "Id3", UserName = "Player3", IsDeleted = false, EmailConfirmed = true, CreatedOn = DateTime.UtcNow.AddDays(-5)},
+                new ApplicationUser{Id = "Id4", UserName = "Player4", IsDeleted = true, EmailConfirmed = true, CreatedOn = DateTime.UtcNow.AddDays(-18)},
+                new ApplicationUser{Id = "Id5", UserName = "admin", IsDeleted = false, EmailConfirmed = true, CreatedOn = DateTime.UtcNow.AddDays(-18)},
             };
 
-            await context.ApplicationUsers.AddRangeAsync(testingUsers);
-            await context.SaveChangesAsync();
+            await db.ApplicationUsers.AddRangeAsync(testingUsers);
+            await db.SaveChangesAsync();
 
             //Act
             var actual = await this.usersService.GetAllUserViewModelsAsync(1, 10);
-            ;
+            
             //Assert
             Assert.Equal(expected, actual.Count());
+        }
+
+        [Fact]
+        public async Task GetAllUserViewModelsAsync_WithValidDAta_ShouldReturnCorrectOrder()
+        {
+            //Arrange
+            var expected = new List<string> { "Id3", "Id2", "Id1" };
+
+            var moqHttpContext = new Mock<IHttpContextAccessor>();
+            var userStore = new Mock<IUserStore<ApplicationUser>>();
+            var userManager = new Mock<UserManager<ApplicationUser>>(userStore.Object, null, null, null, null, null, null, null, null);
+            var moqGameService = new Mock<IGamesService>();
+
+            var option = new DbContextOptionsBuilder<ChessDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var db = new ChessDbContext(option);
+
+            this.usersService = new UsersService(db, moqHttpContext.Object, userManager.Object, mapper, moqGameService.Object);
+
+            var testingUsers = new List<ApplicationUser>
+            {
+                new ApplicationUser{Id = "Id1", UserName = "Player1", IsDeleted = false,EmailConfirmed = true, CreatedOn = DateTime.UtcNow.AddDays(-25)},
+                new ApplicationUser{Id = "Id2", UserName = "Player2", IsDeleted = false, EmailConfirmed = true, CreatedOn = DateTime.UtcNow.AddDays(-20)},
+                new ApplicationUser{Id = "Id3", UserName = "Player3", IsDeleted = false, EmailConfirmed = true, CreatedOn = DateTime.UtcNow.AddDays(-5)},
+            };
+
+            await db.ApplicationUsers.AddRangeAsync(testingUsers);
+            await db.SaveChangesAsync();
+
+            //Act
+            var actual = this.usersService.GetAllUserViewModelsAsync(1, 10).GetAwaiter().GetResult().ToList();
+
+            //Assert
+            Assert.Equal(expected[0], actual[0].Id);
+            Assert.Equal(expected[1], actual[1].Id);
+            Assert.Equal(expected[2], actual[2].Id);
         }
     }
 }
