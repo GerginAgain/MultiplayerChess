@@ -47,7 +47,7 @@
 
         public async Task<IActionResult> Blocked(int? pageNumber)
         {
-            var allBlockedUserViewModels = await this.usersService.GetAllBlockedUserViewModels(pageNumber ?? GlobalConstants.DefaultPageNumber, GlobalConstants.DefaultPageSize);
+            var allBlockedUserViewModels = await this.usersService.GetAllBlockedUserViewModelsAsync(pageNumber ?? GlobalConstants.DefaultPageNumber, GlobalConstants.DefaultPageSize);
 
             return this.View(allBlockedUserViewModels);
         }

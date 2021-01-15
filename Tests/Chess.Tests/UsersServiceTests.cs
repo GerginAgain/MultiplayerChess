@@ -224,5 +224,77 @@ namespace Chess.Tests
             Assert.True(actual);
             Assert.True(testingUser.IsDeleted);
         }
+
+        [Fact]
+        public async Task GetAllBlockedUserViewModelsAsync_WithValidDAta_ShouldReturnCorrectCount()
+        {
+            //Arrange
+            var expected = 3;
+
+            var moqHttpContext = new Mock<IHttpContextAccessor>();
+            var userStore = new Mock<IUserStore<ApplicationUser>>();
+            var userManager = new Mock<UserManager<ApplicationUser>>(userStore.Object, null, null, null, null, null, null, null, null);
+            var moqGameService = new Mock<IGamesService>();
+
+            var option = new DbContextOptionsBuilder<ChessDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var db = new ChessDbContext(option);
+
+            this.usersService = new UsersService(db, moqHttpContext.Object, userManager.Object, mapper, moqGameService.Object);
+
+            var testingUsers = new List<ApplicationUser>
+            {
+                new ApplicationUser{Id = "Id1", UserName = "Player1", IsDeleted = true, EmailConfirmed = true, CreatedOn = DateTime.UtcNow.AddDays(-25)},
+                new ApplicationUser{Id = "Id2", UserName = "Player2", IsDeleted = true, EmailConfirmed = true, CreatedOn = DateTime.UtcNow.AddDays(-20)},
+                new ApplicationUser{Id = "Id3", UserName = "Player3", IsDeleted = true, EmailConfirmed = true, CreatedOn = DateTime.UtcNow.AddDays(-5)},
+                new ApplicationUser{Id = "Id4", UserName = "Player4", IsDeleted = false, EmailConfirmed = true, CreatedOn = DateTime.UtcNow.AddDays(-18)},
+            };
+
+            await db.ApplicationUsers.AddRangeAsync(testingUsers);
+            await db.SaveChangesAsync();
+
+            //Act
+            var actual = await this.usersService.GetAllBlockedUserViewModelsAsync(1, 10);
+
+            //Assert
+            Assert.Equal(expected, actual.Count());
+        }
+
+        [Fact]
+        public async Task GetAllBlockedUserViewModelsAsync_WithValidDAta_ShouldReturnCorrectOrder()
+        {
+            //Arrange
+            var expected = new List<string> { "Id3", "Id2", "Id1" };
+
+            var moqHttpContext = new Mock<IHttpContextAccessor>();
+            var userStore = new Mock<IUserStore<ApplicationUser>>();
+            var userManager = new Mock<UserManager<ApplicationUser>>(userStore.Object, null, null, null, null, null, null, null, null);
+            var moqGameService = new Mock<IGamesService>();
+
+            var option = new DbContextOptionsBuilder<ChessDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var db = new ChessDbContext(option);
+
+            this.usersService = new UsersService(db, moqHttpContext.Object, userManager.Object, mapper, moqGameService.Object);
+
+
+            var testingUsers = new List<ApplicationUser>
+            {
+                new ApplicationUser{Id = "Id1", UserName = "Player1", IsDeleted = true, EmailConfirmed = true, CreatedOn = DateTime.UtcNow.AddDays(-25)},
+                new ApplicationUser{Id = "Id2", UserName = "Player2", IsDeleted = true, EmailConfirmed = true, CreatedOn = DateTime.UtcNow.AddDays(-20)},
+                new ApplicationUser{Id = "Id3", UserName = "Player3", IsDeleted = true, EmailConfirmed = true, CreatedOn = DateTime.UtcNow.AddDays(-5)},
+            };
+
+            await db.ApplicationUsers.AddRangeAsync(testingUsers);
+            await db.SaveChangesAsync();
+
+            //Act
+            var actual = this.usersService.GetAllBlockedUserViewModelsAsync(1, 10).GetAwaiter().GetResult().ToList();
+
+            //Assert
+            Assert.Equal(expected[0], actual[0].Id);
+            Assert.Equal(expected[1], actual[1].Id);
+            Assert.Equal(expected[2], actual[2].Id);
+        }
     }
 }

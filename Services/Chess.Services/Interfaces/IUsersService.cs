@@ -13,7 +13,7 @@
 
         Task<bool> BlockUserByIdAsync(string userId);
 
-        Task<PaginatedList<BlockedUserAllViewModel>> GetAllBlockedUserViewModels(int pageNumber, int pageSize);
+        Task<PaginatedList<BlockedUserAllViewModel>> GetAllBlockedUserViewModelsAsync(int pageNumber, int pageSize);
 
         Task<bool> UnblockUserByIdAsync(string userId);
 

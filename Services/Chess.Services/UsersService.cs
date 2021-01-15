@@ -69,7 +69,7 @@
             return true;
         }
 
-        public async Task<PaginatedList<BlockedUserAllViewModel>> GetAllBlockedUserViewModels(int pageNumber, int pageSize)
+        public async Task<PaginatedList<BlockedUserAllViewModel>> GetAllBlockedUserViewModelsAsync(int pageNumber, int pageSize)
         {
             var blockedUsers = this.context
                 .ApplicationUsers
