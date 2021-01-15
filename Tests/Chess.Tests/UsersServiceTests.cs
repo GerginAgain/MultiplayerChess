@@ -353,5 +353,61 @@ namespace Chess.Tests
             Assert.True(actual);
             Assert.False(testingUser.IsDeleted);
         }
+
+        [Fact]
+        public async Task GetUserByIdAsync_WithInvalidUserId_ShouldThrowAndArgumentException()
+        {
+            //Arrange
+            var expectedErrorMessage = "User with the given id doesn't exist!";
+
+            var moqHttpContext = new Mock<IHttpContextAccessor>();
+            var userStore = new Mock<IUserStore<ApplicationUser>>();
+            var userManager = new Mock<UserManager<ApplicationUser>>(userStore.Object, null, null, null, null, null, null, null, null);
+            var moqGameService = new Mock<IGamesService>();
+
+            var option = new DbContextOptionsBuilder<ChessDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var db = new ChessDbContext(option);
+
+            this.usersService = new UsersService(db, moqHttpContext.Object, userManager.Object, mapper, moqGameService.Object);
+
+            //Act and act
+            var ex = await Assert.ThrowsAsync<ArgumentException>(() => this.usersService.GetUserByIdAsync("UserId"));
+            Assert.Equal(expectedErrorMessage, ex.Message);
+        }
+
+        [Fact]
+        public async Task GetUserByIdAsync_WithValidDAta_ShouldReturnCorrectUser()
+        {
+            //Arrange
+            var expectedUserId = "UserId";
+            var expectedUsername = "User";
+
+            var moqHttpContext = new Mock<IHttpContextAccessor>();
+            var userStore = new Mock<IUserStore<ApplicationUser>>();
+            var userManager = new Mock<UserManager<ApplicationUser>>(userStore.Object, null, null, null, null, null, null, null, null);
+            //userManager.Setup(x => x.FindByIdAsync("UserId"))
+            //    .ReturnsAsync(new ApplicationUser { Id = "UserId", UserName = "Username" });
+
+            var moqGameService = new Mock<IGamesService>();
+
+            var option = new DbContextOptionsBuilder<ChessDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var db = new ChessDbContext(option);
+
+            this.usersService = new UsersService(db, moqHttpContext.Object, userManager.Object, mapper, moqGameService.Object);
+
+            var testingUser = new ApplicationUser { Id = "UserId", UserName = "User" };
+
+            await db.ApplicationUsers.AddAsync(testingUser);
+            await db.SaveChangesAsync();
+
+            //Act
+            var actual = await this.usersService.GetUserByIdAsync("UserId");
+
+            //Assert
+            Assert.Equal(expectedUserId, actual.Id);
+            Assert.Equal(expectedUsername, actual.UserName);
+        }
     }
 }

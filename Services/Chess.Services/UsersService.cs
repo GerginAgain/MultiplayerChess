@@ -101,6 +101,11 @@
 
         public async Task<ApplicationUser> GetUserByIdAsync(string id)
         {
+            if (!await this.context.ApplicationUsers.AnyAsync(x => x.Id == id))
+            {
+                throw new ArgumentException(GlobalConstants.InvalidUserIdErrorMessage);
+            }
+
             var userFromDb = await this.context.ApplicationUsers.FirstOrDefaultAsync(x => x.Id == id);
             return userFromDb;
         }
