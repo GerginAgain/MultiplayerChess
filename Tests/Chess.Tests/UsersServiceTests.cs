@@ -386,9 +386,6 @@ namespace Chess.Tests
             var moqHttpContext = new Mock<IHttpContextAccessor>();
             var userStore = new Mock<IUserStore<ApplicationUser>>();
             var userManager = new Mock<UserManager<ApplicationUser>>(userStore.Object, null, null, null, null, null, null, null, null);
-            //userManager.Setup(x => x.FindByIdAsync("UserId"))
-            //    .ReturnsAsync(new ApplicationUser { Id = "UserId", UserName = "Username" });
-
             var moqGameService = new Mock<IGamesService>();
 
             var option = new DbContextOptionsBuilder<ChessDbContext>()
@@ -408,6 +405,64 @@ namespace Chess.Tests
             //Assert
             Assert.Equal(expectedUserId, actual.Id);
             Assert.Equal(expectedUsername, actual.UserName);
+        }
+
+        [Fact]
+        public async Task GetUserHostConnectionIdByGameIdAsync_WithInvalidGameId_ShouldThrowAndArgumentException()
+        {
+            //Arrange
+            var expectedErrorMessage = "Game with the given id doesn't exist!";
+
+            var moqHttpContext = new Mock<IHttpContextAccessor>();
+            var userStore = new Mock<IUserStore<ApplicationUser>>();
+            var userManager = new Mock<UserManager<ApplicationUser>>(userStore.Object, null, null, null, null, null, null, null, null);
+            var moqGameService = new Mock<IGamesService>();
+
+            var option = new DbContextOptionsBuilder<ChessDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var db = new ChessDbContext(option);
+
+            this.usersService = new UsersService(db, moqHttpContext.Object, userManager.Object, mapper, moqGameService.Object);
+
+            //Act and act
+            var ex = await Assert.ThrowsAsync<ArgumentException>(() => this.usersService.GetUserHostConnectionIdByGameIdAsync("GameId"));
+            Assert.Equal(expectedErrorMessage, ex.Message);
+        }
+
+        [Fact]
+        public async Task GetUserHostConnectionIdByGameIdAsync_WithValidDAta_ShouldReturnCorrectConnectionId()
+        {
+            //Arrange
+            var expected = "HostConnectionId";
+
+            var testingGame = new Game
+            {
+                Id = "GameId",
+                Name = "GameName",
+                Color = "white",
+                HostConnectionId = "HostConnectionId",
+            };
+
+            var option = new DbContextOptionsBuilder<ChessDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var db = new ChessDbContext(option);
+
+            await db.Games.AddAsync(testingGame);
+            await db.SaveChangesAsync();
+
+            var moqHttpContext = new Mock<IHttpContextAccessor>();
+            var userStore = new Mock<IUserStore<ApplicationUser>>();
+            var userManager = new Mock<UserManager<ApplicationUser>>(userStore.Object, null, null, null, null, null, null, null, null);
+            var moqGameService = new Mock<IGamesService>();
+            moqGameService.Setup(x => x.GetGameByIdAsync("GameId")).ReturnsAsync(testingGame);          
+
+            this.usersService = new UsersService(db, moqHttpContext.Object, userManager.Object, mapper, moqGameService.Object);
+
+            //Act
+            var actual = await this.usersService.GetUserHostConnectionIdByGameIdAsync("GameId");
+
+            //Assert
+            Assert.Equal(expected, actual);
         }
     }
 }

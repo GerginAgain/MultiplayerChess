@@ -119,6 +119,11 @@
 
         public async Task<string> GetUserHostConnectionIdByGameIdAsync(string gameId)
         {
+            if (!await this.context.Games.AnyAsync(x => x.Id == gameId))
+            {
+                throw new ArgumentException(GlobalConstants.InvalidGameIdErrorMessage);
+            }
+
             var game = await this.gamesService.GetGameByIdAsync(gameId);
             var hostConnectionId = game.HostConnectionId;
             return hostConnectionId;
