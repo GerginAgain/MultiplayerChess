@@ -167,5 +167,62 @@ namespace Chess.Tests
             Assert.Equal(expected[1], actual[1].Id);
             Assert.Equal(expected[2], actual[2].Id);
         }
+
+        [Fact]
+        public async Task BlockUserByIdAsync_WithInvalidUserId_ShouldThrowAndArgumentException()
+        {
+            //Arrange
+            var expectedErrorMessage = "User with the given id doesn't exist!";
+
+            var moqHttpContext = new Mock<IHttpContextAccessor>();
+            var userStore = new Mock<IUserStore<ApplicationUser>>();
+            var userManager = new Mock<UserManager<ApplicationUser>>(userStore.Object, null, null, null, null, null, null, null, null);
+            var moqGameService = new Mock<IGamesService>();
+
+            var option = new DbContextOptionsBuilder<ChessDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var db = new ChessDbContext(option);
+
+            this.usersService = new UsersService(db, moqHttpContext.Object, userManager.Object, mapper, moqGameService.Object);
+
+            //Act and act
+            var ex = await Assert.ThrowsAsync<ArgumentException>(() => this.usersService.BlockUserByIdAsync("UserId"));
+            Assert.Equal(expectedErrorMessage, ex.Message);
+        }
+
+        [Fact]
+        public async Task BlockUserByIdAsync_WithValidDAta_ShouldReturnTrue()
+        {
+            //Arrange
+            var moqHttpContext = new Mock<IHttpContextAccessor>();
+            var userStore = new Mock<IUserStore<ApplicationUser>>();
+            var userManager = new Mock<UserManager<ApplicationUser>>(userStore.Object, null, null, null, null, null, null, null, null);
+            var moqGameService = new Mock<IGamesService>();
+
+            var option = new DbContextOptionsBuilder<ChessDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var db = new ChessDbContext(option);
+
+            this.usersService = new UsersService(db, moqHttpContext.Object, userManager.Object, mapper, moqGameService.Object);
+
+            var testingUser = new ApplicationUser
+            {
+                Id = "UserId",
+                UserName = "Player1",
+                IsDeleted = false,
+                EmailConfirmed = true,
+                CreatedOn = DateTime.UtcNow.AddDays(-25),
+            };
+
+            await db.ApplicationUsers.AddAsync(testingUser);
+            await db.SaveChangesAsync();
+
+            //Act
+            var actual = await this.usersService.BlockUserByIdAsync("UserId");
+
+            //Assert
+            Assert.True(actual);
+            Assert.True(testingUser.IsDeleted);
+        }
     }
 }
