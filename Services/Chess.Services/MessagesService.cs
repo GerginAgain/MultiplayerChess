@@ -5,8 +5,6 @@
     using Chess.Data.Models;
     using Chess.Services.Interfaces;
     using Chess.Web.ViewModels.ViewModels.Messages;
-    using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using System;
     using System.Collections.Generic;
@@ -16,21 +14,20 @@
     public class MessagesService : IMessagesService
     {
         private readonly ChessDbContext db;
-        private readonly IHttpContextAccessor httpContext;
-        private readonly UserManager<ApplicationUser> userManager;
         private readonly IMapper mapper;
+        private readonly IUsersService usersService;
 
-        public MessagesService(ChessDbContext db, IHttpContextAccessor httpContext, UserManager<ApplicationUser> userManager, IMapper mapper)
+        public MessagesService(ChessDbContext db, IMapper mapper, IUsersService usersService)
         {
             this.db = db;
-            this.httpContext = httpContext;
-            this.userManager = userManager;
             this.mapper = mapper;
+            this.usersService = usersService;
         }
 
         public async Task AddMessageToDbAsync(string content, string gameId)
         {
-            var playerId = this.userManager.GetUserId(this.httpContext.HttpContext.User);
+            var player = await this.usersService.GetCurrentUserAsync();
+            var playerId = player.Id;
 
             var message = new Message
             {

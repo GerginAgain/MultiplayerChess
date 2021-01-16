@@ -5,8 +5,6 @@
     using Chess.Data.Models;
     using Chess.Services.Interfaces;
     using Chess.Web.ViewModels.ViewModels.Moves;
-    using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using System;
     using System.Collections.Generic;
