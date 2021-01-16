@@ -18,23 +18,13 @@
     public class PicturesServiceTests
     {
         private IPicturesService picturesService;
-        private static IMapper mapper;
 
         public PicturesServiceTests()
         {
-            if (mapper == null)
-            {
-                var mappingConfig = new MapperConfiguration(mc =>
-                {
-                    mc.AddProfile(new AutoMapping());
-                });
-                IMapper mapper = mappingConfig.CreateMapper();
-                PicturesServiceTests.mapper = mapper;
-            }
         }
 
         [Fact]
-        public async Task CreatePictureAsync_ShouldCreatePicture()
+        public async Task CreatePictureAsync_WithValidDAta_ShouldCreateCorrectPicture()
         {
             //Arrange
             var expectedPictureName = "PictureName";
@@ -48,7 +38,7 @@
 
             //Act
             await this.picturesService.CreatePictureAsync("PictureName", "PictureLink");
-            var picture = db.Pictures.FirstOrDefault(x => x.Link == expectedPictureLink);
+            var picture = await db.Pictures.FirstOrDefaultAsync(x => x.Link == expectedPictureLink);
 
             //Assert
             Assert.Equal(expectedPictureName, picture.Name);

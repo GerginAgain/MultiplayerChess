@@ -16,21 +16,20 @@
     public class MovesService : IMovesService
     {
         private readonly ChessDbContext db;
-        private readonly IHttpContextAccessor httpContext;
-        private readonly UserManager<ApplicationUser> userManager;
         private readonly IMapper mapper;
+        private readonly IUsersService usersService;
 
-        public MovesService(ChessDbContext db, IHttpContextAccessor httpContext, UserManager<ApplicationUser> userManager, IMapper mapper)
+        public MovesService(ChessDbContext db, IMapper mapper, IUsersService usersService)
         {
             this.db = db;
-            this.httpContext = httpContext;
-            this.userManager = userManager;
             this.mapper = mapper;
+            this.usersService = usersService;
         }
 
         public async Task AddMoveToDbAsync(string title, string gameId)
         {
-            var playerId = this.userManager.GetUserId(this.httpContext.HttpContext.User);
+            var player = await this.usersService.GetCurrentUserAsync();
+            var playerId = player.Id;
 
             var move = new Move
             {
