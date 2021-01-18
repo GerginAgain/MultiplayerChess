@@ -86,9 +86,9 @@
 
         public async Task RemoveUserFavoriteVideoAsync(int videoId, string currentUserId)
         {
-            var sellMeUserFavoriteProduct = this.db.UserFavouriteVideos.First(x => x.VideoId == videoId && x.ApplicationUserId == currentUserId);
+            var userFavoriteVideo = this.db.UserFavouriteVideos.First(x => x.VideoId == videoId && x.ApplicationUserId == currentUserId);
 
-            this.db.Remove(sellMeUserFavoriteProduct);
+            this.db.UserFavouriteVideos.Remove(userFavoriteVideo);
             await this.db.SaveChangesAsync();
         }
     }
