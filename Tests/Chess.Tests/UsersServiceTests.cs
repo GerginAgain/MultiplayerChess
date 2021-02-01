@@ -97,7 +97,7 @@ namespace Chess.Tests
         }
 
         [Fact]
-        public async Task GetAllUserViewModelsAsync_WithValidDAta_ShouldReturnCorrectCount()
+        public async Task GetAllUserViewModelsAsync_WithValidData_ShouldReturnCorrectCount()
         {
             //Arrange
             var expected = 3;
@@ -133,7 +133,7 @@ namespace Chess.Tests
         }
 
         [Fact]
-        public async Task GetAllUserViewModelsAsync_WithValidDAta_ShouldReturnCorrectOrder()
+        public async Task GetAllUserViewModelsAsync_WithValidData_ShouldReturnCorrectOrder()
         {
             //Arrange
             var expected = new List<string> { "Id3", "Id2", "Id1" };

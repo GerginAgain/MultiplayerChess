@@ -212,7 +212,6 @@
                     UserFavouriteVideos = new List<UserFavouriteVideo>
                     {
                         new UserFavouriteVideo{Id = 1, VideoId = 2,},
-
                     }
                 });
 
