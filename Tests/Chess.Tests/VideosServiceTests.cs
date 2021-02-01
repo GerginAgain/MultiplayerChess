@@ -7,6 +7,7 @@
     using AutoMapper;
     using Chess.Data;
     using Chess.Services.Mapping;
+    using Chess.Web.ViewModels.InputModels.Videos;
     using Chess.Web.ViewModels.ViewModels.Users;
     using Common;
     using Data.Models;
@@ -34,6 +35,78 @@
                 IMapper mapper = mappingConfig.CreateMapper();
                 VideosServiceTests.mapper = mapper;
             }
+        }
+
+        [Fact]
+        public async Task CreateVideoAsync_WithValidData_VideosInDatabaseShouldReturnCorrectCount()
+        {
+            //Arrange
+            var expectedResult = 1;
+
+            var moqPictureService = new Mock<IPicturesService>();
+            moqPictureService.Setup(x => x.GetPictureByLinkAsync("pictureLink"))
+                .ReturnsAsync(new Picture
+                {
+                    Id = 1,
+                    Name = "PictureName",
+                });
+
+            var moqUsersService = new Mock<IUsersService>();
+
+            var option = new DbContextOptionsBuilder<ChessDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var db = new ChessDbContext(option);
+
+            this.videosService = new VideosService(db, moqPictureService.Object, mapper, moqUsersService.Object);
+
+            var inputModel = new AddVideoInputModel
+            {
+                VideoTitle = "VideoTitle",
+                VideoLink = "VideoLink"
+            };
+
+            //Act
+            await this.videosService.CreateVideoAsync(inputModel);
+
+            //Assert
+            Assert.Equal(expectedResult, db.Videos.ToList().Count);
+        }
+
+        [Fact]
+        public async Task CreateVideoAsync_WithValidData_ShouldCreateCorrectVideo()
+        {
+            //Arrange
+            var expectedResult = 1;
+
+            var moqPictureService = new Mock<IPicturesService>();
+            moqPictureService.Setup(x => x.GetPictureByLinkAsync("pictureLink"))
+                .ReturnsAsync(new Picture
+                {
+                    Id = 1,
+                    Name = "PictureName",
+                });
+
+            var moqUsersService = new Mock<IUsersService>();
+
+            var option = new DbContextOptionsBuilder<ChessDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var db = new ChessDbContext(option);
+
+            this.videosService = new VideosService(db, moqPictureService.Object, mapper, moqUsersService.Object);
+
+            var inputModel = new AddVideoInputModel
+            {
+                VideoTitle = "VideoTitle",
+                VideoLink = "VideoLink"
+            };
+
+            //Act
+            await this.videosService.CreateVideoAsync(inputModel);
+            var video = db.Videos.First();
+
+            //Assert
+            Assert.Equal("VideoTitle", video.Title);
+            Assert.Equal("VideoLink", video.Link);
         }
 
         [Fact]
