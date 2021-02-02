@@ -171,6 +171,11 @@
 
         public async Task<bool> RestoreVideoByIdAsync(int videoId)
         {
+            if (!await this.db.Videos.AnyAsync(x => x.Id == videoId))
+            {
+                throw new ArgumentException(GlobalConstants.InvalidVideoIdErrorMessage);
+            }
+
             var videoFromDb = await db.Videos.FirstOrDefaultAsync(x => x.Id == videoId);
 
             videoFromDb.IsDeleted = false;
