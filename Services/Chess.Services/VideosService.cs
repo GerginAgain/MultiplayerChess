@@ -11,6 +11,7 @@
     using Chess.Services.Interfaces;
     using Chess.Web.ViewModels.InputModels.Videos;
     using Chess.Web.ViewModels.ViewModels.Videos;
+    using Chess.Common;
 
     public class VideosService : IVideosService
     {
@@ -140,6 +141,11 @@
 
         public async Task<bool> DeleteVideoByIdAsync(int videoId)
         {
+            if (!await this.db.Videos.AnyAsync(x => x.Id == videoId))
+            {
+                throw new ArgumentException(GlobalConstants.InvalidVideoIdErrorMessage);
+            }
+
             var videoFromDb = await db.Videos.FirstOrDefaultAsync(x => x.Id == videoId);
 
             videoFromDb.IsDeleted = true;

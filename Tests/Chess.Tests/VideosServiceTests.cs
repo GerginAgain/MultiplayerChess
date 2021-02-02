@@ -719,5 +719,55 @@
             //Assert
             Assert.Equal(expectedResult, actual);
         }
+
+        [Fact]
+        public async Task DeleteVideoByIdAsync_WithInvalidVideoId_ShouldThrowArgumentException()
+        {
+            //Arrange
+            var expectedErrorMessage = "Video with the given id doesn't exist!";
+
+            var moqPictureService = new Mock<IPicturesService>();
+            var moqUsersService = new Mock<IUsersService>();
+
+            var option = new DbContextOptionsBuilder<ChessDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var db = new ChessDbContext(option);
+
+            this.videosService = new VideosService(db, moqPictureService.Object, mapper, moqUsersService.Object);
+
+            //Act and assert
+            var ex = await Assert.ThrowsAsync<ArgumentException>(() => this.videosService.DeleteVideoByIdAsync(1));
+            Assert.Equal(expectedErrorMessage, ex.Message);
+        }
+
+        [Fact]
+        public async Task DeleteVideoByIdAsync_WithValidData_ShouldReturnTrue()
+        {
+            //Arrange
+            var moqPictureService = new Mock<IPicturesService>();
+            var moqUsersService = new Mock<IUsersService>();
+
+            var option = new DbContextOptionsBuilder<ChessDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var db = new ChessDbContext(option);
+
+            this.videosService = new VideosService(db, moqPictureService.Object, mapper, moqUsersService.Object);
+
+            var testingVideo = new Video
+            {
+                Id = 1,
+                Title = "VideoTitle",
+                IsDeleted = false
+            };
+
+            await db.Videos.AddRangeAsync(testingVideo);
+            await db.SaveChangesAsync();
+
+            //Act
+            var actual = await this.videosService.DeleteVideoByIdAsync(1);
+
+            //Assert
+            Assert.True(actual);
+        }
     }
 }
