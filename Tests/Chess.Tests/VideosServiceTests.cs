@@ -663,5 +663,61 @@
             Assert.Equal(expectedResult[1], actual[1].Id);
             Assert.Equal(expectedResult[2], actual[2].Id);
         }
+
+        [Fact]
+        public async Task GetCountOfAllVideosAsync_WithoutAnyVideos_ShouldReturnZero()
+        {
+            //Arrange
+            var expectedResult = 0;
+
+            var moqPictureService = new Mock<IPicturesService>();
+            var moqUsersService = new Mock<IUsersService>();
+
+            var option = new DbContextOptionsBuilder<ChessDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var db = new ChessDbContext(option);
+
+            this.videosService = new VideosService(db, moqPictureService.Object, mapper, moqUsersService.Object);
+
+            //Act
+            var actual = await this.videosService.GetCountOfAllVideosAsync();
+
+            //Assert
+            Assert.Equal(expectedResult, actual);
+        }
+
+        [Fact]
+        public async Task GetCountOfAllVideosAsync_WithValidData_ShouldReturnCorrectCount()
+        {
+            //Arrange
+            var expectedResult = 5;
+
+            var moqPictureService = new Mock<IPicturesService>();
+            var moqUsersService = new Mock<IUsersService>();
+
+            var option = new DbContextOptionsBuilder<ChessDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var db = new ChessDbContext(option);
+
+            this.videosService = new VideosService(db, moqPictureService.Object, mapper, moqUsersService.Object);
+
+            var testingVideos = new List<Video>
+            {
+                new Video{Id = 1, Title = "Video1", IsDeleted = false, Link = "link1"},
+                new Video{Id = 2, Title = "Video2", IsDeleted = false, Link = "link2"},
+                new Video{Id = 3, Title = "Video3", IsDeleted = false, Link = "link3"},
+                new Video{Id = 4, Title = "Video4", IsDeleted = false, Link = "link4"},
+                new Video{Id = 5, Title = "Video5", IsDeleted = true, Link = "link5"},
+            };
+
+            await db.Videos.AddRangeAsync(testingVideos);
+            await db.SaveChangesAsync();
+
+            //Act
+            var actual = await this.videosService.GetCountOfAllVideosAsync();
+
+            //Assert
+            Assert.Equal(expectedResult, actual);
+        }
     }
 }
