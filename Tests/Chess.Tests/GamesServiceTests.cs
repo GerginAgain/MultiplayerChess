@@ -364,5 +364,75 @@
             //Assert
             Assert.Equal(expectedResult, result);
         }
+
+        [Fact]
+        public async Task GetTheCountForTheCreatedGamesForTheLastTenDaysAsync__WithVaildData_ShouldReturnCorrectCollectionLength()
+        {
+            //Arrange
+            var expectedLength = 10;
+
+            var moqHttpContext = new Mock<IHttpContextAccessor>();
+            var userStore = new Mock<IUserStore<ApplicationUser>>();
+            var userManager = new Mock<UserManager<ApplicationUser>>(userStore.Object, null, null, null, null, null, null, null, null);
+
+            var option = new DbContextOptionsBuilder<ChessDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var db = new ChessDbContext(option);
+
+            this.gamesService = new GamesService(db, mapper, moqHttpContext.Object, userManager.Object);
+
+            //Act
+            var result = await this.gamesService.GetTheCountForTheCreatedGamesForTheLastTenDaysAsync();
+
+            //Assert
+            Assert.Equal(expectedLength, result.Count);
+        }
+
+        [Fact]
+        public async Task GetTheCountForTheCreatedGamesForTheLastTenDaysAsync_WithVaildData_ShouldReturnCorrectResult()
+        {
+            //Arrange
+            var expected = new List<int> { 1, 0, 1, 0, 2, 0, 0, 0, 1, 1 };
+
+            var moqHttpContext = new Mock<IHttpContextAccessor>();
+            var userStore = new Mock<IUserStore<ApplicationUser>>();
+            var userManager = new Mock<UserManager<ApplicationUser>>(userStore.Object, null, null, null, null, null, null, null, null);
+
+            var option = new DbContextOptionsBuilder<ChessDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var db = new ChessDbContext(option);
+
+            this.gamesService = new GamesService(db, mapper, moqHttpContext.Object, userManager.Object);
+
+            var testingGames = new List<Game>
+            {
+                new Game {Id = "Id1", Name = "Game1", Color = "White", CreatedOn = DateTime.UtcNow.AddDays(-5)},
+                new Game {Id = "Id2", Name = "Game2", Color = "White", CreatedOn = DateTime.UtcNow.AddDays(-5)},
+                new Game {Id = "Id3", Name = "Game3", Color = "White", CreatedOn = DateTime.UtcNow.AddDays(-7)},
+                new Game {Id = "Id4", Name = "Game4", Color = "White", CreatedOn = DateTime.UtcNow.AddDays(-9) },
+                new Game {Id = "Id5", Name = "Game5", Color = "White", CreatedOn = DateTime.UtcNow.AddDays(-1) },
+                new Game {Id = "Id6", Name = "Game6", Color = "White", CreatedOn = DateTime.UtcNow.AddDays(-10) },
+                new Game {Id = "Id7", Name = "Game7", Color = "White", CreatedOn = DateTime.UtcNow.AddDays(-30) },
+                new Game {Id = "Id8", Name = "Game8", Color = "White", CreatedOn = DateTime.UtcNow }
+            };
+
+            await db.Games.AddRangeAsync(testingGames);
+            await db.SaveChangesAsync();
+
+            //Act
+            var actual = await this.gamesService.GetTheCountForTheCreatedGamesForTheLastTenDaysAsync();
+
+            //Assert
+            Assert.Equal(expected[0], actual[0]);
+            Assert.Equal(expected[1], actual[1]);
+            Assert.Equal(expected[2], actual[2]);
+            Assert.Equal(expected[3], actual[3]);
+            Assert.Equal(expected[4], actual[4]);
+            Assert.Equal(expected[5], actual[5]);
+            Assert.Equal(expected[6], actual[6]);
+            Assert.Equal(expected[7], actual[7]);
+            Assert.Equal(expected[8], actual[8]);
+            Assert.Equal(expected[9], actual[9]);
+        }
     }
 }
