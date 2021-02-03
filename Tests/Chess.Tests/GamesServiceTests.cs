@@ -531,5 +531,102 @@
             Assert.Equal(expected[8], actual[8]);
             Assert.Equal(expected[9], actual[9]);
         }
+
+        [Fact]
+        public async Task GetGameAllViewModelsAsync_WithoutAnyGames_ShouldReturnZeroViewModels()
+        {
+            //Arrange
+            var expectedResult = 0;
+
+            var moqHttpContext = new Mock<IHttpContextAccessor>();
+            var userStore = new Mock<IUserStore<ApplicationUser>>();
+            var userManager = new Mock<UserManager<ApplicationUser>>(userStore.Object, null, null, null, null, null, null, null, null);
+
+            var option = new DbContextOptionsBuilder<ChessDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var db = new ChessDbContext(option);
+
+            this.gamesService = new GamesService(db, mapper, moqHttpContext.Object, userManager.Object);
+
+            //Act
+            var actual = await this.gamesService.GetGameAllViewModelsAsync();
+
+            //Assert
+            Assert.Equal(expectedResult, actual.Count);
+        }
+
+        [Fact]
+        public async Task GetGameAllViewModelsAsync_WithValidData_ShouldReturnCorrectCount()
+        {
+            //Arrange
+            var expectedResult = 4;
+
+            var moqHttpContext = new Mock<IHttpContextAccessor>();
+            var userStore = new Mock<IUserStore<ApplicationUser>>();
+            var userManager = new Mock<UserManager<ApplicationUser>>(userStore.Object, null, null, null, null, null, null, null, null);
+            var moqGameService = new Mock<IGamesService>();
+
+            var option = new DbContextOptionsBuilder<ChessDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var db = new ChessDbContext(option);
+
+            this.gamesService = new GamesService(db, mapper, moqHttpContext.Object, userManager.Object);
+
+            var testingGames = new List<Game>
+            {
+                new Game{Id = "Id1", Name = "Game1", Color = "White", IsActive = true},
+                new Game{Id = "Id2", Name = "Game2", Color = "White", IsActive = true},
+                new Game{Id = "Id3", Name = "Game3", Color = "White", IsActive = true},
+                new Game{Id = "Id4", Name = "Game4", Color = "White", IsActive = false},
+                new Game{Id = "Id5", Name = "Game5", Color = "White", IsActive = true},
+            };
+
+            await db.Games.AddRangeAsync(testingGames);
+            await db.SaveChangesAsync();
+
+            //Act
+            var actual = await this.gamesService.GetGameAllViewModelsAsync();
+
+            //Assert
+            Assert.Equal(expectedResult, actual.Count);
+        }
+
+        [Fact]
+        public async Task GetGameAllViewModelsAsync_WithValidData_ShouldReturnCorrectOrder()
+        {
+            //Arrange
+            var expectedResult = new List<string> { "Id2", "Id4", "Id5" }; ;
+
+            var moqHttpContext = new Mock<IHttpContextAccessor>();
+            var userStore = new Mock<IUserStore<ApplicationUser>>();
+            var userManager = new Mock<UserManager<ApplicationUser>>(userStore.Object, null, null, null, null, null, null, null, null);
+            var moqGameService = new Mock<IGamesService>();
+
+            var option = new DbContextOptionsBuilder<ChessDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var db = new ChessDbContext(option);
+
+            this.gamesService = new GamesService(db, mapper, moqHttpContext.Object, userManager.Object);
+
+            var testingGames = new List<Game>
+            {
+                new Game{Id = "Id1", Name = "Game1", Color = "White", IsActive = false, CreatedOn = DateTime.UtcNow.AddDays(-25)},
+                new Game{Id = "Id2", Name = "Game2", Color = "White", IsActive = true, CreatedOn = DateTime.UtcNow.AddDays(-25)},
+                new Game{Id = "Id3", Name = "Game3", Color = "White", IsActive = false, CreatedOn = DateTime.UtcNow.AddDays(-25)},
+                new Game{Id = "Id4", Name = "Game4", Color = "White", IsActive = true, CreatedOn = DateTime.UtcNow.AddDays(-20)},
+                new Game{Id = "Id5", Name = "Game5", Color = "White", IsActive = true, CreatedOn = DateTime.UtcNow.AddDays(-5)},
+            };
+
+            await db.Games.AddRangeAsync(testingGames);
+            await db.SaveChangesAsync();
+
+            //Act
+            var actual = this.gamesService.GetGameAllViewModelsAsync().GetAwaiter().GetResult().ToList();
+
+            //Assert
+            Assert.Equal(expectedResult[0], actual[0].Id);
+            Assert.Equal(expectedResult[1], actual[1].Id);
+            Assert.Equal(expectedResult[2], actual[2].Id);
+        }
     }
 }
