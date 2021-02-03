@@ -296,5 +296,73 @@
             //Assert
             Assert.False(deletedGame.IsActive);
         }
+
+        [Fact]
+        public async Task GetActiveGameIdByUserIdAsync_WithoutAnyGames_ShouldReturnNull()
+        {
+            //Arrange
+            var moqHttpContext = new Mock<IHttpContextAccessor>();
+            var userStore = new Mock<IUserStore<ApplicationUser>>();
+            var userManager = new Mock<UserManager<ApplicationUser>>(userStore.Object, null, null, null, null, null, null, null, null);
+
+            var option = new DbContextOptionsBuilder<ChessDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var db = new ChessDbContext(option);
+
+            this.gamesService = new GamesService(db, mapper, moqHttpContext.Object, userManager.Object);
+
+            //Act
+            var result = await this.gamesService.GetActiveGameIdByUserIdAsync("UserId");
+
+            //Assert
+            Assert.Null(result);
+        }
+
+        [Fact]
+        public async Task GetActiveGameIdByUserIdAsync_WithValidData_ShouldReturnCorrectGameId()
+        {
+            //Arrange
+            var expectedResult = "GameId";
+
+            var moqHttpContext = new Mock<IHttpContextAccessor>();
+            var userStore = new Mock<IUserStore<ApplicationUser>>();
+            var userManager = new Mock<UserManager<ApplicationUser>>(userStore.Object, null, null, null, null, null, null, null, null);
+
+            var option = new DbContextOptionsBuilder<ChessDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var db = new ChessDbContext(option);
+
+            this.gamesService = new GamesService(db, mapper, moqHttpContext.Object, userManager.Object);
+
+            var testingGames = new List<Game>
+            {
+                new Game
+                {
+                    Id = "GameId",
+                    Name = "Game1",
+                    Color = "White",
+                    IsActive = true,
+                    HostConnectionId = "HostConnectionId",
+                    GuestConnectionId = "GuestConnectionId",
+                    Host = new ApplicationUser
+                    {
+                        Id = "UserId",
+                        UserName = "User1",
+                    } },
+                new Game{Id = "Id2", Name = "Game2", Color = "White", IsActive = true},
+                new Game{Id = "Id3", Name = "Game3", Color = "White", IsActive = true},
+                new Game{Id = "Id4", Name = "Game4", Color = "White", IsActive = false},
+                new Game{Id = "Id5", Name = "Game5", Color = "White", IsActive = true},
+            };
+
+            await db.Games.AddRangeAsync(testingGames);
+            await db.SaveChangesAsync();
+
+            //Act
+            var result = await this.gamesService.GetActiveGameIdByUserIdAsync("UserId");
+
+            //Assert
+            Assert.Equal(expectedResult, result);
+        }
     }
 }
