@@ -51,6 +51,11 @@
 
         public async Task<Game> GetGameByIdAsync(string gameId)
         {
+            if (!await this.db.Games.AnyAsync(x => x.Id == gameId))
+            {
+                throw new ArgumentException(GlobalConstants.InvalidGameIdErrorMessage);
+            }
+
             return await this.db.Games.FirstOrDefaultAsync(x => x.Id == gameId);
         }
 
