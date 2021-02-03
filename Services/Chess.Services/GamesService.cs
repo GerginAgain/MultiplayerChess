@@ -23,9 +23,9 @@
         private readonly IHttpContextAccessor httpContext;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public GamesService(ChessDbContext context, IMapper mapper, IHttpContextAccessor httpContext, UserManager<ApplicationUser> userManager)
+        public GamesService(ChessDbContext db, IMapper mapper, IHttpContextAccessor httpContext, UserManager<ApplicationUser> userManager)
         {
-            this.db = context;
+            this.db = db;
             this.mapper = mapper;
             this.httpContext = httpContext;
             this.userManager = userManager;
