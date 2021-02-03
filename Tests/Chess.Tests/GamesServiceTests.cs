@@ -178,7 +178,7 @@
         public async Task GetGameDetailsViewModelAsync_WithValidData_ShouldReturnCorrectViewModel()
         {
             //Arrange
-            var expectedname = "Game1";
+            var expectedName = "Game1";
             var expectedHostFiguresColor = "White";
             var expectedHostUsername = "User1";
             var expectedHostConnectionId = "HostConnectionId";
@@ -222,11 +222,79 @@
             var actual = await this.gamesService.GetGameDetailsViewModelAsync("GameId");
 
             //Assert
-            Assert.Equal(expectedname, actual.Name);
+            Assert.Equal(expectedName, actual.Name);
             Assert.Equal(expectedHostFiguresColor, actual.HostFiguresColor);
             Assert.Equal(expectedHostUsername, actual.HostUsername);
             Assert.Equal(expectedHostConnectionId, actual.HostConnectionId);
             Assert.Equal(expectedGuestConnectionId, actual.GuestConnectionId);
+        }
+
+        [Fact]
+        public async Task DeleteGameByIdAsync_WithInvalidGameId_ShouldThrowArgumentException()
+        {
+            //Arrange
+            var expectedErrorMessage = "Game with the given id doesn't exist!";
+
+            var moqHttpContext = new Mock<IHttpContextAccessor>();
+            var userStore = new Mock<IUserStore<ApplicationUser>>();
+            var userManager = new Mock<UserManager<ApplicationUser>>(userStore.Object, null, null, null, null, null, null, null, null);
+
+            var option = new DbContextOptionsBuilder<ChessDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var db = new ChessDbContext(option);
+
+            this.gamesService = new GamesService(db, mapper, moqHttpContext.Object, userManager.Object);
+
+            //Act and assert
+            var ex = await Assert.ThrowsAsync<ArgumentException>(() => this.gamesService.DeleteGameByIdAsync("GameId"));
+            Assert.Equal(expectedErrorMessage, ex.Message);
+        }
+
+        [Fact]
+        public async Task DeleteGameByIdAsync_WithValidData_ShouldDeleteGameCorrectly()
+        {
+            //Arrange
+            var moqHttpContext = new Mock<IHttpContextAccessor>();
+            var userStore = new Mock<IUserStore<ApplicationUser>>();
+            var userManager = new Mock<UserManager<ApplicationUser>>(userStore.Object, null, null, null, null, null, null, null, null);
+            var moqGameService = new Mock<IGamesService>();
+
+            var option = new DbContextOptionsBuilder<ChessDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var db = new ChessDbContext(option);
+
+            this.gamesService = new GamesService(db, mapper, moqHttpContext.Object, userManager.Object);
+
+            var testingGames = new List<Game>
+            {
+                new Game
+                {
+                    Id = "GameId",
+                    Name = "Game1",
+                    Color = "White",
+                    IsActive = true,
+                    HostConnectionId = "HostConnectionId",
+                    GuestConnectionId = "GuestConnectionId",
+                    Host = new ApplicationUser
+                    {
+                        UserName = "User1"
+                    } },
+                new Game{Id = "Id2", Name = "Game2", Color = "White", IsActive = true},
+                new Game{Id = "Id3", Name = "Game3", Color = "White", IsActive = true},
+                new Game{Id = "Id4", Name = "Game4", Color = "White", IsActive = false},
+                new Game{Id = "Id5", Name = "Game5", Color = "White", IsActive = true},
+            };
+
+            await db.Games.AddRangeAsync(testingGames);
+            await db.SaveChangesAsync();
+
+            var deletedGame = db.Games.First(x => x.IsActive == false);
+
+            //Act
+            await this.gamesService.DeleteGameByIdAsync("GameId");
+
+            //Assert
+            Assert.False(deletedGame.IsActive);
         }
     }
 }
