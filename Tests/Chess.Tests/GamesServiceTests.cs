@@ -818,5 +818,59 @@
             //Assert
             Assert.Equal(expectedHostConnectionId, game.HostConnectionId);
         }
+
+        [Fact]
+        public async Task AddGuestConnectionIdToGameAsync_WithInvalidGameId_ShouldThrowArgumentException()
+        {
+            //Arrange
+            var expectedErrorMessage = "Game with the given id doesn't exist!";
+
+            var moqUsersService = new Mock<IUsersService>();
+
+            var option = new DbContextOptionsBuilder<ChessDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var db = new ChessDbContext(option);
+
+            this.gamesService = new GamesService(db, mapper, moqUsersService.Object);
+
+            //Act and assert
+            var ex = await Assert.ThrowsAsync<ArgumentException>(() => this.gamesService.AddGuestConnectionIdToGameAsync("GameId", "GuestConnectionId"));
+            Assert.Equal(expectedErrorMessage, ex.Message);
+        }
+
+        [Fact]
+        public async Task AddGuestConnectionIdToGameAsync_WithValidData_ShouldReturnCorrectGame()
+        {
+            //Arrange
+            var expectedGuestConnectionId = "GuestConnectionId";
+
+            var moqUsersService = new Mock<IUsersService>();
+
+            var option = new DbContextOptionsBuilder<ChessDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var db = new ChessDbContext(option);
+
+            this.gamesService = new GamesService(db, mapper, moqUsersService.Object);
+
+            var game = new Game
+            {
+                Id = "GameId",
+                Color = "White",
+                Name = "GameName",
+                HostConnectionId = "HostConnectionId",
+                GuestConnectionId = null,
+                HostId = "HostUserId",
+                IsActive = true,
+            };
+
+            await db.Games.AddAsync(game);
+            await db.SaveChangesAsync();
+
+            //Act
+            await this.gamesService.AddGuestConnectionIdToGameAsync("GameId", "GuestConnectionId");
+
+            //Assert
+            Assert.Equal(expectedGuestConnectionId, game.GuestConnectionId);
+        }
     }
 }

@@ -191,7 +191,7 @@
 
         public async Task AddGuestConnectionIdToGameAsync(string gameId, string guestConnectionId)
         {
-            var currentGame = await this.db.Games.FirstOrDefaultAsync(x => x.Id == gameId);
+            var currentGame = await GetGameByIdAsync(gameId);
             currentGame.GuestConnectionId = guestConnectionId;
             await this.db.SaveChangesAsync();
         }
