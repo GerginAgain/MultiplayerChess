@@ -697,5 +697,54 @@
             Assert.Equal(expectedColor, actual.Color);
             Assert.Equal(expectedHostName, actual.HostName);
         }
+
+        [Fact]
+        public async Task GetEnteringGameViewModelAsync_WithValidData_ShouldReturnCorrectViewModel()
+        {
+            //Arrange
+            var expectedId = "GameId";
+            var expectedName = "GameName";
+            var expectedColor = "Black";
+            var expectedHostName = "HostUserName";
+
+            var moqUsersService = new Mock<IUsersService>();
+            moqUsersService.Setup(x => x.GetCurrentUserAsync())
+                .ReturnsAsync(new ApplicationUser
+                {
+                    Id = "UserId",
+                    UserName = "UserName",
+                });
+
+            var option = new DbContextOptionsBuilder<ChessDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var db = new ChessDbContext(option);
+
+            this.gamesService = new GamesService(db, mapper, moqUsersService.Object);
+
+            await db.Games.AddAsync(new Game
+            {
+                Id = "GameId",
+                Color = "White",
+                Name = "GameName",
+                HostConnectionId = "HostConnectionId",
+                HostId = "HostUserId",
+                IsActive = true,
+            });
+            await db.ApplicationUsers.AddAsync(new ApplicationUser
+            {
+                Id = "HostUserId",
+                UserName = "HostUserName",
+            });
+            await db.SaveChangesAsync();
+
+            //Act
+            var actual = await this.gamesService.GetEnteringGameViewModelAsync("GameId");
+
+            //Assert
+            Assert.Equal(expectedId, actual.Id);
+            Assert.Equal(expectedName, actual.Name);
+            Assert.Equal(expectedColor, actual.Color);
+            Assert.Equal(expectedHostName, actual.HostName);
+        }
     }
 }

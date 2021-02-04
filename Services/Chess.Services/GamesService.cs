@@ -152,7 +152,7 @@
 
         public async Task<GameViewModel> GetEnteringGameViewModelAsync(string id)
         {
-            var game = await this.db.Games.FirstOrDefaultAsync(x => x.Id == id);
+            var game = await GetGameByIdAsync(id);
             var guestId = this.usersService.GetCurrentUserAsync().GetAwaiter().GetResult().Id;
             var guestName = this.usersService.GetCurrentUserAsync().GetAwaiter().GetResult().UserName;
             game.IsActive = false;
