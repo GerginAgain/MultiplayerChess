@@ -7,6 +7,7 @@
     using AutoMapper;
     using Chess.Data;
     using Chess.Services.Mapping;
+    using Chess.Web.ViewModels.InputModels.Games;
     using Chess.Web.ViewModels.InputModels.Videos;
     using Chess.Web.ViewModels.ViewModels.Users;
     using Common;
@@ -43,15 +44,12 @@
             //Arrange
             var expectedResult = 0;
 
-            var moqHttpContext = new Mock<IHttpContextAccessor>();
-            var userStore = new Mock<IUserStore<ApplicationUser>>();
-            var userManager = new Mock<UserManager<ApplicationUser>>(userStore.Object, null, null, null, null, null, null, null, null);
-
+            var moqUsersService = new Mock<IUsersService>();
             var option = new DbContextOptionsBuilder<ChessDbContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
             var db = new ChessDbContext(option);
 
-            this.gamesService = new GamesService(db, mapper, moqHttpContext.Object, userManager.Object);
+            this.gamesService = new GamesService(db, mapper, moqUsersService.Object);
 
             //Act
             var actual = await this.gamesService.GetAllActiveGamesViewModelsAsync(1, 10);
@@ -66,16 +64,12 @@
             //Arrange
             var expectedResult = 4;
 
-            var moqHttpContext = new Mock<IHttpContextAccessor>();
-            var userStore = new Mock<IUserStore<ApplicationUser>>();
-            var userManager = new Mock<UserManager<ApplicationUser>>(userStore.Object, null, null, null, null, null, null, null, null);
-            var moqGameService = new Mock<IGamesService>();
-
+            var moqUsersService = new Mock<IUsersService>();
             var option = new DbContextOptionsBuilder<ChessDbContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
             var db = new ChessDbContext(option);
 
-            this.gamesService = new GamesService(db, mapper, moqHttpContext.Object, userManager.Object);
+            this.gamesService = new GamesService(db, mapper, moqUsersService.Object);
 
             var testingGames = new List<Game>
             {
@@ -102,16 +96,12 @@
             //Arrange
             var expectedResult = new List<string> { "Id5", "Id4", "Id2" }; ;
 
-            var moqHttpContext = new Mock<IHttpContextAccessor>();
-            var userStore = new Mock<IUserStore<ApplicationUser>>();
-            var userManager = new Mock<UserManager<ApplicationUser>>(userStore.Object, null, null, null, null, null, null, null, null);
-            var moqGameService = new Mock<IGamesService>();
-
+            var moqUsersService = new Mock<IUsersService>();
             var option = new DbContextOptionsBuilder<ChessDbContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
             var db = new ChessDbContext(option);
 
-            this.gamesService = new GamesService(db, mapper, moqHttpContext.Object, userManager.Object);
+            this.gamesService = new GamesService(db, mapper, moqUsersService.Object);
 
             var testingGames = new List<Game>
             {
@@ -140,15 +130,12 @@
             //Arrange
             var expectedResult = 0;
 
-            var moqHttpContext = new Mock<IHttpContextAccessor>();
-            var userStore = new Mock<IUserStore<ApplicationUser>>();
-            var userManager = new Mock<UserManager<ApplicationUser>>(userStore.Object, null, null, null, null, null, null, null, null);
-
+            var moqUsersService = new Mock<IUsersService>();
             var option = new DbContextOptionsBuilder<ChessDbContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
             var db = new ChessDbContext(option);
 
-            this.gamesService = new GamesService(db, mapper, moqHttpContext.Object, userManager.Object);
+            this.gamesService = new GamesService(db, mapper, moqUsersService.Object);
 
             //Act
             var actual = await this.gamesService.GetCountOfAllGamesAsync();
@@ -163,16 +150,12 @@
             //Arrange
             var expectedResult = 4;
 
-            var moqHttpContext = new Mock<IHttpContextAccessor>();
-            var userStore = new Mock<IUserStore<ApplicationUser>>();
-            var userManager = new Mock<UserManager<ApplicationUser>>(userStore.Object, null, null, null, null, null, null, null, null);
-            var moqGameService = new Mock<IGamesService>();
-
+            var moqUsersService = new Mock<IUsersService>();
             var option = new DbContextOptionsBuilder<ChessDbContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
             var db = new ChessDbContext(option);
 
-            this.gamesService = new GamesService(db, mapper, moqHttpContext.Object, userManager.Object);
+            this.gamesService = new GamesService(db, mapper, moqUsersService.Object);
 
             var testingGames = new List<Game>
             {
@@ -199,15 +182,12 @@
             //Arrange
             var expectedErrorMessage = "Game with the given id doesn't exist!";
 
-            var moqHttpContext = new Mock<IHttpContextAccessor>();
-            var userStore = new Mock<IUserStore<ApplicationUser>>();
-            var userManager = new Mock<UserManager<ApplicationUser>>(userStore.Object, null, null, null, null, null, null, null, null);
-
+            var moqUsersService = new Mock<IUsersService>();
             var option = new DbContextOptionsBuilder<ChessDbContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
             var db = new ChessDbContext(option);
 
-            this.gamesService = new GamesService(db, mapper, moqHttpContext.Object, userManager.Object);
+            this.gamesService = new GamesService(db, mapper, moqUsersService.Object);
 
             //Act and assert
             var ex = await Assert.ThrowsAsync<ArgumentException>(() => this.gamesService.GetGameByIdAsync("GameId"));
@@ -220,16 +200,12 @@
             //Arrange
             var expectedResult = "GameId";
 
-            var moqHttpContext = new Mock<IHttpContextAccessor>();
-            var userStore = new Mock<IUserStore<ApplicationUser>>();
-            var userManager = new Mock<UserManager<ApplicationUser>>(userStore.Object, null, null, null, null, null, null, null, null);
-            var moqGameService = new Mock<IGamesService>();
-
+            var moqUsersService = new Mock<IUsersService>();
             var option = new DbContextOptionsBuilder<ChessDbContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
             var db = new ChessDbContext(option);
 
-            this.gamesService = new GamesService(db, mapper, moqHttpContext.Object, userManager.Object);
+            this.gamesService = new GamesService(db, mapper, moqUsersService.Object);
 
             var testingGames = new List<Game>
             {
@@ -256,15 +232,12 @@
             //Arrange
             var expectedErrorMessage = "Game with the given id doesn't exist!";
 
-            var moqHttpContext = new Mock<IHttpContextAccessor>();
-            var userStore = new Mock<IUserStore<ApplicationUser>>();
-            var userManager = new Mock<UserManager<ApplicationUser>>(userStore.Object, null, null, null, null, null, null, null, null);
-
+            var moqUsersService = new Mock<IUsersService>();
             var option = new DbContextOptionsBuilder<ChessDbContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
             var db = new ChessDbContext(option);
 
-            this.gamesService = new GamesService(db, mapper, moqHttpContext.Object, userManager.Object);
+            this.gamesService = new GamesService(db, mapper, moqUsersService.Object);
 
             //Act and assert
             var ex = await Assert.ThrowsAsync<ArgumentException>(() => this.gamesService.GetGameDetailsViewModelAsync("GameId"));
@@ -281,16 +254,12 @@
             var expectedHostConnectionId = "HostConnectionId";
             var expectedGuestConnectionId = "GuestConnectionId";
 
-            var moqHttpContext = new Mock<IHttpContextAccessor>();
-            var userStore = new Mock<IUserStore<ApplicationUser>>();
-            var userManager = new Mock<UserManager<ApplicationUser>>(userStore.Object, null, null, null, null, null, null, null, null);
-            var moqGameService = new Mock<IGamesService>();
-
+            var moqUsersService = new Mock<IUsersService>();
             var option = new DbContextOptionsBuilder<ChessDbContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
             var db = new ChessDbContext(option);
 
-            this.gamesService = new GamesService(db, mapper, moqHttpContext.Object, userManager.Object);
+            this.gamesService = new GamesService(db, mapper, moqUsersService.Object);
 
             var testingGames = new List<Game>
             {
@@ -332,15 +301,12 @@
             //Arrange
             var expectedErrorMessage = "Game with the given id doesn't exist!";
 
-            var moqHttpContext = new Mock<IHttpContextAccessor>();
-            var userStore = new Mock<IUserStore<ApplicationUser>>();
-            var userManager = new Mock<UserManager<ApplicationUser>>(userStore.Object, null, null, null, null, null, null, null, null);
-
+            var moqUsersService = new Mock<IUsersService>();
             var option = new DbContextOptionsBuilder<ChessDbContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
             var db = new ChessDbContext(option);
 
-            this.gamesService = new GamesService(db, mapper, moqHttpContext.Object, userManager.Object);
+            this.gamesService = new GamesService(db, mapper, moqUsersService.Object);
 
             //Act and assert
             var ex = await Assert.ThrowsAsync<ArgumentException>(() => this.gamesService.DeleteGameByIdAsync("GameId"));
@@ -351,16 +317,12 @@
         public async Task DeleteGameByIdAsync_WithValidData_ShouldDeleteGameCorrectly()
         {
             //Arrange
-            var moqHttpContext = new Mock<IHttpContextAccessor>();
-            var userStore = new Mock<IUserStore<ApplicationUser>>();
-            var userManager = new Mock<UserManager<ApplicationUser>>(userStore.Object, null, null, null, null, null, null, null, null);
-            var moqGameService = new Mock<IGamesService>();
-
+            var moqUsersService = new Mock<IUsersService>();
             var option = new DbContextOptionsBuilder<ChessDbContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
             var db = new ChessDbContext(option);
 
-            this.gamesService = new GamesService(db, mapper, moqHttpContext.Object, userManager.Object);
+            this.gamesService = new GamesService(db, mapper, moqUsersService.Object);
 
             var testingGames = new List<Game>
             {
@@ -398,15 +360,12 @@
         public async Task GetActiveGameIdByUserIdAsync_WithoutAnyGames_ShouldReturnNull()
         {
             //Arrange
-            var moqHttpContext = new Mock<IHttpContextAccessor>();
-            var userStore = new Mock<IUserStore<ApplicationUser>>();
-            var userManager = new Mock<UserManager<ApplicationUser>>(userStore.Object, null, null, null, null, null, null, null, null);
-
+            var moqUsersService = new Mock<IUsersService>();
             var option = new DbContextOptionsBuilder<ChessDbContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
             var db = new ChessDbContext(option);
 
-            this.gamesService = new GamesService(db, mapper, moqHttpContext.Object, userManager.Object);
+            this.gamesService = new GamesService(db, mapper, moqUsersService.Object);
 
             //Act
             var result = await this.gamesService.GetActiveGameIdByUserIdAsync("UserId");
@@ -421,15 +380,12 @@
             //Arrange
             var expectedResult = "GameId";
 
-            var moqHttpContext = new Mock<IHttpContextAccessor>();
-            var userStore = new Mock<IUserStore<ApplicationUser>>();
-            var userManager = new Mock<UserManager<ApplicationUser>>(userStore.Object, null, null, null, null, null, null, null, null);
-
+            var moqUsersService = new Mock<IUsersService>();
             var option = new DbContextOptionsBuilder<ChessDbContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
             var db = new ChessDbContext(option);
 
-            this.gamesService = new GamesService(db, mapper, moqHttpContext.Object, userManager.Object);
+            this.gamesService = new GamesService(db, mapper, moqUsersService.Object);
 
             var testingGames = new List<Game>
             {
@@ -468,15 +424,12 @@
             //Arrange
             var expectedLength = 10;
 
-            var moqHttpContext = new Mock<IHttpContextAccessor>();
-            var userStore = new Mock<IUserStore<ApplicationUser>>();
-            var userManager = new Mock<UserManager<ApplicationUser>>(userStore.Object, null, null, null, null, null, null, null, null);
-
+            var moqUsersService = new Mock<IUsersService>();
             var option = new DbContextOptionsBuilder<ChessDbContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
             var db = new ChessDbContext(option);
 
-            this.gamesService = new GamesService(db, mapper, moqHttpContext.Object, userManager.Object);
+            this.gamesService = new GamesService(db, mapper, moqUsersService.Object);
 
             //Act
             var result = await this.gamesService.GetTheCountForTheCreatedGamesForTheLastTenDaysAsync();
@@ -491,15 +444,12 @@
             //Arrange
             var expected = new List<int> { 1, 0, 1, 0, 2, 0, 0, 0, 1, 1 };
 
-            var moqHttpContext = new Mock<IHttpContextAccessor>();
-            var userStore = new Mock<IUserStore<ApplicationUser>>();
-            var userManager = new Mock<UserManager<ApplicationUser>>(userStore.Object, null, null, null, null, null, null, null, null);
-
+            var moqUsersService = new Mock<IUsersService>();
             var option = new DbContextOptionsBuilder<ChessDbContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
             var db = new ChessDbContext(option);
 
-            this.gamesService = new GamesService(db, mapper, moqHttpContext.Object, userManager.Object);
+            this.gamesService = new GamesService(db, mapper, moqUsersService.Object);
 
             var testingGames = new List<Game>
             {
@@ -538,15 +488,12 @@
             //Arrange
             var expectedResult = 0;
 
-            var moqHttpContext = new Mock<IHttpContextAccessor>();
-            var userStore = new Mock<IUserStore<ApplicationUser>>();
-            var userManager = new Mock<UserManager<ApplicationUser>>(userStore.Object, null, null, null, null, null, null, null, null);
-
+            var moqUsersService = new Mock<IUsersService>();
             var option = new DbContextOptionsBuilder<ChessDbContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
             var db = new ChessDbContext(option);
 
-            this.gamesService = new GamesService(db, mapper, moqHttpContext.Object, userManager.Object);
+            this.gamesService = new GamesService(db, mapper, moqUsersService.Object);
 
             //Act
             var actual = await this.gamesService.GetGameAllViewModelsAsync();
@@ -561,16 +508,12 @@
             //Arrange
             var expectedResult = 4;
 
-            var moqHttpContext = new Mock<IHttpContextAccessor>();
-            var userStore = new Mock<IUserStore<ApplicationUser>>();
-            var userManager = new Mock<UserManager<ApplicationUser>>(userStore.Object, null, null, null, null, null, null, null, null);
-            var moqGameService = new Mock<IGamesService>();
-
+            var moqUsersService = new Mock<IUsersService>();
             var option = new DbContextOptionsBuilder<ChessDbContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
             var db = new ChessDbContext(option);
 
-            this.gamesService = new GamesService(db, mapper, moqHttpContext.Object, userManager.Object);
+            this.gamesService = new GamesService(db, mapper, moqUsersService.Object);
 
             var testingGames = new List<Game>
             {
@@ -597,16 +540,12 @@
             //Arrange
             var expectedResult = new List<string> { "Id2", "Id4", "Id5" }; ;
 
-            var moqHttpContext = new Mock<IHttpContextAccessor>();
-            var userStore = new Mock<IUserStore<ApplicationUser>>();
-            var userManager = new Mock<UserManager<ApplicationUser>>(userStore.Object, null, null, null, null, null, null, null, null);
-            var moqGameService = new Mock<IGamesService>();
-
+            var moqUsersService = new Mock<IUsersService>();
             var option = new DbContextOptionsBuilder<ChessDbContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
             var db = new ChessDbContext(option);
 
-            this.gamesService = new GamesService(db, mapper, moqHttpContext.Object, userManager.Object);
+            this.gamesService = new GamesService(db, mapper, moqUsersService.Object);
 
             var testingGames = new List<Game>
             {
@@ -635,15 +574,12 @@
             //Arrange
             var expectedResult = 0;
 
-            var moqHttpContext = new Mock<IHttpContextAccessor>();
-            var userStore = new Mock<IUserStore<ApplicationUser>>();
-            var userManager = new Mock<UserManager<ApplicationUser>>(userStore.Object, null, null, null, null, null, null, null, null);
-
+            var moqUsersService = new Mock<IUsersService>();
             var option = new DbContextOptionsBuilder<ChessDbContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
             var db = new ChessDbContext(option);
 
-            this.gamesService = new GamesService(db, mapper, moqHttpContext.Object, userManager.Object);
+            this.gamesService = new GamesService(db, mapper, moqUsersService.Object);
 
             //Act
             var actual = await this.gamesService.GetGamesViewModelAsync();
@@ -658,16 +594,12 @@
             //Arrange
             var expectedResult = 4;
 
-            var moqHttpContext = new Mock<IHttpContextAccessor>();
-            var userStore = new Mock<IUserStore<ApplicationUser>>();
-            var userManager = new Mock<UserManager<ApplicationUser>>(userStore.Object, null, null, null, null, null, null, null, null);
-            var moqGameService = new Mock<IGamesService>();
-
+            var moqUsersService = new Mock<IUsersService>();
             var option = new DbContextOptionsBuilder<ChessDbContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
             var db = new ChessDbContext(option);
 
-            this.gamesService = new GamesService(db, mapper, moqHttpContext.Object, userManager.Object);
+            this.gamesService = new GamesService(db, mapper, moqUsersService.Object);
 
             var testingGames = new List<Game>
             {
@@ -694,16 +626,12 @@
             //Arrange
             var expectedResult = new List<string> { "Id2", "Id4", "Id5" }; ;
 
-            var moqHttpContext = new Mock<IHttpContextAccessor>();
-            var userStore = new Mock<IUserStore<ApplicationUser>>();
-            var userManager = new Mock<UserManager<ApplicationUser>>(userStore.Object, null, null, null, null, null, null, null, null);
-            var moqGameService = new Mock<IGamesService>();
-
+            var moqUsersService = new Mock<IUsersService>();
             var option = new DbContextOptionsBuilder<ChessDbContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
             var db = new ChessDbContext(option);
 
-            this.gamesService = new GamesService(db, mapper, moqHttpContext.Object, userManager.Object);
+            this.gamesService = new GamesService(db, mapper, moqUsersService.Object);
 
             var testingGames = new List<Game>
             {
@@ -724,6 +652,50 @@
             Assert.Equal(expectedResult[0], actual[0].Id);
             Assert.Equal(expectedResult[1], actual[1].Id);
             Assert.Equal(expectedResult[2], actual[2].Id);
+        }
+
+        [Fact]
+        public async Task GetGameViewModelAsync_WithValidData_ShouldReturnCorrectViewModel()
+        {
+            //Arrange
+            var expectedName = "GameName";
+            var expectedColor = "White";
+            var expectedHostName = "UserName";
+
+            var moqUsersService = new Mock<IUsersService>();
+            moqUsersService.Setup(x => x.GetCurrentUserAsync())
+                .ReturnsAsync(new ApplicationUser
+                {
+                    Id = "UserId",
+                    UserName = "UserName",
+                });
+
+            var option = new DbContextOptionsBuilder<ChessDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var db = new ChessDbContext(option);
+
+            this.gamesService = new GamesService(db, mapper, moqUsersService.Object);
+
+            await db.ApplicationUsers.AddAsync(new ApplicationUser
+            {
+                Id = "UserId",
+                UserName = "UserName",
+            });
+            await db.SaveChangesAsync();
+
+            var inputModel = new GameInputViewModel
+            {
+                Name = "GameName",
+                Color = Web.ViewModels.InputModels.Enums.Color.White,
+            };
+
+            //Act
+            var actual = await this.gamesService.GetGameViewModelAsync(inputModel);
+
+            //Assert
+            Assert.Equal(expectedName, actual.Name);
+            Assert.Equal(expectedColor, actual.Color);
+            Assert.Equal(expectedHostName, actual.HostName);
         }
     }
 }

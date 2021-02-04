@@ -5,8 +5,6 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using AutoMapper;
-    using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using Chess.Data;
     using Chess.Data.Models;
@@ -20,15 +18,13 @@
     {
         private readonly ChessDbContext db;
         private readonly IMapper mapper;
-        private readonly IHttpContextAccessor httpContext;
-        private readonly UserManager<ApplicationUser> userManager;
+        private readonly IUsersService usersService;
 
-        public GamesService(ChessDbContext db, IMapper mapper, IHttpContextAccessor httpContext, UserManager<ApplicationUser> userManager)
+        public GamesService(ChessDbContext db, IMapper mapper, IUsersService usersService)
         {
             this.db = db;
             this.mapper = mapper;
-            this.httpContext = httpContext;
-            this.userManager = userManager;
+            this.usersService = usersService;
         }
 
         public async Task<PaginatedList<ActiveGameAllViewModel>> GetAllActiveGamesViewModelsAsync(int pageNumber, int pageSize)
@@ -137,7 +133,7 @@
 
         public async Task<GameViewModel> GetGameViewModelAsync(GameInputViewModel input)
         {
-            var userId = this.userManager.GetUserId(this.httpContext.HttpContext.User);
+            var userId = this.usersService.GetCurrentUserAsync().GetAwaiter().GetResult().Id;
 
             var game = new Game
             {
@@ -157,7 +153,8 @@
         public async Task<GameViewModel> GetEnteringGameViewModelAsync(string id)
         {
             var game = await this.db.Games.FirstOrDefaultAsync(x => x.Id == id);
-            var guestId = this.userManager.GetUserId(this.httpContext.HttpContext.User);
+            var guestId = this.usersService.GetCurrentUserAsync().GetAwaiter().GetResult().Id;
+            var guestName = this.usersService.GetCurrentUserAsync().GetAwaiter().GetResult().UserName;
             game.IsActive = false;
             game.GuestId = guestId;
             await db.SaveChangesAsync();
@@ -179,7 +176,7 @@
                 Color = color,
                 HostConnectionId = game.HostConnectionId,
                 HostName = game.Host.UserName,
-                GuestName = this.httpContext.HttpContext.User.Identity.Name,
+                GuestName = guestName,
             };
 
             return gameViewModel;
@@ -209,7 +206,7 @@
 
         public async Task<PaginatedList<MyGameViewModel>> GetMyGameViewModelsAsync(int pageNumber, int pageSize)
         {
-            var currentUserId = this.userManager.GetUserId(this.httpContext.HttpContext.User);
+            var currentUserId = this.usersService.GetCurrentUserAsync().GetAwaiter().GetResult().Id;
 
             var allMyGames = db.Games
                 .Where(x => x.HostId == currentUserId || x.GuestId == currentUserId)
