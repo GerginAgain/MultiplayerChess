@@ -699,6 +699,25 @@
         }
 
         [Fact]
+        public async Task GetEnteringGameViewModelAsync_WithInvalidGameId_ShouldThrowArgumentException()
+        {
+            //Arrange
+            var expectedErrorMessage = "Game with the given id doesn't exist!";
+
+            var moqUsersService = new Mock<IUsersService>();
+
+            var option = new DbContextOptionsBuilder<ChessDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var db = new ChessDbContext(option);
+
+            this.gamesService = new GamesService(db, mapper, moqUsersService.Object);
+
+            //Act and assert
+            var ex = await Assert.ThrowsAsync<ArgumentException>(() => this.gamesService.GetEnteringGameViewModelAsync("GameId"));
+            Assert.Equal(expectedErrorMessage, ex.Message);
+        }
+
+        [Fact]
         public async Task GetEnteringGameViewModelAsync_WithValidData_ShouldReturnCorrectViewModel()
         {
             //Arrange
