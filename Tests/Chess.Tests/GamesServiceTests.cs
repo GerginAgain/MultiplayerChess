@@ -941,5 +941,118 @@
             Assert.Equal(expectedGuestName, actual.GuestUsername);
             Assert.Equal(expectedGuestConnectionId, actual.GuestConnectionId);
         }
+
+        [Fact]
+        public async Task GetMyGameViewModelsAsync_WithoutAnyGames_ShouldReturnZeroViewModels()
+        {
+            //Arrange
+            var expectedResult = 0;
+
+            var moqUsersService = new Mock<IUsersService>();
+            moqUsersService.Setup(x => x.GetCurrentUserAsync())
+                .ReturnsAsync(new ApplicationUser 
+                {
+                    Id = "UserId",
+                });
+            var option = new DbContextOptionsBuilder<ChessDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var db = new ChessDbContext(option);
+
+            this.gamesService = new GamesService(db, mapper, moqUsersService.Object);
+
+            //Act
+            var actual = await this.gamesService.GetMyGameViewModelsAsync(1, 10);
+
+            //Assert
+            Assert.Equal(expectedResult, actual.Count);
+        }
+
+        [Fact]
+        public async Task GetMyGameViewModelsAsync_WithValidData_ShouldReturnCorrectCount()
+        {
+            //Arrange
+            var expectedResult = 3;
+
+            var moqUsersService = new Mock<IUsersService>();
+            moqUsersService.Setup(x => x.GetCurrentUserAsync())
+               .ReturnsAsync(new ApplicationUser
+               {
+                   Id = "UserId",
+               });
+            var option = new DbContextOptionsBuilder<ChessDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var db = new ChessDbContext(option);
+
+            this.gamesService = new GamesService(db, mapper, moqUsersService.Object);
+
+            var firstTestingUser = new ApplicationUser { Id = "UserId", UserName = "FirstUserName" };
+            var secondTestingUser = new ApplicationUser { Id = "SecondUserId", UserName = "SecondUserName" };
+
+            await db.ApplicationUsers.AddAsync(firstTestingUser);
+            await db.ApplicationUsers.AddAsync(secondTestingUser);
+
+            var testingGames = new List<Game>
+            {
+                new Game{Id = "Id1", Name = "Game1", Color = "White", IsActive = true, Host = firstTestingUser, Guest = secondTestingUser, CreatedOn = DateTime.UtcNow.AddDays(-25)},
+                new Game{Id = "Id2", Name = "Game2", Color = "White", IsActive = false, Host = firstTestingUser, Guest = secondTestingUser, CreatedOn = DateTime.UtcNow.AddDays(-25)},
+                new Game{Id = "Id3", Name = "Game3", Color = "White", IsActive = false, Host = firstTestingUser, Guest = secondTestingUser, CreatedOn = DateTime.UtcNow.AddDays(-25)},
+                new Game{Id = "Id4", Name = "Game4", Color = "White", IsActive = false, Host = secondTestingUser, Guest = firstTestingUser, CreatedOn = DateTime.UtcNow.AddDays(-20)},
+                new Game{Id = "Id5", Name = "Game5", Color = "White", IsActive = true, Host = secondTestingUser, Guest = firstTestingUser, CreatedOn = DateTime.UtcNow.AddDays(-5)},
+            };
+
+            await db.Games.AddRangeAsync(testingGames);
+            await db.SaveChangesAsync();
+
+            //Act
+            var actual = await this.gamesService.GetMyGameViewModelsAsync(1, 10);
+
+            //Assert
+            Assert.Equal(expectedResult, actual.Count);
+        } 
+
+        [Fact]
+        public async Task GetMyGameViewModelsAsync_WithValidData_ShouldReturnCorrectOrder()
+        {
+            //Arrange
+            var expectedResult = new List<string> { "Id4", "Id3", "Id2" }; ;
+
+            var moqUsersService = new Mock<IUsersService>();
+            moqUsersService.Setup(x => x.GetCurrentUserAsync())
+               .ReturnsAsync(new ApplicationUser
+               {
+                   Id = "UserId",
+               });
+            var option = new DbContextOptionsBuilder<ChessDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var db = new ChessDbContext(option);
+
+            this.gamesService = new GamesService(db, mapper, moqUsersService.Object);
+
+            var firstTestingUser = new ApplicationUser { Id = "UserId", UserName = "FirstUserName" };
+            var secondTestingUser = new ApplicationUser { Id = "SecondUserId", UserName = "SecondUserName" };
+
+            await db.ApplicationUsers.AddAsync(firstTestingUser);
+            await db.ApplicationUsers.AddAsync(secondTestingUser);
+
+            var testingGames = new List<Game>
+            {
+                new Game{Id = "Id1", Name = "Game1", Color = "White", IsActive = true, Host = firstTestingUser, Guest = secondTestingUser, CreatedOn = DateTime.UtcNow.AddDays(-25)},
+                new Game{Id = "Id2", Name = "Game2", Color = "White", IsActive = false, Host = firstTestingUser, Guest = secondTestingUser, CreatedOn = DateTime.UtcNow.AddDays(-25)},
+                new Game{Id = "Id3", Name = "Game3", Color = "White", IsActive = false, Host = firstTestingUser, Guest = secondTestingUser, CreatedOn = DateTime.UtcNow.AddDays(-25)},
+                new Game{Id = "Id4", Name = "Game4", Color = "White", IsActive = false, Host = secondTestingUser, Guest = firstTestingUser, CreatedOn = DateTime.UtcNow.AddDays(-20)},
+                new Game{Id = "Id5", Name = "Game5", Color = "White", IsActive = true, Host = secondTestingUser, Guest = firstTestingUser, CreatedOn = DateTime.UtcNow.AddDays(-5)},
+            };
+
+            await db.Games.AddRangeAsync(testingGames);
+            await db.SaveChangesAsync();
+
+            //Act
+            var actual = this.gamesService.GetMyGameViewModelsAsync(1, 10).GetAwaiter().GetResult().ToList();
+
+            //Assert
+            Assert.Equal(expectedResult[0], actual[0].Id);
+            Assert.Equal(expectedResult[1], actual[1].Id);
+            Assert.Equal(expectedResult[2], actual[2].Id);
+        }
     }
 }
