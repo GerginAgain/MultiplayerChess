@@ -786,7 +786,7 @@
         }
 
         [Fact]
-        public async Task AddHostConnectionIdToGameAsync_WithValidData_ShouldReturnCorrectGame()
+        public async Task AddHostConnectionIdToGameAsync_WithValidData_ShouldWorkCorrectly()
         {
             //Arrange
             var expectedHostConnectionId = "HostConnectionId";
@@ -839,7 +839,7 @@
         }
 
         [Fact]
-        public async Task AddGuestConnectionIdToGameAsync_WithValidData_ShouldReturnCorrectGame()
+        public async Task AddGuestConnectionIdToGameAsync_WithValidData_ShouldWorkCorrectly()
         {
             //Arrange
             var expectedGuestConnectionId = "GuestConnectionId";
@@ -871,6 +871,75 @@
 
             //Assert
             Assert.Equal(expectedGuestConnectionId, game.GuestConnectionId);
+        }
+
+        [Fact]
+        public async Task GetHubGameViewModelByGameIdAsync_WithInvalidGameId_ShouldThrowArgumentException()
+        {
+            //Arrange
+            var expectedErrorMessage = "Game with the given id doesn't exist!";
+
+            var moqUsersService = new Mock<IUsersService>();
+
+            var option = new DbContextOptionsBuilder<ChessDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var db = new ChessDbContext(option);
+
+            this.gamesService = new GamesService(db, mapper, moqUsersService.Object);
+
+            //Act and assert
+            var ex = await Assert.ThrowsAsync<ArgumentException>(() => this.gamesService.GetHubGameViewModelByGameIdAsync("GameId"));
+            Assert.Equal(expectedErrorMessage, ex.Message);
+        }
+
+        [Fact]
+        public async Task GetHubGameViewModelByGameIdAsync_WithValidData_ShouldReturnCorrectViewModel()
+        {
+            //Arrange
+            var expectedHostConnectionId = "HostConnectionId";
+            var expectedHostName = "UserHost";
+            var expectedGuestConnectionId = "GuestConnectionId";
+            var expectedGuestName = "UserGuest";
+
+            var moqUsersService = new Mock<IUsersService>();
+
+            var option = new DbContextOptionsBuilder<ChessDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var db = new ChessDbContext(option);
+
+            this.gamesService = new GamesService(db, mapper, moqUsersService.Object);
+
+            var game = new Game
+            {
+                Id = "GameId",
+                Color = "White",
+                Name = "GameName",
+                HostConnectionId = "HostConnectionId",
+                HostId = "HostUserId",
+                Host = new ApplicationUser
+                {
+                    UserName = "UserHost",
+                },
+                IsActive = true,
+                GuestConnectionId = "GuestConnectionId",
+                GuestId = "GuestUserId",
+                Guest = new ApplicationUser
+                {
+                    UserName = "UserGuest",
+                },
+            };
+
+            await db.Games.AddAsync(game);
+            await db.SaveChangesAsync();
+
+            //Act
+            var actual = await this.gamesService.GetHubGameViewModelByGameIdAsync("GameId");
+
+            //Assert
+            Assert.Equal(expectedHostName, actual.HostUsername);
+            Assert.Equal(expectedHostConnectionId, actual.HostConnectionId);
+            Assert.Equal(expectedGuestName, actual.GuestUsername);
+            Assert.Equal(expectedGuestConnectionId, actual.GuestConnectionId);
         }
     }
 }

@@ -198,7 +198,7 @@
 
         public async Task<HubGameViewModel> GetHubGameViewModelByGameIdAsync(string gameId)
         {
-            var currentGame = await this.db.Games.FirstOrDefaultAsync(x => x.Id == gameId);
+            var currentGame = await GetGameByIdAsync(gameId);
             var hubGameViewModel = mapper.Map<HubGameViewModel>(currentGame);
 
             return hubGameViewModel;
