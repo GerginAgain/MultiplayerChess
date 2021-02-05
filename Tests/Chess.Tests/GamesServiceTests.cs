@@ -5,20 +5,15 @@
     using System.Linq;
     using System.Threading.Tasks;
     using AutoMapper;
+    using Microsoft.EntityFrameworkCore;
+    using Moq;
+    using Xunit;
     using Chess.Data;
     using Chess.Services.Mapping;
     using Chess.Web.ViewModels.InputModels.Games;
-    using Chess.Web.ViewModels.InputModels.Videos;
-    using Chess.Web.ViewModels.ViewModels.Users;
-    using Common;
-    using Data.Models;
-    using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.EntityFrameworkCore;
-    using Moq;
+    using Data.Models;   
     using Services;
-    using Services.Interfaces;
-    using Xunit;
+    using Services.Interfaces;   
 
     public class GamesServiceTests
     {

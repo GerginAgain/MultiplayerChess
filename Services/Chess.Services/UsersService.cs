@@ -4,10 +4,10 @@
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
-    using Microsoft.EntityFrameworkCore;
-    using Chess.Services.Paging;
+    using Microsoft.EntityFrameworkCore;   
     using System.Linq;
     using AutoMapper;
+    using Chess.Services.Paging;
     using Chess.Common;
     using Chess.Data.Models;
     using Chess.Data;

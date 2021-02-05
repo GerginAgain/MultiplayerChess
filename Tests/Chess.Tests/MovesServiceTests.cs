@@ -3,21 +3,16 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Security.Claims;
     using System.Threading.Tasks;
     using AutoMapper;
-    using Chess.Data;
-    using Chess.Services.Mapping;
-    using Chess.Web.ViewModels.ViewModels.Users;
-    using Common;
-    using Data.Models;
-    using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using Moq;
-    using Services;
-    using Services.Interfaces;
     using Xunit;
+    using Chess.Data;
+    using Chess.Services.Mapping;
+    using Data.Models;   
+    using Services;
+    using Services.Interfaces;   
 
     public class MovesServiceTests
     {

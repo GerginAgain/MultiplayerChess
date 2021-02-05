@@ -1,19 +1,13 @@
 ﻿namespace Chess.Tests
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
-    using AutoMapper;
-    using Chess.Data;
-    using Chess.Data.Models;
-    using Chess.Services.Mapping;
-    using Common;
     using Microsoft.EntityFrameworkCore;
-    using Moq;
-    using Services;
-    using Services.Interfaces;
     using Xunit;
+    using Chess.Data;
+    using Chess.Data.Models; 
+    using Services;
+    using Services.Interfaces; 
 
     public class PicturesServiceTests
     {

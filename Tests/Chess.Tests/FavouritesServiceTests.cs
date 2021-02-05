@@ -4,15 +4,14 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using AutoMapper;
-    using Chess.Data;
-    using Chess.Services.Mapping;
-    using Common;
-    using Data.Models;
+    using Xunit;
     using Microsoft.EntityFrameworkCore;
     using Moq;
+    using Chess.Data;
+    using Chess.Services.Mapping;
+    using Data.Models;
     using Services;
-    using Services.Interfaces;
-    using Xunit;
+    using Services.Interfaces;  
 
     public class FavouritesServiceTests
     {
@@ -193,7 +192,6 @@
             var ex = await Assert.ThrowsAsync<ArgumentException>(() => favouritesService.RemoveFromFavoritesAsync(1));
             Assert.Equal(expectedErrorMessage, ex.Message);
         }
-
 
         [Fact]
         public async Task RemoveFromFavoritesAsync_WithExistingVideoInFavorites_ShouldReturnTrue()

@@ -5,14 +5,13 @@
     using System.Linq;
     using System.Threading.Tasks;
     using AutoMapper;
-    using Chess.Data;
-    using Chess.Services.Mapping;
-    using Common;
     using Microsoft.EntityFrameworkCore;
     using Moq;
-    using Services;
-    using Services.Interfaces;
     using Xunit;
+    using Chess.Data;
+    using Chess.Services.Mapping;
+    using Services;
+    using Services.Interfaces;   
 
     public class StatisticsServiceTests
     {

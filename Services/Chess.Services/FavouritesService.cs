@@ -1,13 +1,13 @@
 ﻿namespace Chess.Services
 {
-    using Chess.Common;
-    using Chess.Data;
-    using Chess.Data.Models;
-    using Chess.Services.Interfaces;
     using Microsoft.EntityFrameworkCore;
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+    using Chess.Common;
+    using Chess.Data;
+    using Chess.Data.Models;
+    using Chess.Services.Interfaces;  
 
     public class FavouritesService : IFavouritesService
     {

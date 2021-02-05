@@ -1,15 +1,15 @@
 ﻿namespace Chess.Services
 {
     using AutoMapper;
-    using Chess.Data;
-    using Chess.Data.Models;
-    using Chess.Services.Interfaces;
-    using Chess.Web.ViewModels.ViewModels.Messages;
     using Microsoft.EntityFrameworkCore;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Chess.Data;
+    using Chess.Data.Models;
+    using Chess.Services.Interfaces;
+    using Chess.Web.ViewModels.ViewModels.Messages;  
 
     public class MessagesService : IMessagesService
     {
