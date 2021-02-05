@@ -1104,5 +1104,58 @@
             //Assert
             Assert.Equal(expectedResult, actual.Id);
         }
+
+        [Fact]
+        public async Task MakeGameInActiveAsync_WithInvalidGameId_ShouldThrowArgumentException()
+        {
+            //Arrange
+            var expectedErrorMessage = "Game with the given id doesn't exist!";
+
+            var moqUsersService = new Mock<IUsersService>();
+            var option = new DbContextOptionsBuilder<ChessDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var db = new ChessDbContext(option);
+
+            this.gamesService = new GamesService(db, mapper, moqUsersService.Object);
+
+            //Act and assert
+            var ex = await Assert.ThrowsAsync<ArgumentException>(() => this.gamesService.MakeGameInActiveAsync("GameId"));
+            Assert.Equal(expectedErrorMessage, ex.Message);
+        }
+
+        [Fact]
+        public async Task MakeGameInActiveAsync_WithValidData_ShouldWorkCorrectly()
+        {
+            //Arrange
+            var expectedResult = "GameId";
+
+            var moqUsersService = new Mock<IUsersService>();
+            var option = new DbContextOptionsBuilder<ChessDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var db = new ChessDbContext(option);
+
+            this.gamesService = new GamesService(db, mapper, moqUsersService.Object);
+
+            var testingGames = new List<Game>
+            {
+                new Game{Id = "GameId", Name = "Game1", Color = "White", IsActive = true, HostConnectionId = "HostConnectionId"},
+                new Game{Id = "Id2", Name = "Game2", Color = "White", IsActive = true},
+                new Game{Id = "Id3", Name = "Game3", Color = "White", IsActive = true},
+                new Game{Id = "Id4", Name = "Game4", Color = "White", IsActive = false},
+                new Game{Id = "Id5", Name = "Game5", Color = "White", IsActive = true},
+            };
+
+            await db.Games.AddRangeAsync(testingGames);
+            await db.SaveChangesAsync();
+
+            var game = db.Games.First(x => x.Id == "GameId");
+
+            //Act
+            await this.gamesService.MakeGameInActiveAsync("GameId");
+
+            //Assert
+            Assert.Equal(expectedResult, game.Id);
+            Assert.False(game.IsActive);
+        }
     }
 }
