@@ -220,6 +220,11 @@
 
         public async Task<Game> GetGameByConnectionIdAndIsActiveStatusAsync(string connectionId)
         {
+            if (!await this.db.Games.AnyAsync(x => x.HostConnectionId == connectionId))
+            {
+                throw new ArgumentException(GlobalConstants.InvalidGameConnectionIdErrorMessage);
+            }
+
             var abandonedGame = await this.db.Games
                 .FirstOrDefaultAsync(x => x.HostConnectionId == connectionId && x.IsActive == true);
 

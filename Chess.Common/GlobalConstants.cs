@@ -4,6 +4,7 @@
     {
         public const string InvalidUserIdErrorMessage = "User with the given id doesn't exist!";
         public const string InvalidGameIdErrorMessage = "Game with the given id doesn't exist!";
+        public const string InvalidGameConnectionIdErrorMessage = "Game with the given connection id doesn't exist!";
 
         public const string CurrentUserIsNullErrorMessage = "Current user can't be null";
         public const string InvalidVideoIdErrorMessage = "Video with the given id doesn't exist!";
