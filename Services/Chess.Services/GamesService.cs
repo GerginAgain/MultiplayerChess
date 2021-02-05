@@ -240,6 +240,11 @@
 
         public async Task<Game> GetFinishedGameByConnectionIdAsync(string connectionId)
         {
+            if (!await this.db.Games.AnyAsync(x => x.HostConnectionId == connectionId || x.GuestConnectionId == connectionId))
+            {
+                throw new ArgumentException(GlobalConstants.InvalidGameConnectionIdErrorMessage);
+            }
+
             var finishedGame = await this.db.Games
                 .FirstOrDefaultAsync(x => (x.HostConnectionId == connectionId || x.GuestConnectionId == connectionId)
                                             && x.IsActive == false);

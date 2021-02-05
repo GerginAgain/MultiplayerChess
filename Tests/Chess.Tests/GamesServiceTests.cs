@@ -1157,5 +1157,55 @@
             Assert.Equal(expectedResult, game.Id);
             Assert.False(game.IsActive);
         }
+
+        [Fact]
+        public async Task GetFinishedGameByConnectionIdAsync_WithInvalidConnectionId_ShouldThrowArgumentException()
+        {
+            //Arrange
+            var expectedErrorMessage = "Game with the given connection id doesn't exist!";
+
+            var moqUsersService = new Mock<IUsersService>();
+            var option = new DbContextOptionsBuilder<ChessDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var db = new ChessDbContext(option);
+
+            this.gamesService = new GamesService(db, mapper, moqUsersService.Object);
+
+            //Act and assert
+            var ex = await Assert.ThrowsAsync<ArgumentException>(() => this.gamesService.GetFinishedGameByConnectionIdAsync("ConnectionId"));
+            Assert.Equal(expectedErrorMessage, ex.Message);
+        }
+
+        [Fact]
+        public async Task GetFinishedGameByConnectionIdAsync_WithValidData_ShouldReturnCorrectGame()
+        {
+            //Arrange
+            var expectedResult = "GameId";
+
+            var moqUsersService = new Mock<IUsersService>();
+            var option = new DbContextOptionsBuilder<ChessDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var db = new ChessDbContext(option);
+
+            this.gamesService = new GamesService(db, mapper, moqUsersService.Object);
+
+            var testingGames = new List<Game>
+            {
+                new Game{Id = "GameId", Name = "Game1", Color = "White", IsActive = false, HostConnectionId = "HostConnectionId"},
+                new Game{Id = "Id2", Name = "Game2", Color = "White", IsActive = true},
+                new Game{Id = "Id3", Name = "Game3", Color = "White", IsActive = true},
+                new Game{Id = "Id4", Name = "Game4", Color = "White", IsActive = false},
+                new Game{Id = "Id5", Name = "Game5", Color = "White", IsActive = true},
+            };
+
+            await db.Games.AddRangeAsync(testingGames);
+            await db.SaveChangesAsync();
+
+            //Act
+            var actual = await this.gamesService.GetFinishedGameByConnectionIdAsync("HostConnectionId");
+
+            //Assert
+            Assert.Equal(expectedResult, actual.Id);
+        }
     }
 }
